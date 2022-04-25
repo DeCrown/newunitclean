@@ -1,0 +1,90 @@
+
+.textW300 {
+    font-weight: 300;
+}
+.textW400 {
+    font-weight: 400;
+}
+.textW500 {
+    font-weight: 500;
+}
+.textW600 {
+    font-weight: 600;
+}
+.textW700 {
+    font-weight: 700;
+}
+.textW800 {
+    font-weight: 800;
+}
+.textW900 {
+    font-weight: 900;
+}
+
+.textS12 {
+    font-size: 12px;
+}
+.textS13 {
+    font-size: 13px;
+}
+.textS16 {
+    font-size: 16px;
+}
+.textS18 {
+    font-size: 18px;
+}
+.textS20 {
+    font-size: 20px;
+}
+.textS36 {
+    font-size: 36px;
+}
+
+.textCwhite {
+    color: white;
+}
+.textCblack {
+    color: black;
+}
+.textCgray {
+    color: #717171;
+}
+.textCligth_gray {
+    color: #9C9C9C;
+}
+.textCred {
+    color: #BA172C;
+}
+.textCblue {
+    color: #2196F3;
+}
+
+
+body {
+    color: black;
+}
+
+.textXS {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.textS {
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.textM {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.textMB {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.textLB {
+    font-size: 36px;
+    font-weight: 900;
+}
