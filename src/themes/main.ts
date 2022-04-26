@@ -7,6 +7,9 @@ export const Main = {
             16: '16px',
             18: '18px',
             20: '20px',
+            24: '24px',
+            28: '28px',
+            30: '30px',
             36: '36px'
         },
 
@@ -29,7 +32,13 @@ export const Main = {
             blue: '#2196F3',
 
             mobileTopTab: '#ADB8C4',
-            mobileMovingTab: '#ADB8C4F5'
+            mobileMovingTab: '#ADB8C4F5',
+        }
+    },
+
+    backgrounds: {
+        promotion: {
+            discount: '#2196F3'
         }
     }
 }

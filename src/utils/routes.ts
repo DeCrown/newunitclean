@@ -3,6 +3,8 @@ import {route} from "src/utils/types";
 import Main from "../pages/main";
 import Cart from "../pages/cart";
 import Contacts from "../pages/contacts";
+import Catalog from "src/pages/catalog";
+import Promotions from "src/pages/promotions";
 
 export const authRoutes:route[] = [
     {
@@ -16,7 +18,8 @@ export const authRoutes:route[] = [
     {
         url: constants.URLs.CART,
         page: Cart,
-        clearBackground: true
+        mobileClearBackground: true,
+        browserClearBackground: true
     },
 ]
 
@@ -27,11 +30,13 @@ export const freeRoutes:route[] = [
     },
     {
         url: constants.URLs.CATALOG,
-        page: Main
+        page: Catalog
     },
     {
         url: constants.URLs.PROMOTION,
-        page: Main
+        page: Promotions,
+        mobileClearBackground: true,
+        browserClearBackground: false
     },
     {
         url: constants.URLs.REVIEWS,
@@ -40,7 +45,8 @@ export const freeRoutes:route[] = [
     {
         url: constants.URLs.CONTACTS,
         page: Contacts,
-        clearBackground: true
+        mobileClearBackground: true,
+        browserClearBackground: true
     },
     {
         url: constants.URLs.SEARCH,

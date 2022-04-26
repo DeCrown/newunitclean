@@ -3,9 +3,8 @@ import React from 'react';
 import TabsMenu from "components/shared/tabsMenu";
 import All from "components/cart/all";
 import Favourites from "components/cart/favourites";
-import PreviousOrders from "components/cart/previousOrders";
-import styled from "styled-components";
 import {H1} from "components/shared/fonts/headers";
+import PreviousOrders from "components/cart/previousOrders";
 
 const Cart = () => {
 

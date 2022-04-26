@@ -13,14 +13,18 @@ const ProductStyle = styled.div`
   border-radius: 10px;
   display: grid;
   grid-template-rows: 50% 50%;
-  margin-bottom: 90px;
+  margin-bottom: 0px;
   
-  .mobile & {
+  .mobile .withButtons & {
     width: auto;
     height: 176px;
     grid-template-rows: auto;
     grid-template-columns: 50% 50%;
     margin-bottom: 0;
+  }
+  
+  .withButtons & {
+    margin-bottom: 90px;
   }
 `
 
@@ -32,8 +36,8 @@ const Image = styled.div`
     max-width: 100%;
     max-height: 100%;
   }
-  
-  .mobile & {
+
+  .mobile .withButtons & {
     padding: 14px;
   }
 `
@@ -43,7 +47,7 @@ const Info = styled.div`
   grid-template-rows: 24% 44% 32% 62px;
   padding: 0 26px;
   
-  .mobile & {
+  .mobile .withButtons & {
     grid-template-rows: 30% 38% 32%;
     padding: 0 40px 0 0;
   }
@@ -59,7 +63,7 @@ const Title = styled.div`
   -webkit-box-orient: vertical;
   overflow: hidden;
 
-  .mobile & {
+  .mobile .withButtons & {
     font-size: ${({ theme }) => theme.font.size[14]};
     align-self: center;
   }
@@ -76,7 +80,7 @@ const Description = styled.div`
   -webkit-box-orient: vertical;
   overflow: hidden;
   
-  .mobile & {
+  .mobile .withButtons & {
     align-self: center;
     font-size: ${({ theme }) => theme.font.size[12]};
     line-height: normal;
@@ -91,7 +95,7 @@ const Price = styled.div`
   font-weight: ${({ theme }) => theme.font.weight[700]};
   color: ${({ theme }) => theme.font.color.blue};
   
-  .mobile & {
+  .mobile .withButtons & {
     justify-content: start;
   }
 `
@@ -102,7 +106,7 @@ const Buttons = styled.div`
   grid-auto-flow: column;
   align-content: end;
   
-  .mobile & {
+  .mobile .withButtons & {
     height: 100%;
     position: absolute;
     grid-auto-flow: row;
@@ -127,7 +131,7 @@ const Button = styled.div`
     opacity: 1;
   }
   
-  .mobile & {
+  .mobile .withButtons & {
     background: none;
     box-shadow: none;
   }
@@ -137,17 +141,7 @@ const ButtonDelete = styled(Button)``
 
 const ButtonFavourite = styled(Button)``
 
-const Product = (props: {data: ProductType}) => {
-
-    function delete_() {
-        Api.Cart.all.deleteProduct(props.data.id);
-    }
-
-    function favourite() {
-        if (props.data.favourite !== undefined) {
-            Api.Cart.favourites.markFavourite(props.data.id, props.data.favourite);
-        }
-    }
+export const Product = (props: {data: ProductType}) => {
 
     return (
         <ProductStyle>
@@ -158,20 +152,40 @@ const Product = (props: {data: ProductType}) => {
                 <Title>{props.data.title}</Title>
                 <Description>{props.data.description}</Description>
                 <Price>{props.data.price} РУБ</Price>
-                {props.data.buttons ?
-                    <Buttons>
-                        <ButtonDelete onClick={delete_}>
-                            <img src={icons.delete}/>
-                        </ButtonDelete>
-                        <ButtonFavourite onClick={favourite}>
-                            <img src={props.data.favourite ? icons.favourite : icons.not_favourite}/>
-                        </ButtonFavourite>
-                    </Buttons>
-                    : ''
-                }
             </Info>
         </ProductStyle>
     );
-};
+}
 
-export default Product;
+export const ProductWithButtons = (props: {data: ProductType}) => {
+
+    function delete_() {
+        Api.Cart.all.deleteProduct(props.data.id);
+    }
+    function favourite() {
+        if (props.data.favourite !== undefined) {
+            Api.Cart.favourites.markFavourite(props.data.id, props.data.favourite);
+        }
+    }
+
+    return (
+        <ProductStyle className={'withButtons'}>
+            <Image>
+                <img src={props.data.image}/>
+            </Image>
+            <Info>
+                <Title>{props.data.title}</Title>
+                <Description>{props.data.description}</Description>
+                <Price>{props.data.price} РУБ</Price>
+                <Buttons>
+                    <ButtonDelete onClick={delete_}>
+                        <img src={icons.delete}/>
+                    </ButtonDelete>
+                    <ButtonFavourite onClick={favourite}>
+                        <img src={props.data.favourite ? icons.favourite : icons.not_favourite}/>
+                    </ButtonFavourite>
+                </Buttons>
+            </Info>
+        </ProductStyle>
+    );
+}

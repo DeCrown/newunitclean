@@ -7,7 +7,6 @@ export const get = () => {
             title: 'Название товара',
             description: 'Описание товара, основные хар-ки, параметры',
             price: 3000,
-            buttons: true,
             favourite: true
         },
         {
@@ -16,7 +15,6 @@ export const get = () => {
             title: 'Название товара',
             description: 'Описание товара, основные хар-ки, параметры',
             price: 3000,
-            buttons: true,
             favourite: true
         },
         {
@@ -25,7 +23,6 @@ export const get = () => {
             title: 'Название товара - не придумал еще',
             description: 'Описание товара, основные хар-ки, параметры, еще что-то чтобы вышло за пределы области',
             price: 3000,
-            buttons: true,
             favourite: true
         }];
 }

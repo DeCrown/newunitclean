@@ -34,7 +34,7 @@ const FooterContainer = styled.div`
 const Template = (props: {children: JSX.Element; clearBackground?: boolean}) => {
     return (
         <div>
-            { props.clearBackground ? <ClearBackground></ClearBackground> : <Background></Background> }
+            { props.clearBackground ? <ClearBackground></ClearBackground> : <Background></Background>}
             <Header></Header>
             {props.children}
             <FooterContainer>

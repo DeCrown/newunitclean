@@ -8,7 +8,6 @@ export const get = () => {
             title: 'Название товара',
             description: 'Описание товара, основные хар-ки, параметры',
             price: 3000,
-            buttons: true,
             favourite: false
         },
         {
@@ -17,7 +16,6 @@ export const get = () => {
             title: 'Название товара',
             description: 'Описание товара, основные хар-ки, параметры',
             price: 3000,
-            buttons: true,
             favourite: true
         },
         {
@@ -26,7 +24,6 @@ export const get = () => {
             title: 'Название товара',
             description: 'Описание товара, основные хар-ки, параметры',
             price: 3000,
-            buttons: true,
             favourite: false
         },
         {
@@ -35,7 +32,6 @@ export const get = () => {
             title: 'Название товара',
             description: 'Описание товара, основные хар-ки, параметры',
             price: 3000,
-            buttons: true,
             favourite: false
         },
         {
@@ -44,7 +40,6 @@ export const get = () => {
             title: 'Название товара',
             description: 'Описание товара, основные хар-ки, параметры',
             price: 3000,
-            buttons: true,
             favourite: false
         },
         {
@@ -53,7 +48,6 @@ export const get = () => {
             title: 'Название товара',
             description: 'Описание товара, основные хар-ки, параметры',
             price: 3000,
-            buttons: true,
             favourite: false
         },
         {
@@ -62,7 +56,6 @@ export const get = () => {
             title: 'Название товара',
             description: 'Описание товара, основные хар-ки, параметры',
             price: 3000,
-            buttons: true,
             favourite: false
         },
         {
@@ -71,7 +64,6 @@ export const get = () => {
             title: 'Тапки Леши',
             description: 'Описание товара, основные хар-ки, параметры',
             price: 30000,
-            buttons: true,
             favourite: true
         },
         {
@@ -80,7 +72,6 @@ export const get = () => {
             title: 'Название товара',
             description: 'Описание товара, основные хар-ки, параметры',
             price: 13000,
-            buttons: true,
             favourite: true
         }];
 }

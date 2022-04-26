@@ -8,11 +8,11 @@ import {route} from "src/utils/types";
 import {Main} from "src/themes/main";
 import {ThemeProvider} from "styled-components";
 import {isMobile} from "react-device-detect";
-import GlobalStyles from './style/globalStyles'
+import GlobalStyles from './style/globalStyles';
 
 const Page = (route:route, i:number) => {
-    return (<Route key={route.url} path={route.url} element={
-        <Template clearBackground={route.clearBackground}>{route.page()}</Template>
+    return (<Route key={i} path={route.url} element={
+        <Template clearBackground={isMobile ? route.mobileClearBackground : route.browserClearBackground}>{route.page()}</Template>
     } />);
 }
 

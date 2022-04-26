@@ -16,6 +16,7 @@ const TabButtonStyle = styled.div`
 
   display: grid;
   align-content: center;
+  white-space: nowrap;
   
   &.selected {
     border-bottom: 2px solid;
@@ -50,8 +51,10 @@ const TabsButtonsStyle = styled.div`
   margin-bottom: 50px;
   
   .mobile & {
-    height: 30px;
+    /*height: 30px;*/
+    grid-auto-columns: 1fr;
     justify-content: space-between;
+    overflow-x: scroll;
   }
 `;
 

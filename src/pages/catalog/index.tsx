@@ -1,36 +1,35 @@
 import React from 'react';
 
 import TabsMenu from "components/shared/tabsMenu";
-import All from "components/cart/all";
-import Favourites from "components/cart/favourites";
-import PreviousOrders from "components/cart/previousOrders";
 import {Api} from "src/api";
 import {H1} from "components/shared/fonts/headers";
+import Tab from "components/catalog/tab";
 
-const Cart = () => {
+const Catalog = () => {
 
-    const categories = Api.Cart.favourites.get();
+    const categories = Api.Catalog.get();
+    const tabs = [
+        {
+            title: 'Все товары',
+            content: <div>
+                {categories.map((category, i) => <Tab key={i} products={category.products} title={category.category}></Tab>)}
+            </div>
+        }
+    ];
+    categories.map(category => {tabs.push(
+        {
+            title: category.category,
+            content: <Tab products={category.products} title={category.category}></Tab>
+        }
+    )});
 
     return (
-        <div className={'content no_up'}>
-            <H1>Корзина</H1>
+        <div className={'content'}>
+            <H1>Каталог</H1>
 
-            <TabsMenu tabs={[
-                {
-                    title: 'Все товары',
-                    content: <All></All>
-                },
-                {
-                    title: 'Избранное',
-                    content: <Favourites></Favourites>
-                },
-                {
-                    title: 'Предыдущие заказы',
-                    content: <PreviousOrders></PreviousOrders>
-                }
-            ]}></TabsMenu>
+            <TabsMenu tabs={tabs}></TabsMenu>
         </div>
     );
 };
 
-export default Cart;
+export default Catalog;

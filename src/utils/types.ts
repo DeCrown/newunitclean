@@ -3,7 +3,8 @@ import React from "react";
 export interface route {
     url: string;
     page(): JSX.Element;
-    clearBackground?: boolean
+    mobileClearBackground?: boolean;
+    browserClearBackground?: boolean;
 }
 
 export interface headerMenuTopButton {
@@ -17,8 +18,10 @@ export interface headerMenuBottomButton {
     icon: string;
 }
 
+
+
 export interface ProductType {
-    id: number,
+    id: number;
     image: string;
     title: string;
     description: string;
@@ -26,4 +29,12 @@ export interface ProductType {
     buttons?: boolean;
     favourite?: boolean;
     promotion?: boolean;
+}
+
+export interface PromotionType {
+    id: number;
+    product: number;
+    title: string;
+    price: number;
+    discount: number;
 }

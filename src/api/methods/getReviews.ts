@@ -1,4 +1,4 @@
-import {icons} from "../../utils/icons";
+import {icons} from "src/utils/icons";
 
 export const getReviews = () => {
     return [{id: 1,
