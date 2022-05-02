@@ -1,0 +1,136 @@
+import React, {useState} from 'react';
+import styled from "styled-components";
+import {icons} from "src/utils/icons";
+import {isMobile} from "react-device-detect";
+
+const EditRowStyle = styled.div`
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: min-content 1fr 7fr min-content;
+  
+  &.verified {
+    border-bottom: 1px solid #36873E;
+  }
+
+  .mobile {
+    grid-template-columns: min-content min-content auto min-content;
+  }
+  .mobile &.verified {
+    border-bottom: 1px solid #2196F3;
+  }
+  
+  & > div {
+    display: grid;
+    grid-auto-flow: column;
+    align-content: center;
+  }
+  
+  & img {
+    margin: 0 8px;
+  }
+`;
+
+const Verified = styled.div`
+  justify-self: end;
+  margin-left: 20px;
+
+  .mobile & {
+    margin-left: 0px;
+    
+    & img {
+      margin-left: 0px;
+    }
+  }
+`;
+
+const Title = styled.div`
+  justify-self: start;
+  font-size: ${({ theme }) => theme.font.size[22]};
+  font-weight: ${({ theme }) => theme.font.weight[600]};
+  color: ${({ theme }) => theme.font.color.black};
+  margin-left: 28px;
+  white-space: nowrap;
+  
+  .verified & {
+    margin-left: 0px;
+  }
+  
+  .mobile & {
+    font-size: ${({ theme }) => theme.font.size[18]};
+    margin-left: 0px;
+  }
+`;
+
+const Value = styled.div`
+  font-size: ${({ theme }) => theme.font.size[16]};
+  font-weight: ${({ theme }) => theme.font.weight[400]};
+  color: ${({ theme }) => theme.font.color.black};
+
+  .mobile & {
+    font-size: ${({ theme }) => theme.font.size[14]};
+    justify-self: end;
+  }
+`;
+
+const LargeValue = styled(Value)`
+  font-size: ${({ theme }) => theme.font.size[28]};
+  font-weight: ${({ theme }) => theme.font.weight[600]};
+  justify-content: start;
+
+  .mobile & {
+    font-size: ${({ theme }) => theme.font.size[20]};
+    justify-self: start;
+  }
+`;
+
+const Edit = styled.div`
+  justify-self: end;
+  font-size: ${({ theme }) => theme.font.size[12]};
+  font-weight: ${({ theme }) => theme.font.weight[400]};
+  color: rgba(0, 0, 0, 0.3);
+`;
+
+const EditValue = styled.input`
+  font-size: ${({ theme }) => theme.font.size[16]};
+  font-weight: ${({ theme }) => theme.font.weight[400]};
+  color: ${({ theme }) => theme.font.color.black};
+
+  .mobile & {
+    font-size: ${({ theme }) => theme.font.size[14]};
+    justify-self: end;
+  }
+  
+  background: none;
+  border: none;
+  width: 100%;
+`;
+
+export const EditRow = (props: {title?: string; value: string; verified?: boolean}) => {
+    const [editing, setEditing] = useState(false);
+
+    const switchEditing = () => {
+        setEditing(!editing);
+    }
+
+    return (
+        <EditRowStyle className={props.verified ? 'verified' : ''}>
+            { props.verified ? <Verified><img src={isMobile ? icons.verified_blue : icons.verified} /></Verified> : <div></div> }
+            { props.title ? <Title>{props.title}:</Title> : <div></div> }
+            { props.title ?
+                <Value>
+                    {editing ? <EditValue></EditValue> : props.value}
+                </Value>
+                :
+                <LargeValue>
+                    {props.value}
+                </LargeValue> }
+            <Edit><img src={icons.edit}/>Ред.</Edit>
+        </EditRowStyle>
+    );
+};
+
+export const EditRows = styled.div`
+  display: grid;
+  grid-gap: 40px;
+`;

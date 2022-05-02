@@ -8,6 +8,7 @@ export const URLs = {
     LK: '/lk',
     CART: '/cart',
     SEARCH: '/search',
+    PRODUCT: '/product',
     P404: '/'
 }
 
@@ -24,4 +25,5 @@ export const LINKS = {
     telegram: '',
     instagram: '',
     wildberries: '',
+    ozon: '',
 }

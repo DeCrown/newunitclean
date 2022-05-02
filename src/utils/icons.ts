@@ -20,9 +20,32 @@ import rarrowblack from "../icons/right_arrow_black.svg";
 import ExpositionEllipse from "../icons/exposition_ellipse";
 
 import promotion_background from "../icons/promotion/background.svg";
-import promotion_discount from "../icons/promotion/discount.svg";
+import promotion_discount from "../icons/promotion/discount2.svg";
 import promotion_price from "../icons/promotion/price.svg";
 import promotion_title from "../icons/promotion/title.svg";
+
+import verified from "../icons/verified.svg";
+import verified_blue from "../icons/verified_blue.svg";
+import edit from "../icons/edit.svg";
+
+import vk from "../icons/links/vk.svg";
+import facebook from "../icons/links/facebook.svg";
+import google from "../icons/links/google.svg";
+
+import button_right_arrow from "../icons/button_right_arrow.svg";
+import close from "../icons/close.svg";
+
+import whatsapp from "../icons/links/whatsapp.svg";
+import wildberries from "../icons/links/wildberries.png";
+import youtube from "../icons/links/youtube.svg";
+import telegram from "../icons/links/telegram.svg";
+import instagram from "../icons/links/instagram.svg";
+import ozon from "../icons/links/ozon.png";
+
+import settings from "../icons/reasons/settings.png";
+import chat from "../icons/reasons/chat.png";
+import wallet from "../icons/reasons/wallet.png";
+import security from "../icons/reasons/security.png";
 
 export const icons = {
     lk: lk,
@@ -45,5 +68,27 @@ export const icons = {
         discount: promotion_discount,
         price: promotion_price,
         title: promotion_title
+    },
+    verified: verified,
+    verified_blue: verified_blue,
+    edit: edit,
+    button_right_arrow: button_right_arrow,
+    links: {
+        vk: vk,
+        facebook: facebook,
+        google: google,
+        whatsapp: whatsapp,
+        youtube: youtube,
+        wildberries: wildberries,
+        telegram: telegram,
+        instagram: instagram,
+        ozon: ozon
+    },
+    close: close,
+    reasons: {
+        settings: settings,
+        chat: chat,
+        wallet: wallet,
+        security: security
     }
 }

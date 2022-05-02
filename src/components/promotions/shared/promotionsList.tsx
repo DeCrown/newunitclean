@@ -10,17 +10,7 @@ const PromotionsStyle = styled.div`
   
   .mobile & {
     display: grid;
-    grid-auto-flow: column;
-    overflow-x: scroll;
-    
-    margin: -50px;
-    padding: 50px;
-    
-    &.withButtons {
-      display: grid;
-      grid-auto-flow: row;
-      grid-gap: 20px;
-    }
+    grid-auto-flow: row;
   }
 `
 

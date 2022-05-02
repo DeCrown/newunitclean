@@ -5,15 +5,21 @@ import Cart from "../pages/cart";
 import Contacts from "../pages/contacts";
 import Catalog from "src/pages/catalog";
 import Promotions from "src/pages/promotions";
+import Lk from "src/pages/lk";
+import Payment from "src/pages/payment";
+import Product from "src/pages/product";
 
 export const authRoutes:route[] = [
     {
         url: constants.URLs.LK,
-        page: Main
+        page: Lk,
+        mobileClearBackground: true,
     },
     {
         url: constants.URLs.PAYMENT,
-        page: Main
+        page: Payment,
+        mobileClearBackground: true,
+        browserClearBackground: true
     },
     {
         url: constants.URLs.CART,
@@ -30,7 +36,8 @@ export const freeRoutes:route[] = [
     },
     {
         url: constants.URLs.CATALOG,
-        page: Catalog
+        page: Catalog,
+        mobileClearBackground: true,
     },
     {
         url: constants.URLs.PROMOTION,
@@ -51,6 +58,11 @@ export const freeRoutes:route[] = [
     {
         url: constants.URLs.SEARCH,
         page: Main
+    },
+    {
+        url: constants.URLs.PRODUCT,
+        page: Product,
+        mobileClearBackground: true,
     },
     {
         url: constants.URLs.P404,

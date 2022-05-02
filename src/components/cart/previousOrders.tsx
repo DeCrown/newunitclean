@@ -1,6 +1,6 @@
 import React from 'react';
 import ProductsList from "components/shared/productsList";
-import ButtonBlue from "components/shared/forms/ButtonBlue";
+import ButtonBlue from "components/shared/forms/Button/buttonBlue";
 import EmptyBasket from "components/shared/productsList/empty";
 import {Api} from "src/api";
 import TabContent from "components/shared/tabsMenu/tabContent";
@@ -18,7 +18,7 @@ const PreviousOrders = () => {
                 { orders.map((order, i) => <TabContent key={i}>
                     <ProductsList products={order.products} buttons={true}></ProductsList>
                     <ButtonContainerLeft>
-                        <ButtonBlue css={Button}>Номер заказа</ButtonBlue>
+                        <ButtonBlue styled={Button}>Номер заказа</ButtonBlue>
                     </ButtonContainerLeft>
                 </TabContent>) }
             </TabContent>
@@ -26,7 +26,7 @@ const PreviousOrders = () => {
             <TabContent>
                 <EmptyBasket>Вы еще не сделали свой первый заказ :(</EmptyBasket>
                 <ButtonContainerCenter>
-                    <ButtonBlue css={Button}>Посмотреть товары</ButtonBlue>
+                    <ButtonBlue styled={Button}>Посмотреть товары</ButtonBlue>
                 </ButtonContainerCenter>
             </TabContent>
     );

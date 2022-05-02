@@ -13,8 +13,8 @@ const ProductsStyle = styled.div`
     grid-auto-flow: column;
     overflow-x: scroll;
     
-    margin: -50px;
-    padding: 50px;
+    margin: -50px -${({ theme }) => theme.values.contentMobileMargin}px;
+    padding: 50px ${({ theme }) => theme.values.contentMobileMargin}px;
     
     &.withButtons {
       display: grid;

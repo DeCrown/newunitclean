@@ -15,7 +15,7 @@ const Background = styled.div`
   z-index: -1;
   
   .mobile & {
-    background: linear-gradient(180deg, rgba(54, 81, 109, 0.47) 0px, rgba(255, 255, 255, 0) 668px, rgba(255, 255, 255, 0) calc(100% - 1075px),  rgba(103, 130, 158, 1) 100%);
+    background: linear-gradient(180deg, #36516D 0%, rgba(255, 255, 255, 0) 668px, rgba(255, 255, 255, 0) calc(100% - 1075px),  rgba(103, 130, 158, 1) 100%);
   }
 `;
 

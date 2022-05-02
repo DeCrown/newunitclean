@@ -1,7 +1,7 @@
 import React from 'react';
 import ProductsList from "components/shared/productsList";
-import Line from "components/shared/line";
-import ButtonBlue from "components/shared/forms/ButtonBlue";
+import Line from "components/shared/duplicateComponents/line";
+import ButtonBlue from "components/shared/forms/Button/buttonBlue";
 import EmptyBasket from "components/shared/productsList/empty";
 import {Api} from "src/api";
 import {BrowserView} from "react-device-detect";
@@ -22,14 +22,14 @@ const Favourites = () => {
                     <Line></Line>
                 </BrowserView>
                 <ButtonContainerCenter>
-                    <ButtonBlue css={Button}>Купить за {45} ₽</ButtonBlue>
+                    <ButtonBlue styled={Button}>Купить за {45} ₽</ButtonBlue>
                 </ButtonContainerCenter>
             </TabContent>
             :
             <TabContent>
                 <EmptyBasket>Вы не выбрали избранные товары</EmptyBasket>
                 <ButtonContainerCenter>
-                    <ButtonBlue css={Button}>Посмотреть товары</ButtonBlue>
+                    <ButtonBlue styled={Button}>Посмотреть товары</ButtonBlue>
                 </ButtonContainerCenter>
             </TabContent>
     );

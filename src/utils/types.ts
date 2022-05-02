@@ -1,4 +1,3 @@
-import React from "react";
 
 export interface route {
     url: string;
@@ -8,23 +7,28 @@ export interface route {
 }
 
 export interface headerMenuTopButton {
-    href: string;
+    href?: string;
     text: string;
+    func?: () => void;
 }
 
 export interface headerMenuBottomButton {
-    href: string;
+    href?: string;
     text: string;
     icon: string;
+    func?: () => void;
 }
 
 
 
 export interface ProductType {
     id: number;
-    image: string;
+    image: string[];
     title: string;
-    description: string;
+    description: {
+            header: string;
+            text: string | string[]
+        }[];
     price: number;
     buttons?: boolean;
     favourite?: boolean;

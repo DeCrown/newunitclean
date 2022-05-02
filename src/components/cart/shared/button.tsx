@@ -1,6 +1,7 @@
-import {css} from "styled-components";
+import styled from "styled-components";
+import {DIV_BUTTON_BLUE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
 
-const Button = css`
+const Button = styled(DIV_BUTTON_BLUE_STYLE)`
   padding: 0 72px;
   font-size: ${({ theme }) => theme.font.size[16]};
   font-weight: ${({ theme }) => theme.font.weight[600]};

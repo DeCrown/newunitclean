@@ -1,6 +1,8 @@
 import React, {useRef} from 'react';
 import styled from "styled-components";
 import {useTypedSelector} from "src/store";
+import {Main} from "src/themes/main";
+import {isMobile} from "react-device-detect";
 
 const TabStyle = styled.div`
   position: relative;
@@ -15,9 +17,10 @@ const TabStyle = styled.div`
 const Tab = (props: {children: any, self: number}) => {
 
     const pos = useTypedSelector((state) => state.tabsMenu.pos);
+    const margin = isMobile ? Main.values.contentMobileMargin : Main.values.contentMargin;
 
     return (
-        <TabStyle className={props.self == pos ? '' : 'hidden'} style={{ left: 'calc(-100% * ' + pos + ' + 215px * ' + (props.self - pos) + ')' }}>
+        <TabStyle className={props.self == pos ? '' : 'hidden'} style={{ left: 'calc(-100% * ' + pos + ' + ' + margin + 'px * ' + (props.self - pos) + ')' }}>
             {props.children}
         </TabStyle>
     )

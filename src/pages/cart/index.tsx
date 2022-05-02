@@ -3,13 +3,14 @@ import React from 'react';
 import TabsMenu from "components/shared/tabsMenu";
 import All from "components/cart/all";
 import Favourites from "components/cart/favourites";
-import {H1} from "components/shared/fonts/headers";
+import {H1} from "components/shared/fonts/specialFonts";
 import PreviousOrders from "components/cart/previousOrders";
+import Content from "components/template/content";
 
 const Cart = () => {
 
     return (
-        <div className={'content no_up'}>
+        <Content>
             <H1>Корзина</H1>
 
             <TabsMenu tabs={[
@@ -26,7 +27,7 @@ const Cart = () => {
                     content: <PreviousOrders></PreviousOrders>
                 }
             ]}></TabsMenu>
-        </div>
+        </Content>
     );
 };
 

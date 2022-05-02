@@ -1,22 +1,19 @@
 import React from 'react';
 
 import TabsMenu from "components/shared/tabsMenu";
-import {H1} from "components/shared/fonts/headers";
+import {H1} from "components/shared/fonts/specialFonts";
 import Coupons from "components/promotions/coupons";
 import Shares from "components/promotions/shares";
-import All from "components/promotions/all";
+import Content from "components/template/content";
+import {isMobile} from "react-device-detect";
 
 const Promotions = () => {
 
     return (
-        <div className={'content no_up'}>
-            <H1>Акции</H1>
+        <Content>
+            <H1>{isMobile ? 'Акции' : 'Акции и предложения'}</H1>
 
             <TabsMenu tabs={[
-                {
-                    title: 'Все акции',
-                    content: <All></All>
-                },
                 {
                     title: 'Акции',
                     content: <Shares></Shares>
@@ -26,7 +23,7 @@ const Promotions = () => {
                     content: <Coupons></Coupons>
                 }
             ]}></TabsMenu>
-        </div>
+        </Content>
     );
 };
 

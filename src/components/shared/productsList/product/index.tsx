@@ -18,7 +18,7 @@ const ProductStyle = styled.div`
   .mobile .withButtons & {
     width: auto;
     height: 176px;
-    grid-template-rows: auto;
+    grid-template-rows: 100%;
     grid-template-columns: 50% 50%;
     margin-bottom: 0;
   }
@@ -28,17 +28,17 @@ const ProductStyle = styled.div`
   }
 `
 
-const Image = styled.div`
-  padding: 0px 12px;
-  padding-top: 26px;
-  
-  & img {
-    max-width: 100%;
-    max-height: 100%;
-  }
+const Image = styled.div<{src: string}>`
+  margin: 26px 12px 0 12px;
+  position: relative;
+  background-color: rgba(196, 196, 196, 0.23);
+  background-image: url(${props => props.src});
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
 
   .mobile .withButtons & {
-    padding: 14px;
+    margin: 14px;
   }
 `
 
@@ -62,10 +62,10 @@ const Title = styled.div`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  align-self: center;
 
   .mobile .withButtons & {
     font-size: ${({ theme }) => theme.font.size[14]};
-    align-self: center;
   }
 `
 
@@ -145,12 +145,17 @@ export const Product = (props: {data: ProductType}) => {
 
     return (
         <ProductStyle>
-            <Image>
-                <img src={props.data.image}/>
-            </Image>
+            <Image src={props.data.image[0]} />
             <Info>
                 <Title>{props.data.title}</Title>
-                <Description>{props.data.description}</Description>
+                <Description>{props.data.description.map((desc, i) => {
+                    if (typeof desc.text == "string") {
+                        return <span key={i}>{desc.text}<br/></span>
+                    }
+                    else {
+                        return <span key={i}>{desc.text.join(', ')}<br/></span>
+                    }
+                })}</Description>
                 <Price>{props.data.price} РУБ</Price>
             </Info>
         </ProductStyle>
@@ -170,12 +175,17 @@ export const ProductWithButtons = (props: {data: ProductType}) => {
 
     return (
         <ProductStyle className={'withButtons'}>
-            <Image>
-                <img src={props.data.image}/>
-            </Image>
+            <Image src={props.data.image[0]}/>
             <Info>
                 <Title>{props.data.title}</Title>
-                <Description>{props.data.description}</Description>
+                <Description>{props.data.description.map((desc) => {
+                    if (typeof desc.text == "string") {
+                        return desc.text
+                    }
+                    else {
+                        return desc.text.join(',')
+                    }
+                })}</Description>
                 <Price>{props.data.price} РУБ</Price>
                 <Buttons>
                     <ButtonDelete onClick={delete_}>

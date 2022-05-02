@@ -2,8 +2,10 @@ import React, {useEffect, useState} from 'react';
 import Review from "./review";
 import {icons} from "src/utils/icons";
 import {Api} from "src/api";
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import {isMobile, BrowserView, MobileView} from "react-device-detect";
+import ButtonBlue from "components/shared/forms/Button/buttonBlue";
+import {DIV_BUTTON_WHITE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
 
 const ReviewsStyle = styled.div`
   width: 400px;
@@ -53,28 +55,17 @@ const ReviewPointSelected = styled(ReviewPoint)`
   background: #717171;
 `
 
-const ReviewsMoreButton = styled.div`
-  border: 2px solid #2196F3;
-  box-sizing: border-box;
-  border-radius: 10px;
-  color: #2196F3;
+const ReviewsMoreButton = styled(DIV_BUTTON_WHITE_STYLE)`
   font-size: ${({ theme }) => theme.font.size[16]};
   font-weight: ${({ theme }) => theme.font.weight[700]};
-  height: 30px;
-  padding-top: 5px;
+  height: 35px;
   width: 50%;
-  left: 25%;
-  position: relative;
-  transition: background-color, color 0.3s, 0.3s;
-  cursor: pointer;
-  
-  &:hover {
-    background: #2196F3;
-    color: #fff;
-  }
+  justify-self: center;
+  color: ${({ theme }) => theme.font.color.blue};
   
   .mobile & {
     align-self: center;
+    width: auto;
   }
 `
 
@@ -145,7 +136,7 @@ const Reviews: React.FC = () => {
             <ReviewsContainer>
                 { reviewsList.map((review) => <Review pos={pos} key={review.id} name={review.name} photo={review.photo} role={review.role} text={review.text} />) }
             </ReviewsContainer>
-            <ReviewsMoreButton>Читать все отзывы</ReviewsMoreButton>
+            <ButtonBlue styled={ReviewsMoreButton}>Читать все отзывы</ButtonBlue>
             <ReviewsCounter>
                 <ReviewsArrowLeft onClick={leftArrow}>
                     <img src={icons.larrowblack} />
@@ -164,7 +155,7 @@ const Reviews: React.FC = () => {
             <ReviewsCounter>
                 { reviewsList.map((review, i) => pos == i ? <ReviewPointSelected key={review.id}></ReviewPointSelected> : <ReviewPoint key={review.id}></ReviewPoint>)}
             </ReviewsCounter>
-            <ReviewsMoreButton>Читать все отзывы</ReviewsMoreButton>
+            <ButtonBlue styled={ReviewsMoreButton}>Читать все отзывы</ButtonBlue>
             <ReviewsArrowLeft onClick={leftArrow}>
                 <img src={icons.larrow} />
             </ReviewsArrowLeft>

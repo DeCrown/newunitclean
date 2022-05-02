@@ -33,19 +33,11 @@ export default createGlobalStyle`
     min-width: 0;
   }
 
-  .content {
-    padding: 30px 215px;
-  }
-
-  .mobile .content {
-    padding: 0 16px;
-  }
-
   p {
-    margin-bottom: 40px;
-  }
-
-  h1 {
+    padding-top: 48px;
     
+    .mobile & {
+      padding: 0;
+    }
   }
 `

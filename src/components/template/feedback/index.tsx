@@ -25,7 +25,7 @@ const ReviewsHeader = styled.div`
 
 const Feedback = () => {
     return (
-        <div>
+        <div id={"feedback"}>
             <BrowserView>
                 <FeedbackStyle>
                     <OrderCall></OrderCall>

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Forms} from "components/shared/forms";
 import styled from "styled-components";
+import ButtonBlue from "components/shared/forms/Button/buttonBlue";
 
 const OrderCallStyle = styled.div`
   width: 370px;
@@ -59,7 +60,7 @@ const OrderCall = () => {
             <Forms.InputText placeholder='Телефон' ></Forms.InputText>
             <Forms.InputText placeholder='Когда перезвонить' ></Forms.InputText>
             <Forms.InputTextField placeholder='Комментарий' ></Forms.InputTextField>
-            <Forms.ButtonBlue><ButtonSend>Отправить</ButtonSend></Forms.ButtonBlue>
+            <ButtonBlue><ButtonSend>Отправить</ButtonSend></ButtonBlue>
         </OrderCallStyle>
     );
 };

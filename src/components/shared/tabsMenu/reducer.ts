@@ -1,6 +1,4 @@
-import {TypedUseSelectorHook, useSelector} from "react-redux";
-
-interface state {
+export interface state {
     pos: number;
     heights: { };
 }

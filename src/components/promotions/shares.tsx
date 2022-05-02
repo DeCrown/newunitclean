@@ -1,36 +1,33 @@
 import React from 'react';
-import ProductsList from "components/shared/productsList";
-import Line from "components/shared/line";
-import ButtonBlue from "components/shared/forms/ButtonBlue";
-import EmptyBasket from "components/shared/productsList/empty";
 import {Api} from "src/api";
-import {BrowserView} from "react-device-detect";
 import TabContent from "components/shared/tabsMenu/tabContent";
-import {ButtonContainerCenter} from "components/cart/shared/buttonContainers";
-import Button from "components/cart/shared/button";
+import PromotionsList from "components/promotions/shared/promotionsList";
+import Banner from "components/shared/duplicateComponents/banner";
+import {BrowserView} from "react-device-detect";
+import styled from "styled-components";
+
+const MonthTrendContainer = styled.div`
+  padding: 20px 0 20px 0;
+`;
 
 const Shares = () => {
 
-    const products = Api.Cart.favourites.get();
+    const promotions = Api.Promotions.get();
 
     return (
-        products.length
+        promotions.length
             ?
             <TabContent>
-                <ProductsList products={products} buttons={true}></ProductsList>
+                <PromotionsList promotions={promotions}></PromotionsList>
                 <BrowserView>
-                    <Line></Line>
+                    <MonthTrendContainer>
+                        <Banner header={'Тренд месяца'} text={'В честь начала летнего сезона скидки на товары месяца 15%. Успей заказать и в поход!'}></Banner>
+                    </MonthTrendContainer>
                 </BrowserView>
-                <ButtonContainerCenter>
-                    <ButtonBlue css={Button}>Купить за {45} ₽</ButtonBlue>
-                </ButtonContainerCenter>
             </TabContent>
             :
             <TabContent>
-                <EmptyBasket>Вы не выбрали избранные товары</EmptyBasket>
-                <ButtonContainerCenter>
-                    <ButtonBlue css={Button}>Посмотреть товары</ButtonBlue>
-                </ButtonContainerCenter>
+
             </TabContent>
     );
 };

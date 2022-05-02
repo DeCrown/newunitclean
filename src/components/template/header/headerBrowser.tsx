@@ -6,6 +6,8 @@ import logo from "src/logo/croppedlogo.png";
 import HeaderTopButton from "components/template/header/topButton";
 import HeaderBottomMenuButton from "components/template/header/bottomMenuButton";
 import {headerMenuBottomButton, headerMenuTopButton} from "src/utils/types";
+import {useDispatch} from "react-redux";
+import {Authorization} from "components/shared/windows/authorization";
 
 const HeaderContainerStyle = styled.div`
   background: #ADB8C4;
@@ -80,13 +82,23 @@ const HeaderBottomMenu = styled.div`
 `;
 
 export const HeaderContainer = (props: {topButtons: headerMenuTopButton[]; bottomButtons: headerMenuBottomButton[]}) => {
+
+    const dispatch = useDispatch();
+
+    const openRegistration = () => {
+        dispatch({
+            type: 'SET_ACTIVE_WINDOW',
+            payload: Authorization
+        });
+    }
+
     return (
         <HeaderContainerStyle>
             <HeaderTop>
                 <HeaderTopText>{constants.INFO.TITLE}</HeaderTopText>
                 <div></div>
                 {
-                    props.topButtons.map((button, i) => <HeaderTopButton href={button.href} key={i}>{button.text}</HeaderTopButton>)
+                    props.topButtons.map((button, i) => <HeaderTopButton data={button} key={i} />)
                 }
             </HeaderTop>
 
@@ -100,7 +112,7 @@ export const HeaderContainer = (props: {topButtons: headerMenuTopButton[]; botto
                 </PhoneNumber>
                 <HeaderBottomMenu>
                     {
-                        props.bottomButtons.map((button, i) => <HeaderBottomMenuButton key={i} href={button.href} icon={button.icon}>{button.text}</HeaderBottomMenuButton>)
+                        props.bottomButtons.map((button, i) => <HeaderBottomMenuButton key={i} data={button}/>)
                     }
                 </HeaderBottomMenu>
             </HeaderBottom>

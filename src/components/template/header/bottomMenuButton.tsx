@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import {headerMenuBottomButton} from "src/utils/types";
 
 const HeaderBottomMenuButtonIcon = styled.div`
   & img {
@@ -12,26 +13,29 @@ const HeaderBottomMenuButtonIcon = styled.div`
   }
 `
 
-const HeaderBottomMenuButtonStyle = styled.div`
+const HeaderBottomMenuButtonStyle = styled.a`
   display: grid;
   align-content: center;
   padding: 0 5px;
   font-size: ${({ theme }) => theme.font.size[13]};
   font-weight: ${({ theme }) => theme.font.weight[700]};
   cursor: pointer;
+
+  &, &:visited {
+    text-decoration: none;
+    color: ${({ theme }) => theme.font.color.black};
+    font-size: ${({ theme }) => theme.font.size[13]};
+    font-weight: ${({ theme }) => theme.font.weight[700]};
+  }
 `
 
-const HeaderBottomMenuButton = (props: { children: any; href: string; icon: any } ) => {
-    function open() {
-        document.location = props.href;
-    }
-
+const HeaderBottomMenuButton = (props: { data: headerMenuBottomButton } ) => {
     return (
-        <HeaderBottomMenuButtonStyle onClick={open}>
+        <HeaderBottomMenuButtonStyle href={props.data.href} onClick={props.data.func}>
             <HeaderBottomMenuButtonIcon>
-                <img src={props.icon} />
+                <img src={props.data.icon} />
             </HeaderBottomMenuButtonIcon>
-            <div>{props.children}</div>
+            <div>{props.data.text}</div>
         </HeaderBottomMenuButtonStyle>
     );
 };

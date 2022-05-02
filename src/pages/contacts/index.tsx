@@ -1,18 +1,34 @@
 import React from 'react';
-import {Fonts, Text} from "components/shared/fonts";
-import Info from "components/contacts/info";
-import Map from "components/contacts/map";
+import Info from "components/contacts/info/info";
+import Map from "components/contacts/map/map";
+import Content from "components/template/content";
+import styled from "styled-components";
+import {H1} from "components/shared/fonts/specialFonts";
+
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 65px 0 142px 0;
+  grid-gap: 16px;
+  
+  .mobile & {
+    margin: 20px 0 60px 0;
+    justify-content: start;
+    grid-gap: 55px;
+  }
+`;
 
 const Contacts = () => {
     return (
-        <div className={'content no_up'}>
-            <h1><Text style={[Fonts.w900, Fonts.s36, Fonts.black]}>Контакты</Text></h1>
+        <Content>
+            <H1>Контакты</H1>
 
-            <div>
+            <Container>
                 <Info></Info>
                 <Map></Map>
-            </div>
-        </div>
+            </Container>
+        </Content>
     );
 };
 

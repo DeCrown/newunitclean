@@ -1,35 +1,25 @@
 import React from 'react';
-import ProductsList from "components/shared/productsList";
-import Line from "components/shared/line";
-import ButtonBlue from "components/shared/forms/ButtonBlue";
-import EmptyBasket from "components/shared/productsList/empty";
-import {Api} from "src/api";
 import TabContent from "components/shared/tabsMenu/tabContent";
-import {ButtonContainerCenter, ButtonContainerLeft} from "components/cart/shared/buttonContainers";
-import Button from "components/cart/shared/button";
+import PromoCode from "./promoCode";
+import Banner from "components/shared/duplicateComponents/banner";
+import {BrowserView} from "react-device-detect";
+import styled from "styled-components";
+
+const MonthTrendContainer = styled.div`
+  padding: 20px 0 20px 0;
+`;
 
 const Coupons = () => {
 
-    const orders = Api.Cart.previousOrders.get();
-
     return (
-        orders.length
-            ?
-            <TabContent>
-                { orders.map((order, i) => <TabContent key={i}>
-                    <ProductsList products={order.products} buttons={true}></ProductsList>
-                    <ButtonContainerLeft>
-                        <ButtonBlue css={Button}>Номер заказа</ButtonBlue>
-                    </ButtonContainerLeft>
-                </TabContent>) }
-            </TabContent>
-            :
-            <TabContent>
-                <EmptyBasket>Вы еще не сделали свой первый заказ :(</EmptyBasket>
-                <ButtonContainerCenter>
-                    <ButtonBlue css={Button}>Посмотреть товары</ButtonBlue>
-                </ButtonContainerCenter>
-            </TabContent>
+        <TabContent>
+            <PromoCode></PromoCode>
+            <BrowserView>
+                <MonthTrendContainer>
+                    <Banner header={'Тренд месяца'} text={'В честь начала летнего сезона скидки на товары месяца 15%. Успей заказать и в поход!'}></Banner>
+                </MonthTrendContainer>
+            </BrowserView>
+        </TabContent>
     );
 };
 

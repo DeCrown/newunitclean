@@ -18,7 +18,7 @@ const Page = (route:route, i:number) => {
 
 function App() {
   return (
-      <div className={ isMobile ? 'mobile' : 'he' }>
+      <div className={ isMobile ? 'mobile' : '' }>
           <BrowserRouter>
               <ThemeProvider theme={Main}>
                   <Provider store={store}>
