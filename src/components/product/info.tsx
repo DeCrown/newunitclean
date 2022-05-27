@@ -3,10 +3,12 @@ import {H1} from "components/shared/fonts/specialFonts";
 import {ProductType} from "src/utils/types";
 import styled from "styled-components";
 import InfoRow from "./infoRow";
-import ButtonBlue from "components/shared/forms/Button/buttonBlue";
+import ButtonBlue from "components/shared/forms/buttonBlue";
 import {DIV_BUTTON_BLUE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
-import RadioButtons from "components/shared/forms/Button/radioButtons";
 import {isMobile} from "react-device-detect";
+import {AppendApiMethod} from "src/actions/ApiMethodAction/ApiMethodAction";
+import {Dispatch} from "redux";
+import {useDispatch} from "react-redux";
 
 const InfoStyle = styled.div`
   display: grid;
@@ -48,20 +50,36 @@ const ButtonStyle = styled(DIV_BUTTON_BLUE_STYLE)`
   }
 `;
 
+const AddToCart = (id: number) => (dispatch:Dispatch) => {
+    AppendApiMethod({func: 'patch', data: {product_id: id}, url: '/product/api/v2/order/add_product/',
+        success: (success) => {
+
+        },
+        error: (error) => {
+
+        }, auth: true})(dispatch);
+}
+
 const Info = (props: {data: ProductType}) => {
-    console.log(props.data);
+    const dispatch = useDispatch();
+
     return (
         <InfoStyle>
             { isMobile ? '' : <Header>{props.data.title}</Header>}
 
             <Price>{props.data.price.toLocaleString()} РУБ</Price>
             <Description>
-                {typeof props.data.description == "string" ? '' : props.data.description.map((row, i) =>
-                    <InfoRow key={i} title={row.header}>
-                        {typeof row.text == "string" ? row.text : <RadioButtons buttons={row.text}></RadioButtons>}
-                    </InfoRow>)}
+                <InfoRow title={'Описание'}>
+                    {props.data.description}
+                </InfoRow>
+                {
+                    /*typeof props.data.description == "string" ? '' : props.data.description.map((row, i) =>
+                                        <InfoRow key={i} title={row.header}>
+                                            {typeof row.text == "string" ? row.text : <RadioButtons buttons={row.text}></RadioButtons>}
+                                        </InfoRow>)}*/
+                }
             </Description>
-            <ButtonBlue styled={ButtonStyle}>Купить за {props.data.price} ₽</ButtonBlue>
+            <ButtonBlue styled={ButtonStyle} func={() => AddToCart(props.data.id)(dispatch)}>Добавить в корзину</ButtonBlue>
         </InfoStyle>
     );
 };

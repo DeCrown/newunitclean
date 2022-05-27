@@ -7,8 +7,8 @@ const Button = styled(DIV_BUTTON_BLUE_STYLE)`
   font-weight: ${({ theme }) => theme.font.weight[600]};
   
   .mobile & {
-    padding: 0px 20px;
-    width: calc(100% - 40px);
+    /*padding: 0px 20px;
+    width: calc(100% - 40px);*/
   }
 `;
 

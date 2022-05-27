@@ -1,7 +1,6 @@
-import React from 'react';
+import React, {useCallback, useEffect} from 'react';
 import Content from "components/template/content";
 import styled from "styled-components";
-import {Api} from "src/api";
 import Info from "components/product/info";
 import Images from "components/product/images";
 import OtherProducts from "components/product/otherProducts";
@@ -9,6 +8,13 @@ import Banner from "components/shared/duplicateComponents/banner";
 import {BrowserView, isMobile} from "react-device-detect";
 import {H1} from "components/shared/fonts/specialFonts";
 import ImagesMobile from "components/product/imagesMobile";
+import {useParams} from "react-router-dom";
+import {useTypedSelector} from "src/store/configureStore";
+import {IStateProductList} from "src/reducers/ProductListReducer/ProductListReducer.types";
+import {useDispatch} from "react-redux";
+import {GetProductList} from "src/actions/ProductListAction/ProductListAction";
+import {GetProduct} from "src/actions/ProductAction/ProductAction";
+import {IStateProduct} from "src/reducers/ProductReducer/ProductReducer.types";
 
 const Container = styled.div`
   display: grid;
@@ -27,23 +33,32 @@ const MonthTrendContainer = styled.div`
   padding: 100px 0 154px 0;
 `;
 
-const Product = (/*props: {data: ProductType}*/) => {
+const Product = () => {
+    const state = useTypedSelector((store) => store);
+    const productState = state.Product as IStateProduct;
 
-    const props = {data: Api.Cart.all.get()[0]};
+    const dispatch = useDispatch();
+    const stableDispatch = useCallback(dispatch, []);
+
+    let { id } = useParams();
+
+    useEffect(() => {
+        stableDispatch(GetProduct(id));
+    }, []);
 
     return (
         <Content>
-            { isMobile ? <H1>{props.data.title}</H1> : ''}
+            { isMobile ? <H1>{productState.product.title}</H1> : ''}
 
             <Container>
                 { isMobile ?
-                    <ImagesMobile images={props.data.image}></ImagesMobile>
+                    <ImagesMobile images={productState.product.image ? productState.product.image : []}></ImagesMobile>
                     :
-                    <Images images={props.data.image}></Images> }
-                <Info data={props.data}></Info>
+                    <Images images={productState.product.image ? productState.product.image : []}></Images> }
+                <Info data={productState.product}></Info>
             </Container>
 
-            <OtherProducts></OtherProducts>
+            <OtherProducts self={productState.product.id}></OtherProducts>
 
             <BrowserView>
                 <MonthTrendContainer>

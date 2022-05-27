@@ -6,7 +6,7 @@ export const DIV_BUTTON_BLUE_STYLE = styled.div<{css?: any; cssMobile?: any}>`
   box-sizing: border-box;
   height: 60px;
   background: #2196F3;
-  border: 1px solid #2196F3;
+  border: 2px solid #2196F3;
   border-radius: 10px;
   color: ${({ theme }) => theme.font.color.white};
   padding: 0px 20px;
@@ -16,9 +16,14 @@ export const DIV_BUTTON_BLUE_STYLE = styled.div<{css?: any; cssMobile?: any}>`
   overflow: hidden;
   text-overflow: ellipsis;
   ${props => props.css}
+  transition: filter 0.2s;
   
   .mobile & {
     ${props => props.cssMobile}
+  }
+  
+  &:hover {
+    filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.25));
   }
 `;
 

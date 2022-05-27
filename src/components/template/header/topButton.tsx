@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import {headerMenuTopButton} from "src/utils/types";
+import HeaderButton from "components/template/header/headerButton";
 
 const HeaderTopButtonStyle = styled.a`
   cursor: pointer;
@@ -21,10 +22,12 @@ const HeaderTopButtonStyle = styled.a`
   }
 `
 
-const HeaderTopButton = (props: { data: headerMenuTopButton }) => {
+const TopButton = (props: { data: headerMenuTopButton }) => {
     return (
-        <HeaderTopButtonStyle href={props.data.href} onClick={props.data.func}>{props.data.text}</HeaderTopButtonStyle>
+        <HeaderButton styled={HeaderTopButtonStyle} href={props.data.href} func={props.data.func} auth={props.data.auth}>
+            {props.data.text}
+        </HeaderButton>
     );
 };
 
-export default HeaderTopButton;
+export default TopButton;

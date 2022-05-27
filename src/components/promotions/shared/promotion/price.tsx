@@ -16,7 +16,7 @@ const PriceStyle = styled.div`
   margin-bottom: 10px;
 `;
 
-const Price = (props: {sum: number}) => {
+const Price = (props: {sum?: number}) => {
     return (
         <PriceStyle>
             {props.sum}р

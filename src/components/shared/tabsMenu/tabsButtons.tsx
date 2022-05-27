@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
-import {useTypedSelector} from "src/store";
+import {IStateTabsManu} from "src/reducers/TabsMenuReducer/TabsMenuReducer";
+import {useTypedSelector} from "src/store/configureStore";
 
 
 const TabButtonStyle = styled.div`
@@ -25,8 +26,8 @@ const TabButtonStyle = styled.div`
 `
 
 const TabButton = (props: { children: string, self: number } ) => {
-
-    const pos = useTypedSelector((state) => state.tabsMenu.pos);
+    const TabsMenu = useTypedSelector((store) => store.TabsMenu);
+    const {pos} = TabsMenu as IStateTabsManu;
     const dispatch = useDispatch();
 
     function click() {

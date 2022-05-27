@@ -1,9 +1,9 @@
 import React from 'react';
 import * as constants from "src/utils/constants";
 import logo from "src/logo/logo.png";
-import INPUT_TEXT from "components/shared/forms/primitives/INPUT_TEXT";
 import styled from "styled-components";
 import {isMobile} from "react-device-detect";
+import {InputText} from "components/shared/forms/inputText";
 
 const FooterStyle = styled.div`
   background: #1C446EAB;
@@ -120,7 +120,7 @@ const Footer = () => {
                     <Logo><img src={logo} /></Logo>
                     <Title>{constants.INFO.TITLE}</Title>
                     <Search>
-                        <INPUT_TEXT placeholder='Поиск'></INPUT_TEXT>
+                        <InputText placeholder='Поиск'></InputText>
                     </Search>
                     <HighText>{constants.INFO.PHONE_NUMBER}</HighText>
                     <HighText>{constants.INFO.EMAIL}</HighText>
@@ -163,7 +163,7 @@ const Footer = () => {
                     </NavigationList>
                 </Navigation>
                 <Search>
-                    <INPUT_TEXT placeholder='Поиск'></INPUT_TEXT>
+                    <InputText placeholder='Поиск'></InputText>
                 </Search>
             </FooterStyle>
     );

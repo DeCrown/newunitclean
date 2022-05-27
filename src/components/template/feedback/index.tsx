@@ -3,6 +3,11 @@ import {BrowserView, MobileView} from 'react-device-detect';
 import Reviews from "./reviews";
 import styled from "styled-components";
 import OrderCall from "components/template/feedback/orderCall";
+import {FeedbackBackground} from "components/template/backgrounds/feedbackBackground";
+
+const FeedbackContainer = styled.div`
+  position: relative;
+`;
 
 const FeedbackStyle = styled.div`
     height: 712px;
@@ -25,7 +30,8 @@ const ReviewsHeader = styled.div`
 
 const Feedback = () => {
     return (
-        <div id={"feedback"}>
+        <FeedbackContainer id={"feedback"}>
+            <FeedbackBackground></FeedbackBackground>
             <BrowserView>
                 <FeedbackStyle>
                     <OrderCall></OrderCall>
@@ -41,7 +47,7 @@ const Feedback = () => {
                     <OrderCall></OrderCall>
                 </div>
             </MobileView>
-        </div>
+        </FeedbackContainer>
     );
 };
 

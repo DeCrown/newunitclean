@@ -3,11 +3,11 @@ import styled from "styled-components";
 
 const LinkStyle = styled.div``;
 
-const Link = (props: {image: string; url: string}) => {
+const Link = (props: {image: string; url: string; height: string}) => {
     return (
         <LinkStyle>
             <a href={props.url}>
-                <img src={props.image} />
+                <img height={props.height} src={props.image} />
             </a>
         </LinkStyle>
     );

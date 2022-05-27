@@ -22,7 +22,7 @@ export default createGlobalStyle`
   #root {
     position: absolute;
     width: 100%;
-    overflow-x: hidden;
+    overflow: hidden;
   }
 
   #root > div {

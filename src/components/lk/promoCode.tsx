@@ -1,8 +1,8 @@
 import React from 'react';
 import InputCode from "components/shared/forms/specialForms/inputCode";
 import {FormText} from "components/shared/fonts/specialFonts";
-import {InputPromoCode} from "components/shared/forms/InputText";
-import ButtonBlue from "components/shared/forms/Button/buttonBlue";
+import {InputPromoCode} from "components/shared/forms/inputText";
+import ButtonBlue from "components/shared/forms/buttonBlue";
 import {icons} from "src/utils/icons";
 import styled, {css} from "styled-components";
 import {DIV_BUTTON_BLUE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";

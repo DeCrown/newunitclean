@@ -11,7 +11,7 @@ import delete_ from "../icons/delete.svg";
 import not_favourite from "../icons/not_favourite.svg";
 import favourite from "../icons/favourite.svg";
 
-import basket from "../icons/basket.svg";
+import basket from "../icons/basket.png";
 
 import menu from "../icons/menu.svg";
 import larrowblack from "../icons/left_arrow_black.svg";
@@ -40,12 +40,15 @@ import wildberries from "../icons/links/wildberries.png";
 import youtube from "../icons/links/youtube.svg";
 import telegram from "../icons/links/telegram.svg";
 import instagram from "../icons/links/instagram.svg";
-import ozon from "../icons/links/ozon.png";
+import ozon from "../icons/links/ozon.svg";
 
 import settings from "../icons/reasons/settings.png";
 import chat from "../icons/reasons/chat.png";
 import wallet from "../icons/reasons/wallet.png";
+import wallet_clicked from "../icons/reasons/wallet_clicked.png";
 import security from "../icons/reasons/security.png";
+
+import exit from "../icons/exit.svg";
 
 export const icons = {
     lk: lk,
@@ -89,6 +92,8 @@ export const icons = {
         settings: settings,
         chat: chat,
         wallet: wallet,
+        wallet_clicked: wallet_clicked,
         security: security
-    }
+    },
+    exit: exit
 }

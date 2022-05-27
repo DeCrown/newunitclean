@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import {HEADER_STYLE} from "components/shared/fonts/specialFonts";
 import {DIV_BUTTON_BLUE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
-import ButtonBlue from "components/shared/forms/Button/buttonBlue";
+import ButtonBlue from "components/shared/forms/buttonBlue";
 
 const BannerStyle = styled.div`
   height: 184px;

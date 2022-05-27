@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import styled from "styled-components";
 import {Main} from "src/themes/main";
 import {icons} from "src/utils/icons";
 import {useDispatch} from "react-redux";
+import {WindowsManagerClear} from "src/actions/WindowsManagerAction/WindowsManagerAction";
 
-const FormStyle = styled.div`
+const FormStyle = styled.form`
   position: relative;
   background: #FFFFFF;
   box-shadow: 0px 9px 18px 7px rgba(0, 0, 0, 0.17);
@@ -33,7 +34,7 @@ const Form = (props: {children: any; closeButton?: boolean}) => {
     );
 };
 
-const FormCloseStyle = styled.div`
+export const FormCloseStyle = styled.div`
   position: absolute;
   top: 0px;
   right: 0px;
@@ -55,15 +56,10 @@ const FormCloseStyle = styled.div`
 
 const FormClose = () => {
     const dispatch = useDispatch();
-
-    const close = () => {
-        dispatch({
-            type: 'RESET_WINDOW'
-        });
-    }
+    const stableDispatch = useCallback(dispatch, []);
 
     return (
-        <FormCloseStyle onClick={close}>
+        <FormCloseStyle onClick={() => stableDispatch(WindowsManagerClear())}>
             <img src={icons.close} />
         </FormCloseStyle>
     );

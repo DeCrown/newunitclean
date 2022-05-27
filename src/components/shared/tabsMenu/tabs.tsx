@@ -1,8 +1,9 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import styled from "styled-components";
-import {useTypedSelector} from "src/store";
 import {Main} from "src/themes/main";
 import {isMobile} from "react-device-detect";
+import {IStateTabsManu} from "src/reducers/TabsMenuReducer/TabsMenuReducer";
+import {useTypedSelector} from "src/store/configureStore";
 
 const TabStyle = styled.div`
   position: relative;
@@ -16,7 +17,8 @@ const TabStyle = styled.div`
 
 const Tab = (props: {children: any, self: number}) => {
 
-    const pos = useTypedSelector((state) => state.tabsMenu.pos);
+    const TabsMenu = useTypedSelector((store) => store.TabsMenu);
+    const {pos} = TabsMenu as IStateTabsManu;
     const margin = isMobile ? Main.values.contentMobileMargin : Main.values.contentMargin;
 
     return (

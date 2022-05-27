@@ -1,8 +1,8 @@
 import React from 'react';
 import styled, {css} from "styled-components";
 import {FormContainer} from "components/shared/forms/form";
-import {InputText} from "components/shared/forms/InputText";
-import ButtonBlue from "components/shared/forms/Button/buttonBlue";
+import {InputText} from "components/shared/forms/inputText";
+import ButtonBlue from "components/shared/forms/buttonBlue";
 import {DIV_BUTTON_BLUE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
 
 const Container = styled.div`

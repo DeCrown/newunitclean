@@ -8,11 +8,18 @@ import Promotions from "src/pages/promotions";
 import Lk from "src/pages/lk";
 import Payment from "src/pages/payment";
 import Product from "src/pages/product";
+import CompanyLk from "src/pages/company_lk";
+import Search from "src/pages/search";
 
 export const authRoutes:route[] = [
     {
         url: constants.URLs.LK,
         page: Lk,
+        mobileClearBackground: true,
+    },
+    {
+        url: constants.URLs.COMPANY_LK,
+        page: CompanyLk,
         mobileClearBackground: true,
     },
     {
@@ -57,7 +64,11 @@ export const freeRoutes:route[] = [
     },
     {
         url: constants.URLs.SEARCH,
-        page: Main
+        page: Search
+    },
+    {
+        url: constants.URLs.SEARCH_WITH_PARAM,
+        page: Search
     },
     {
         url: constants.URLs.PRODUCT,

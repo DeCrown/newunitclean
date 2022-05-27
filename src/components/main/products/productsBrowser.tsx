@@ -1,9 +1,15 @@
-import React, {useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import styled from "styled-components";
 import {H2Main} from "components/shared/fonts/specialFonts";
 import {Api} from "src/api";
 import Category from "components/main/products/category";
 import Product from "components/main/products/product";
+import {useTypedSelector} from "src/store/configureStore";
+import {IStateProductList} from "src/reducers/ProductListReducer/ProductListReducer.types";
+import {IStateCategories} from "src/reducers/CategoriesReducer/CategoriesReducer.types";
+import {useDispatch} from "react-redux";
+import {GetProductList} from "src/actions/ProductListAction/ProductListAction";
+import {GetCategories} from "src/actions/CategoriesAction/CategoriesAction";
 
 const ProductsStyle = styled.div`
   margin: 100px 0 150px 0;
@@ -41,8 +47,23 @@ const ProductsList = styled.div`
 
 const ProductsBrowser = () => {
 
-    const [selected, setSelected] = useState(0);
-    const categories = Api.Catalog.get();
+    const state = useTypedSelector((store) => store);
+    const productListState = state.ProductList as IStateProductList;
+    const categoriesState = state.Categories as IStateCategories;
+
+    const dispatch = useDispatch();
+    const stableDispatch = useCallback(dispatch, []);
+
+    useEffect(() => {
+        stableDispatch(GetProductList());
+        stableDispatch(GetCategories());
+    }, []);
+
+    const [selected, setSelected] = useState(-1);
+
+    if (categoriesState.categories.length && selected == -1) {
+        setSelected(categoriesState.categories[0].id);
+    }
 
     function select(i: number) {
         setSelected(i);
@@ -53,10 +74,13 @@ const ProductsBrowser = () => {
             <Header>Товары</Header>
             <Container>
                 <Categories>
-                    {categories.map((category, i) => <Category key={i} selected={selected} self={i} func={select}>{category.category}</Category>)}
+                    {categoriesState.categories.map((category) =>
+                        <Category key={category.id} selected={selected} self={category.id} func={select}>{category.title}</Category>)}
                 </Categories>
                 <ProductsList>
-                    {categories[selected].products.map((product, i) => <Product key={i} data={product}></Product>)}
+                    {productListState.products
+                        .filter(product => product.group == selected)
+                        .map((product) => <Product key={product.id} data={product}></Product>)}
                 </ProductsList>
 
             </Container>

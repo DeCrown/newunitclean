@@ -1,9 +1,9 @@
 import React from 'react';
 import TabContent from "components/shared/tabsMenu/tabContent";
 import ProductsList from "components/shared/productsList";
-import EmptyBasket from "components/shared/productsList/empty";
 import {ProductType} from "src/utils/types";
 import styled from "styled-components";
+import EmptyBasket from "components/shared/productsList/empty";
 
 const Title = styled.h2`
   font-size: ${({ theme }) => theme.font.size[28]};

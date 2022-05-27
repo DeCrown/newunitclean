@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import ButtonBlue from "components/shared/forms/Button/buttonBlue";
+import ButtonBlue from "components/shared/forms/buttonBlue";
 import {DIV_BUTTON_BLUE_STYLE, DIV_BUTTON_WHITE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
 
 const CategoryStyle = styled(DIV_BUTTON_WHITE_STYLE)`

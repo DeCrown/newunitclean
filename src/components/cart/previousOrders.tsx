@@ -1,33 +1,48 @@
-import React from 'react';
+import React, {useCallback, useEffect} from 'react';
 import ProductsList from "components/shared/productsList";
-import ButtonBlue from "components/shared/forms/Button/buttonBlue";
-import EmptyBasket from "components/shared/productsList/empty";
-import {Api} from "src/api";
+import ButtonBlue from "components/shared/forms/buttonBlue";
 import TabContent from "components/shared/tabsMenu/tabContent";
 import {ButtonContainerCenter, ButtonContainerLeft} from "components/cart/shared/buttonContainers";
 import Button from "components/cart/shared/button";
+import {isMobile} from "react-device-detect";
+import EmptyBasket from "components/shared/productsList/empty";
+import {useTypedSelector} from "src/store/configureStore";
+import {IStatePreviousOrders} from "src/reducers/PreviousOrdersReducer/PreviousOrdersReducer.types";
+import {URLs} from "src/utils/constants";
+import {useNavigate} from "react-router-dom";
+import {GetPreviousOrders} from "src/actions/PreviousOrdersAction/PreviousOrdersAction";
+import {useDispatch} from "react-redux";
+import Order from "components/cart/shared/order";
 
 const PreviousOrders = () => {
 
-    const orders = Api.Cart.previousOrders.get();
+    const PreviousOrder = useTypedSelector((store) => store.PreviousOrders);
+    const {orders, isFetching, error} = PreviousOrder as IStatePreviousOrders;
+    const dispatch = useDispatch();
+    const stableDispatch = useCallback(dispatch, []);
+
+    useEffect(() => {
+        stableDispatch(GetPreviousOrders());
+    }, []);
 
     return (
         orders.length
             ?
             <TabContent>
-                { orders.map((order, i) => <TabContent key={i}>
-                    <ProductsList products={order.products} buttons={true}></ProductsList>
-                    <ButtonContainerLeft>
-                        <ButtonBlue styled={Button}>Номер заказа</ButtonBlue>
-                    </ButtonContainerLeft>
-                </TabContent>) }
+                { orders.map((order) =>
+                    <Order key={order.id} order={order}/>
+                ) }
             </TabContent>
             :
             <TabContent>
                 <EmptyBasket>Вы еще не сделали свой первый заказ :(</EmptyBasket>
-                <ButtonContainerCenter>
-                    <ButtonBlue styled={Button}>Посмотреть товары</ButtonBlue>
-                </ButtonContainerCenter>
+                {isMobile ?
+                    ''
+                    :
+                    <ButtonContainerCenter>
+                        <ButtonBlue styled={Button} func={() => window.open(URLs.CATALOG, '_self')}>Посмотреть товары</ButtonBlue>
+                    </ButtonContainerCenter>
+                }
             </TabContent>
     );
 };

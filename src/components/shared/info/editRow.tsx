@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styled from "styled-components";
 import {icons} from "src/utils/icons";
 import {isMobile} from "react-device-detect";
+import EditIcon from "src/icons/edit";
+import SaveIcon from "src/icons/save";
 
 const EditRowStyle = styled.div`
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -24,6 +26,8 @@ const EditRowStyle = styled.div`
     display: grid;
     grid-auto-flow: column;
     align-content: center;
+    justify-items: center;
+    grid-auto-columns: 1fr;
   }
   
   & img {
@@ -84,14 +88,25 @@ const LargeValue = styled(Value)`
   }
 `;
 
-const Edit = styled.div`
+const EditSaveButton = styled.div`
   justify-self: end;
   font-size: ${({ theme }) => theme.font.size[12]};
   font-weight: ${({ theme }) => theme.font.weight[400]};
   color: rgba(0, 0, 0, 0.3);
+  grid-gap: 6px;
+  cursor: pointer;
+  
+  &:hover {
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  &:hover > svg {
+    opacity: 0.8;
+  }
 `;
 
 const EditValue = styled.input`
+  font-family: 'Montserrat';
   font-size: ${({ theme }) => theme.font.size[16]};
   font-weight: ${({ theme }) => theme.font.weight[400]};
   color: ${({ theme }) => theme.font.color.black};
@@ -100,17 +115,32 @@ const EditValue = styled.input`
     font-size: ${({ theme }) => theme.font.size[14]};
     justify-self: end;
   }
-  
+
   background: none;
-  border: none;
-  width: 100%;
+  border: 2px dotted #626262;
+  width: 90%;
+  box-sizing: border-box;
+  border-radius: 10px;
+  padding: 0 10px;
 `;
 
-export const EditRow = (props: {title?: string; value: string; verified?: boolean}) => {
+export const EditRow = (props: {title?: string; value: string; verified?: boolean; save?: (val: string) => void}) => {
     const [editing, setEditing] = useState(false);
+    const [value, setValue] = useState('');
 
     const switchEditing = () => {
         setEditing(!editing);
+    }
+
+    const setVal = (event?: any) => {
+        setValue(event.target.value);
+    }
+
+    const save = () => {
+        if (props.save) {
+            props.save(value);
+        }
+        switchEditing();
     }
 
     return (
@@ -119,13 +149,16 @@ export const EditRow = (props: {title?: string; value: string; verified?: boolea
             { props.title ? <Title>{props.title}:</Title> : <div></div> }
             { props.title ?
                 <Value>
-                    {editing ? <EditValue></EditValue> : props.value}
+                    {editing ? <EditValue type={'text'} defaultValue={props.value} onInput={setVal}></EditValue> : props.value}
                 </Value>
                 :
                 <LargeValue>
-                    {props.value}
+                    {editing ? <EditValue type={'text'} defaultValue={props.value} onInput={setVal}></EditValue> : props.value}
                 </LargeValue> }
-            <Edit><img src={icons.edit}/>Ред.</Edit>
+            { editing
+                ? <EditSaveButton onClick={save}><SaveIcon/>Сохр.</EditSaveButton>
+                : <EditSaveButton onClick={switchEditing}><EditIcon/>Ред.</EditSaveButton>
+            }
         </EditRowStyle>
     );
 };

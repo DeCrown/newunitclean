@@ -1,6 +1,6 @@
-import {InputText} from "./InputText";
-import InputTextField from "./InputTextField";
-import ButtonBlue from "./Button/buttonBlue";
+import {InputText} from "./inputText";
+import InputTextField from "./inputTextField";
+import ButtonBlue from "./buttonBlue";
 
 
 export const Forms = {

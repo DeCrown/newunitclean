@@ -1,31 +1,34 @@
 import React from 'react';
-import Map from "components/payment/map";
 import Content from "components/template/content";
 import styled from "styled-components";
 import {H1} from "components/shared/fonts/specialFonts";
 import InputList from "components/payment/inputList";
-import MarketPlace from "components/payment/marketPlace";
-import MoreInfo from "components/payment/moreInfo";
 import {BrowserView} from "react-device-detect";
 import Banner from "components/shared/duplicateComponents/banner";
+import MapAndButtons from "components/payment/mapAndButtons";
 
 const Container = styled.div`
-  display: grid;
+  /*display: grid;
   grid-template-areas: 
     "inputs map map"
     "inputs marketPlace moreInfo";
   grid-template-columns: 40%;
   grid-gap: 30px;
-  align-items: end;
+  align-items: end;*/
+  
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  grid-gap: 30px;
   
   .mobile & {
-    grid-template-areas: 
+    /*grid-template-areas: 
       "inputs"
       "marketPlace"
       "moreInfo"
       "map";
     grid-template-columns: 100%;
-    grid-column-gap: 0px;
+    grid-column-gap: 0px;*/
   }
 `;
 
@@ -40,9 +43,7 @@ const Payment = () => {
 
             <Container>
                 <InputList></InputList>
-                <MarketPlace></MarketPlace>
-                <MoreInfo></MoreInfo>
-                <Map></Map>
+                <MapAndButtons></MapAndButtons>
             </Container>
 
             <BrowserView>

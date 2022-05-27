@@ -74,11 +74,7 @@ const Generate = (buttons: boolean = false, promotion: boolean = false) => {
         id: Math.round(Math.random() * 1000),
         image: genImages(),
         title: 'Название товара',
-        description: [
-            {header: 'Параметры', text: 'Описание продукта'},
-            {header: 'Описание', text: 'Название товара'},
-            {header: 'Объем', text: ['1,4 л', '2,4 л']}
-        ],
+        description: 'Описание продукта',
         price: Math.round(Math.random() * 10000),
         buttons: buttons,
         favourite: Boolean(Math.round(Math.random())),

@@ -40,11 +40,11 @@ const DiscountText = styled.div`
   }
 `;
 
-const Discount = () => {
+const Discount = (props: {discount: number}) => {
     return (
         <DiscountStyle>
             <DiscountBackground></DiscountBackground>
-            <DiscountText>скидка<span>-30%</span></DiscountText>
+            <DiscountText>скидка<span>-{props.discount}</span></DiscountText>
         </DiscountStyle>
     );
 };

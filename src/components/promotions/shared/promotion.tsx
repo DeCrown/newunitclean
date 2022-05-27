@@ -61,7 +61,7 @@ const Promotion = (props: {data: PromotionType}) => {
     return (
         <PromotionStyle>
             <Image src={img} />
-            <Discount></Discount>
+            <Discount discount={props.data.percentage_amount}></Discount>
             <Price sum={props.data.price}></Price>
             <Title val={props.data.title}></Title>
             <Button>Подробнее</Button>

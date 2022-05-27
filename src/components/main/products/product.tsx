@@ -1,8 +1,9 @@
 import React from 'react';
 import {ProductType} from "src/utils/types";
 import styled from "styled-components";
-import ButtonBlue from "components/shared/forms/Button/buttonBlue";
+import ButtonBlue from "components/shared/forms/buttonBlue";
 import {DIV_BUTTON_BLUE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
+import {URLs} from "src/utils/constants";
 
 const Price = styled.div`
   font-size: ${({ theme }) => theme.font.size[16]};
@@ -14,7 +15,9 @@ const Price = styled.div`
   }
 `;
 
-const ProductStyle = styled.div`
+const ProductStyle = styled.a`
+  display: block;
+  text-decoration: none;
   width: 270px;
   height: 205px;
 
@@ -42,6 +45,7 @@ const Info = styled.div`
   display: grid;
   align-content: end;
   height: calc(100% - 40px);
+  color: ${({ theme }) => theme.font.color.white};
   padding: 20px;
   grid-gap: 8px;
   justify-items: start;
@@ -52,11 +56,12 @@ const Info = styled.div`
 `;
 
 const Title = styled.div`
-  //position: absolute;
   font-size: ${({ theme }) => theme.font.size[18]};
   font-weight: ${({ theme }) => theme.font.weight[500]};
-  bottom: 16px;
-  left: 20px;
+  color: ${({ theme }) => theme.font.color.white};
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 100%;
 `;
 
 const Image = styled.div<{src: string}>`
@@ -79,13 +84,13 @@ const ButtonStyle = styled(DIV_BUTTON_BLUE_STYLE)`
 
 const Product = (props: {data: ProductType}) => {
     return (
-        <ProductStyle>
+        <ProductStyle href={URLs.PRODUCT.replace(':id', '' + props.data.id)}>
             <Info>
                 <Title>{props.data.title}</Title>
                 <Price>Цены от <span>{props.data.price.toLocaleString()} руб.</span></Price>
                 <ButtonBlue styled={ButtonStyle}>ПОСМОТРЕТЬ КАТАЛОГ</ButtonBlue>
             </Info>
-            <Image src={props.data.image[0]}></Image>
+            <Image src={props.data.image ? props.data.image[0] : ''}></Image>
         </ProductStyle>
     );
 };

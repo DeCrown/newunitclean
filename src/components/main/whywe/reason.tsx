@@ -1,5 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from "styled-components";
+import reason from "components/main/whywe/reason";
+import {WindowsManagerClear, WindowsManagerOpen} from "src/actions/WindowsManagerAction/WindowsManagerAction";
+import {WINDOW_TESTING} from "src/actions/WindowsManagerAction/WindowsManagerAction.types";
+import {useDispatch} from "react-redux";
+import {useTypedSelector} from "src/store/configureStore";
+import {IStateWindows} from "src/reducers/WindowsManagerReducer/WindowsManagerReducer.types";
 
 const ReasonStyle = styled.div`
   width: 270px;
@@ -13,6 +19,7 @@ const ReasonStyle = styled.div`
   display: grid;
   grid-template-rows: 60%;
   justify-items: center;
+  cursor: pointer;
 `;
 
 const Text = styled.div`
@@ -27,11 +34,31 @@ const Image = styled.img`
   max-height: 100%;
 `;
 
-const Reason = (props: {icon: string; text: string }) => {
+export interface reason {
+    icon: string;
+    text: string;
+    clickable?: boolean;
+    icon_clicked?: string
+};
+
+const Reason = (props: {reason: reason}) => {
+    const WindowsManager = useTypedSelector((store) => store.WindowsManager);
+    const {window} = WindowsManager as IStateWindows;
+    const dispatch = useDispatch();
+
+    const click = () => {
+        if (window == WINDOW_TESTING) {
+            WindowsManagerClear()(dispatch);
+        }
+        else {
+            WindowsManagerOpen(WINDOW_TESTING)(dispatch);
+        }
+    }
+
     return (
-        <ReasonStyle>
-            <Image src={props.icon} />
-            <Text>{props.text}</Text>
+        <ReasonStyle onClick={props.reason.clickable ? click : undefined}>
+            <Image src={(props.reason.clickable && window == WINDOW_TESTING) ? props.reason.icon_clicked : props.reason.icon}/>
+            <Text>{props.reason.text}</Text>
         </ReasonStyle>
     );
 };

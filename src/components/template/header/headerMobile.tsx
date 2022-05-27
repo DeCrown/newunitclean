@@ -4,6 +4,7 @@ import styled from "styled-components";
 import {icons} from "src/utils/icons";
 import logo from "src/logo/logo.png";
 import * as constants from "src/utils/constants";
+import HeaderButton from "components/template/header/headerButton";
 
 const HeaderTab = styled.div`
   background: ${({ theme }) => theme.font.color.mobileTopTab};
@@ -53,11 +54,11 @@ const MovingTabButton = styled.div`
   padding-left: 16px;
   font-size: ${({ theme }) => theme.font.size[18]};
   font-weight: ${({ theme }) => theme.font.weight[400]};
-  
-  & a {
-    text-decoration: none;
-    color: ${({ theme }) => theme.font.color.black};
-  }
+`;
+
+const MobileButtonStyle = styled.a`
+  text-decoration: none;
+  color: ${({ theme }) => theme.font.color.black};
 `;
 
 const MovingTabLine = styled.div`
@@ -118,12 +119,20 @@ const HeaderContainerMobile = (props: {topButtons: headerMenuTopButton[]; bottom
             <HeaderTabButton><a href={constants.URLs.CART}><img src={icons.cart}/></a></HeaderTabButton>
 
             <MovingTab className={ pos ? 'opened' : 'closed' } onTouchStart={touchStart} onTouchEnd={touchEnd} onTouchMove={touchMove}>
-                { props.topButtons.map((button) => <MovingTabButton><a href={button.href}>{button.text}</a></MovingTabButton>) }
+                { props.topButtons.map((button) => <MovingTabButton><MobileButton data={button} /></MovingTabButton>) }
                 <MovingTabLine></MovingTabLine>
-                { props.bottomButtons.map((button) => <MovingTabButton><a href={button.href}>{button.text}</a></MovingTabButton>) }
+                { props.bottomButtons.map((button) => <MovingTabButton><MobileButton data={button} /></MovingTabButton>) }
             </MovingTab>
         </HeaderTab>
     );
 };
+
+const MobileButton = (props: {data: headerMenuTopButton | headerMenuBottomButton}) => {
+    return (
+        <HeaderButton styled={MobileButtonStyle} href={props.data.href} func={props.data.func} auth={props.data.auth}>
+            {props.data.text}
+        </HeaderButton>
+    );
+}
 
 export default HeaderContainerMobile;

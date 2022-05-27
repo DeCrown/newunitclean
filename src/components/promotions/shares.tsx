@@ -1,10 +1,13 @@
-import React from 'react';
-import {Api} from "src/api";
+import React, {useCallback, useEffect} from 'react';
 import TabContent from "components/shared/tabsMenu/tabContent";
 import PromotionsList from "components/promotions/shared/promotionsList";
 import Banner from "components/shared/duplicateComponents/banner";
 import {BrowserView} from "react-device-detect";
 import styled from "styled-components";
+import {useTypedSelector} from "src/store/configureStore";
+import {useDispatch} from "react-redux";
+import {IStatePromotions} from "src/reducers/PromotionsReducer/PromotionsReducer.types";
+import {GetPromotions} from "src/actions/PromotionsAction/PromotionsAction";
 
 const MonthTrendContainer = styled.div`
   padding: 20px 0 20px 0;
@@ -12,7 +15,16 @@ const MonthTrendContainer = styled.div`
 
 const Shares = () => {
 
-    const promotions = Api.Promotions.get();
+    /*const promotions = Api.Promotions.get();*/
+
+    const Promotions = useTypedSelector((store) => store.Promotions);
+    const {promotions, isFetching, error} = Promotions as IStatePromotions;
+    const dispatch = useDispatch();
+    const stableDispatch = useCallback(dispatch, []);
+
+    useEffect(() => {
+        stableDispatch(GetPromotions());
+    }, []);
 
     return (
         promotions.length

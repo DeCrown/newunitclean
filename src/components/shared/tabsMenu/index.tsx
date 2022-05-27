@@ -1,7 +1,6 @@
 import React from 'react';
 import Tabs from "./tabs";
 import TabsButtons from "./tabsButtons";
-import {useTypedSelector} from "src/store";
 
 interface Tab {
     title: string;

@@ -4,6 +4,7 @@ export const Main = {
         size: {
             12: '12px',
             13: '13px',
+            15: '15px',
             16: '16px',
             18: '18px',
             20: '20px',
@@ -37,6 +38,7 @@ export const Main = {
             light_gray: '#9C9C9C',
             red: '#BA172C',
             blue: '#2196F3',
+            green: '#36873E',
 
             mobileTopTab: '#ADB8C4',
             mobileMovingTab: '#ADB8C4F5',
