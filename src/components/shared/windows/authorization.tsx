@@ -12,8 +12,8 @@ import {LoginUser} from "src/actions/AuthAction/AuthAction";
 import {useDispatch} from "react-redux";
 import {useTypedSelector} from "src/store/configureStore";
 import {IStateWindows} from "src/reducers/WindowsManagerReducer/WindowsManagerReducer.types";
-import {WindowsManagerOpen} from "src/actions/WindowsManagerAction/WindowsManagerAction";
-import {WINDOW_REGISTRATION} from "src/actions/WindowsManagerAction/WindowsManagerAction.types";
+import {WindowsManagerClear, WindowsManagerOpen} from "src/actions/WindowsManagerAction/WindowsManagerAction";
+import {WINDOW_AUTHORIZATION, WINDOW_REGISTRATION} from "src/actions/WindowsManagerAction/WindowsManagerAction.types";
 
 const ButtonStyle = styled(DIV_BUTTON_BLUE_STYLE)`
   font-size: ${({ theme }) => theme.font.size[20]};
@@ -67,8 +67,12 @@ export const Authorization = () => {
                     login.obj.clear();
                     password.obj.clear();
                     button.Animate({Styled: ButtonSendSuccess, Children: 'Вход выполнен', timeOut: 2000});
+                    WindowsManagerClear()(dispatch);
                     if (url) {
                         window.open(url, '_self');
+                    }
+                    else {
+                        window.location.reload();
                     }
                 },
                 errorFunc: () => {

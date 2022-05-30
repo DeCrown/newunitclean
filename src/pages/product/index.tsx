@@ -10,9 +10,7 @@ import {H1} from "components/shared/fonts/specialFonts";
 import ImagesMobile from "components/product/imagesMobile";
 import {useParams} from "react-router-dom";
 import {useTypedSelector} from "src/store/configureStore";
-import {IStateProductList} from "src/reducers/ProductListReducer/ProductListReducer.types";
 import {useDispatch} from "react-redux";
-import {GetProductList} from "src/actions/ProductListAction/ProductListAction";
 import {GetProduct} from "src/actions/ProductAction/ProductAction";
 import {IStateProduct} from "src/reducers/ProductReducer/ProductReducer.types";
 

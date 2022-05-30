@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     InputAddress,
     InputFIO,
-    InputPhoneNumber,
+    InputPhoneNumber, InputPromoCode,
 } from "components/shared/forms/inputText";
 import styled from "styled-components";
 import {DIV_BUTTON_BLUE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
@@ -38,7 +38,7 @@ const ButtonStyle = styled(DIV_BUTTON_BLUE_STYLE)`
   height: 47px;
   font-size: ${({ theme }) => theme.font.size[16]};
   font-weight: ${({ theme }) => theme.font.weight[600]};
-  margin-top: 40px;
+  /*margin-top: 40px;*/
   
   .mobile & {
     margin: 0;
@@ -59,9 +59,34 @@ const InputList = () => {
     const [address, setAddress] = useState<any>(null);
     const [receiving_type, setReceivingType] = useState<any>(null);
     const [payment_type, setPaymentType] = useState<any>(null);
+    const [promo, setPromo] = useState<any>(null);
     const [button, setButton] = useState<any>(null);
 
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (promo && promo.value && !promo.active && !promo.error) {
+            addPromo()
+        }
+    }, [promo]);
+
+    const addPromo = () => {
+        /*if (promo.obj.checkError()) {
+            return false;
+        }*/
+        AppendApiMethod({
+            func: 'patch', url: '/product/api/v2/order/add_promo_code/ ',
+            data: {
+                promo_code: promo.value
+            },
+            success: (success) => {
+                console.log(success)
+            },
+            error: (error) => {
+                console.log(error)
+            }, auth: true
+        })(dispatch);
+    }
 
     const order = () => {
         if (fio.obj.checkError()
@@ -109,6 +134,7 @@ const InputList = () => {
                 {value: 'КАРТОЙ', text: 'Картой'},
                 {value: 'НАЛИЧНЫМИ', text: 'Наличными'}
             ]}></Select>
+            <InputPromoCode placeholder={'Введите промокод'} setObj={setPromo}></InputPromoCode>
             <ButtonBlue styled={ButtonStyle} func={order} setObj={setButton}>Заказать</ButtonBlue>
         </InputListStyle>
     );

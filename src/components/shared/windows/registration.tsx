@@ -90,7 +90,7 @@ export const Registration = () => {
                 password1.obj.clear();
                 password2.obj.clear();
                 button.Animate({Styled: ButtonSendSuccess, Children: 'Регистрация выполнена', timeOut: 2000});
-                WindowsManagerOpen(WINDOW_AUTHORIZATION);
+                WindowsManagerOpen(WINDOW_AUTHORIZATION)(dispatch);
             },
             errorFunc: () => {
                 button.Animate({Styled: ButtonSendError, Children: 'Введенные данные некорректны', timeOut: 2000});

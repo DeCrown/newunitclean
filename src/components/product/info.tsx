@@ -11,6 +11,8 @@ import {Dispatch} from "redux";
 import {useDispatch} from "react-redux";
 import RadioButtons from "components/shared/forms/radioButtons";
 import {getAuth} from "src/store/localStorage";
+import {WindowsManagerOpen} from "src/actions/WindowsManagerAction/WindowsManagerAction";
+import {WINDOW_AUTHORIZATION} from "src/actions/WindowsManagerAction/WindowsManagerAction.types";
 
 const InfoStyle = styled.div`
   display: grid;
@@ -52,11 +54,21 @@ const ButtonStyle = styled(DIV_BUTTON_BLUE_STYLE)`
   }
 `;
 
+const ButtonFrozenStyle = styled(ButtonStyle)`
+  font-size: ${({ theme }) => theme.font.size[14]};
+  background: ${({ theme }) => theme.font.color.light_gray};
+  border-color: ${({ theme }) => theme.font.color.gray};
+`;
+
 const Info = (props: {data: ProductType}) => {
     const auth = getAuth();
     const [size, setSize] = useState('');
     const [button, setButton] = useState<any>(null);
     const dispatch = useDispatch();
+
+    const openAuth = () => {
+        WindowsManagerOpen(WINDOW_AUTHORIZATION)(dispatch);
+    }
 
     const AddToCart = () => {
         button.Animate({Children: 'Добавляем...'});
@@ -101,7 +113,7 @@ const Info = (props: {data: ProductType}) => {
             {
                 auth.isAuthorized
                     ? <ButtonBlue styled={ButtonStyle} func={AddToCart} setObj={setButton}>Добавить в корзину</ButtonBlue>
-                    : <div>Чтобы добавить в корзину, авторизуйтесь</div>
+                    : <ButtonBlue styled={ButtonFrozenStyle} func={openAuth}>Чтобы добавить в корзину, авторизуйтесь</ButtonBlue>
             }
         </InfoStyle>
     );

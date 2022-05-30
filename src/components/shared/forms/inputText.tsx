@@ -19,6 +19,9 @@ interface InputState {
 };
 
 export class InputText extends Component<InputProps, InputState> {
+
+    defaultStyled = styled.div``;
+
     constructor(props: InputProps) {
         super(props);
         this.state = {value: '', error: false, errorAnimation: false, active: false, obj: this};
@@ -73,7 +76,7 @@ export class InputText extends Component<InputProps, InputState> {
 
     render() {
 
-        const Styled = this.props.styledContainer ? this.props.styledContainer : styled.div``;
+        const Styled = this.props.styledContainer ? this.props.styledContainer : this.defaultStyled;
 
         return (
             <Styled>
@@ -155,7 +158,7 @@ export class InputUR_KPP extends InputText {
 
 export class InputPromoCode extends InputText {
     check = (value: string) => {
-        if (/^[0-9A-z]{10}$/.test(value)) {
+        if (/^[0-9A-z]*$/.test(value)) {
             return false
         }
         else {
