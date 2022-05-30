@@ -12,8 +12,6 @@ import {AppendApiMethod} from "src/actions/ApiMethodAction/ApiMethodAction";
 import ButtonBlue from "components/shared/forms/buttonBlue";
 
 const InputListStyle = styled.div`
-  grid-area: inputs;
-
   display: grid;
   grid-gap: 20px;
   justify-content: end;
@@ -30,6 +28,7 @@ const InputListStyle = styled.div`
     width: 100%;
     
     & input {
+      width: calc(100% - 40px);
       min-width: 0px;
     }
   }

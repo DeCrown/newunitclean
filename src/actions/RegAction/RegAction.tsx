@@ -39,10 +39,9 @@ export const RegUser = (props: RegProps ) : ThunkAction<void,RootState,unknown,A
     })
     return axios.post(BASE_URL + '/employee/api/v2/register/', props.data, config)
         .then((response) => {
-            if (response.status === 200) {
+            if (response.status === 201) {
                 dispatch({
-                    type: GET_REG_SUCCESS,
-                    payload: response.data
+                    type: GET_REG_SUCCESS
                 })
                 if (props.successFunc) {
                     props.successFunc()

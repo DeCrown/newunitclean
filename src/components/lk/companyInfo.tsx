@@ -24,7 +24,6 @@ export const CompanyInfo = () => {
             <InfoPhotoContainer><InfoPhoto src={company.logo ? company.logo : icons.avatar} /></InfoPhotoContainer>
             <EditRows>
                 <EditRow save={(val) => stableDispatch(PatchCompany({title: val}))} value={company.title}></EditRow>
-                <EditRow save={(val) => stableDispatch(PatchEmployee({email: val}))} title={'E-mail'} value={company.email}></EditRow>
                 <EditRow save={(val) => stableDispatch(PatchCompany({phone_number: val}))} title={'Телефон'} value={company.phone_number}></EditRow>
                 <EditRow save={(val) => stableDispatch(PatchCompany({official_address: val}))} title={'Юр. адрес'} value={company.official_address}></EditRow>
                 <EditRow save={(val) => stableDispatch(PatchCompany({inn: val}))} title={'ИНН'} value={company.inn}></EditRow>

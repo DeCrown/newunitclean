@@ -26,20 +26,31 @@ export interface headerMenuBottomButton {
     auth?: boolean
 }
 
+export interface SuggestionType {
+    title: string;
+    background?: string;
+    product: ProductType;
+}
+
+export interface ProductSizeType {
+    title: string;
+    amount: number
+}
+
 export interface ProductType {
     id: number;
     group?: number;
-    image: string[];
+    image: string;
+    images?: string[];
     title: string;
-    /*description: {
-            header: string;
-            text: string | string[]
-        }[];*/
     description: string;
-    price: number;
-    discount?: number;
+    sizes: ProductSizeType[]
+    price?: number;
+    discount?: string;
     buttons?: boolean;
     promotion?: boolean;
+    amount_of_product?: number;
+    product_order_size?: string
 }
 
 export interface CategoryType {
@@ -86,8 +97,4 @@ export interface CompanyType {
     real_address: string;
     employee: string;
     email: string;
-}
-
-export interface inputTextManage {
-
 }

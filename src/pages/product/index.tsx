@@ -52,9 +52,9 @@ const Product = () => {
 
             <Container>
                 { isMobile ?
-                    <ImagesMobile images={productState.product.image ? productState.product.image : []}></ImagesMobile>
+                    <ImagesMobile images={productState.product.images ? productState.product.images : []}></ImagesMobile>
                     :
-                    <Images images={productState.product.image ? productState.product.image : []}></Images> }
+                    <Images images={productState.product.images ? productState.product.images : []}></Images> }
                 <Info data={productState.product}></Info>
             </Container>
 

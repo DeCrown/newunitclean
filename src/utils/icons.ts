@@ -49,6 +49,7 @@ import wallet_clicked from "../icons/reasons/wallet_clicked.png";
 import security from "../icons/reasons/security.png";
 
 import exit from "../icons/exit.svg";
+import search_gray from "../icons/search_gray.svg";
 
 export const icons = {
     lk: lk,
@@ -95,5 +96,6 @@ export const icons = {
         wallet_clicked: wallet_clicked,
         security: security
     },
-    exit: exit
+    exit: exit,
+    search_gray: search_gray
 }

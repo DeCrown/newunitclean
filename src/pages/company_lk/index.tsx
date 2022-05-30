@@ -7,6 +7,7 @@ import ButtonBlue from "components/shared/forms/buttonBlue";
 import {DIV_BUTTON_WHITE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
 import CompanyPreviousOrders from "components/lk/companyPreviousOrders";
 import {URLs} from "src/utils/constants";
+import {isMobile} from "react-device-detect";
 
 const CompanyButtons = styled.div`
   padding: 58px 0 0 0;
@@ -16,6 +17,10 @@ const CompanyButtons = styled.div`
 
 const ToLkButton = styled(DIV_BUTTON_WHITE_STYLE)`
   width: min-content;
+
+  .mobile & {
+    width: 100%;
+  }
 `;
 
 const CompanyLk = () => {
@@ -29,9 +34,14 @@ const CompanyLk = () => {
 
             <CompanyInfo></CompanyInfo>
 
-            <CompanyButtons>
-                <ButtonBlue styled={ToLkButton} func={toLk}>Личный кабинет</ButtonBlue>
-            </CompanyButtons>
+            {
+                isMobile ?
+                    <ButtonBlue styled={ToLkButton} func={toLk}>Личный кабинет</ButtonBlue>
+                    :
+                    <CompanyButtons>
+                        <ButtonBlue styled={ToLkButton} func={toLk}>Личный кабинет</ButtonBlue>
+                    </CompanyButtons>
+            }
 
             <CompanyPreviousOrders></CompanyPreviousOrders>
         </Content>

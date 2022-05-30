@@ -6,6 +6,7 @@ import ButtonBlue from "components/shared/forms/buttonBlue";
 import {icons} from "src/utils/icons";
 import styled, {css} from "styled-components";
 import {DIV_BUTTON_BLUE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
+import {INPUT_TEXT_STYLE} from "components/shared/forms/primitives/INPUT_TEXT";
 
 const PromoCodeStyle = styled.div`
   margin: 90px -${({ theme }) => theme.values.contentMargin}px 0 -${({ theme }) => theme.values.contentMargin}px;
@@ -31,7 +32,7 @@ const InlineButton = styled.div`
   }
 `;
 
-const InputTextStyle = css`
+const InputTextStyle = styled(INPUT_TEXT_STYLE)`
   border-radius: 10px 0 0 10px;
 `;
 
@@ -46,7 +47,7 @@ const PromoCode = () => {
             <InputCode>
                 <FormText>Промокод</FormText>
                 <InlineButton>
-                    <InputPromoCode css={InputTextStyle}></InputPromoCode>
+                    <InputPromoCode styled={InputTextStyle}></InputPromoCode>
                     <ButtonBlue styled={ButtonStyle}><img src={icons.button_right_arrow} /></ButtonBlue>
                 </InlineButton>
             </InputCode>

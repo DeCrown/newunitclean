@@ -5,19 +5,23 @@ import * as constants from "src/utils/constants";
 import logo from "src/logo/croppedlogo.png";
 import HeaderTopButton from "components/template/header/topButton";
 import HeaderBottomMenuButton from "components/template/header/bottomButton";
-import {headerMenuBottomButton, headerMenuTopButton, ProductType} from "src/utils/types";
+import {headerMenuBottomButton, headerMenuTopButton} from "src/utils/types";
 import {showFeedback} from "components/template/header/headerFuncs";
 import {useTypedSelector} from "src/store/configureStore";
 import {IStateWindows} from "src/reducers/WindowsManagerReducer/WindowsManagerReducer.types";
 import {WINDOW_SEARCH} from "src/actions/WindowsManagerAction/WindowsManagerAction.types";
 import {InputText} from "components/shared/forms/inputText";
 import ButtonBlue from "components/shared/forms/buttonBlue";
-import {DIV_BUTTON_BLUE_STYLE, DIV_BUTTON_WHITE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
 import {GetSearch} from "src/actions/SearchAction/SearchAction";
 import {IStateSearch} from "src/reducers/SearchReducer/SearchReducer.types";
 import {useDispatch} from "react-redux";
 import {URLs} from "src/utils/constants";
-import {WindowsManagerClear, WindowsManagerOpen} from "src/actions/WindowsManagerAction/WindowsManagerAction";
+import {
+    ButtonSearchStyle,
+    HeaderSearchStyle, SearchButtons,
+    SearchContainer, SearchInputTextContainerStyle,
+    SearchInputTextStyle, SearchNoResults, SearchResult, SearchResults
+} from "components/shared/windows/search";
 
 const HeaderContainerStyle = styled.div`
   background: #ADB8C4;
@@ -118,82 +122,6 @@ const HeaderBottom = (props: {bottomButtons: headerMenuBottomButton[]}) => {
     </HeaderBottomStyle>)
 }
 
-const HeaderSearchStyle = styled(HeaderBottomStyle)`
-  grid-template-columns: 26% auto 18%;
-  align-items: center;
-`;
-
-const ButtonSearchStyle = styled(DIV_BUTTON_BLUE_STYLE)`
-  width: min-content;
-  height: 42px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  text-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
-  
-  font-size: ${({ theme }) => theme.font.size[15]};
-  font-weight: ${({ theme }) => theme.font.weight[900]};
-`;
-
-const ButtonCloseStyle = styled(DIV_BUTTON_WHITE_STYLE)`
-  min-width: min-content;
-  height: 42px;
-  aspect-ratio: 1;
-  padding: 0;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  font-size: ${({ theme }) => theme.font.size[32]};
-`;
-
-const SearchContainer = styled.div`
-  padding: 0 30px 0 55px;
-  position: relative;
-`;
-
-const SearchInputTextStyle = css`
-  height: 42px;
-`;
-
-const SearchResults = styled.div`
-  background: #FFFFFF;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-  display: grid;
-  padding: 12px;
-  position: absolute;
-  top: calc(100% + 20px);
-  width: calc(100% - 109px);
-`;
-
-const SearchNoResults = styled.div`
-  padding: 12px;
-  cursor: pointer;
-  border-radius: 10px;
-  font-style: italic;
-`;
-
-const SearchResultStyle = styled(SearchNoResults)`
-  font-style: normal;
-  transition: background-color 0.2s;
-  &:hover {
-    background: #e6e6e6;
-  }
-`;
-
-const SearchButtons = styled.div`
-  display: grid;
-  grid-auto-flow: column;
-  grid-gap: 10px;
-  justify-content: start;
-`;
-
-const SearchResult = (props: {product: ProductType}) => {
-    const click = () => {
-        window.open(URLs.PRODUCT.replace(':id', '' + props.product.id));
-    }
-
-    return (<SearchResultStyle onClick={click}>
-        {props.product.title}
-    </SearchResultStyle>)
-}
-
 const HeaderBottomSearch = () => {
     const Search = useTypedSelector((store) => store.Search);
     const {results} = Search as IStateSearch;
@@ -216,7 +144,9 @@ const HeaderBottomSearch = () => {
             <img src={logo} />
         </Logo>
         <SearchContainer>
-            <InputText css={SearchInputTextStyle} placeholder={'Поиск по сайту'} setObj={setSearchInput}></InputText>
+            <InputText styled={SearchInputTextStyle}
+                       styledContainer={SearchInputTextContainerStyle}
+                       placeholder={'Поиск по сайту'} setObj={setSearchInput}></InputText>
             <SearchResults>
                 {results.length
                     ? results.slice(0, 10).map((result) =>
@@ -245,7 +175,7 @@ export const HeaderContainer = (props: {topButtons: headerMenuTopButton[]; botto
             </HeaderTop>
 
             {window == WINDOW_SEARCH
-                ? <HeaderBottomSearch></HeaderBottomSearch>
+                ? <HeaderBottomSearch/>
                 : <HeaderBottom bottomButtons={props.bottomButtons}></HeaderBottom>
             }
 

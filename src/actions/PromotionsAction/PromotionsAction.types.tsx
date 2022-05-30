@@ -1,4 +1,4 @@
-import {PromotionType} from "src/utils/types";
+import {ProductType, PromotionType} from "src/utils/types";
 
 export const GET_PROMOTIONS_REQUEST = 'GET_PROMOTIONS_REQUEST';
 export const GET_PROMOTIONS_SUCCESS = 'GET_PROMOTIONS_SUCCESS';
@@ -10,7 +10,7 @@ interface RequestPromotionsAction {
 
 interface SuccessPromotionsAction {
   type: typeof GET_PROMOTIONS_SUCCESS;
-  payload: PromotionType[];
+  payload: ProductType[];
 }
 
 interface FailPromotionsAction {

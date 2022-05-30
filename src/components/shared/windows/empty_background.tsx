@@ -13,8 +13,12 @@ const Background = styled.div`
   z-index: 1;
   padding: 0 ${Main.values.contentMargin}px;
   align-content: center;
-  background: linear-gradient(138.97deg, rgba(173, 184, 196, 0.252) 16.39%, rgba(113, 113, 113, 0.259) 70.01%);
+  background: linear-gradient(138.97deg, rgba(173, 184, 196, 0.252) 16.4%, rgba(113, 113, 113, 0.259) 70%);
   box-shadow: inset 0px 4.74611px 300px rgba(0, 0, 0, 0.25);
+  
+  .mobile & {
+    background: rgba(0, 0, 0, 0.7);
+  }
 `;
 
 const EmptyBackground = () => {
@@ -25,8 +29,7 @@ const EmptyBackground = () => {
     }
 
     return (
-        <Background onClick={click}>
-        </Background>
+        <Background onClick={click}></Background>
     );
 };
 

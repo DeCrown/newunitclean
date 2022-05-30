@@ -29,11 +29,11 @@ const ProductsList = (props: {products: ProductType[], buttons?: boolean}) => {
     return (
         props.buttons ?
             <ProductsStyle className={'withButtons'}>
-                { props.products.map((product) => <ProductWithButtons key={product.id} data={product}></ProductWithButtons>) }
+                { props.products.map((product, i) => <ProductWithButtons key={i} data={product}></ProductWithButtons>) }
             </ProductsStyle>
         :
             <ProductsStyle>
-                { props.products.map((product) => <Product key={product.id} data={product}></Product>) }
+                { props.products.map((product, i) => <Product key={i} data={product}></Product>) }
             </ProductsStyle>
     );
 };

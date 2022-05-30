@@ -87,7 +87,7 @@ const Product = (props: {data: ProductType}) => {
         <ProductStyle href={URLs.PRODUCT.replace(':id', '' + props.data.id)}>
             <Info>
                 <Title>{props.data.title}</Title>
-                <Price>Цены от <span>{props.data.price.toLocaleString()} руб.</span></Price>
+                <Price>Цены от <span>{props.data.price ? props.data.price.toLocaleString() + ' руб.' : null}</span></Price>
                 <ButtonBlue styled={ButtonStyle}>ПОСМОТРЕТЬ КАТАЛОГ</ButtonBlue>
             </Info>
             <Image src={props.data.image ? props.data.image[0] : ''}></Image>

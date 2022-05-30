@@ -1,24 +1,16 @@
-export interface IStateTabsManu {
-    pos: number;
-    heights: {};
-}
+import {IStateTabsMenu} from "src/reducers/TabsMenuReducer/TabsMenuReducer.types";
+import {TABS_MENU_SET_HEIGHT, TABS_MENU_SET_POS, TabsMenuAction} from "src/actions/TabsMenuAction/TabsMenuAction.types";
 
-interface actionSetPos {
-    type: 'SET_POS';
-    payload: number;
-}
-interface actionSetHeight {
-    type: 'SET_HEIGHT';
-    payload: {pos: number; height: number};
-}
+const initialStateTabsMenu = {
+    pos: 0,
+    heights: 'auto'
+};
 
-const defaultState = {pos: 0, heights: 'auto'};
-
-export const TabsMenuReducer = (state = defaultState, action: actionSetPos | actionSetHeight) : IStateTabsManu => {
+export function TabsMenuReducer(state = initialStateTabsMenu, action: TabsMenuAction) : IStateTabsMenu {
     switch (action.type) {
-        case "SET_POS":
+        case TABS_MENU_SET_POS:
             return {...state, pos: action.payload}
-        case "SET_HEIGHT":
+        case TABS_MENU_SET_HEIGHT:
             return {...state, heights: {...state, [action.payload.pos]: action.payload.height}}
         default:
             return state;

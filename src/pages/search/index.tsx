@@ -9,9 +9,14 @@ import ProductsList from "components/shared/productsList";
 import {GetSearch} from "src/actions/SearchAction/SearchAction";
 import {useParams} from "react-router-dom";
 import styled from "styled-components";
+import NoProducts from "components/shared/productsList/noProducts";
 
 const ResultsContainer = styled.div`
   padding-top: 32px;
+  
+  .mobile & {
+    padding-bottom: 64px;
+  }
 `;
 
 const Search = () => {
@@ -32,7 +37,12 @@ const Search = () => {
             <H1>Результаты поиска</H1>
 
             <ResultsContainer>
-                <ProductsList products={cache}/>
+                {
+                    cache.length ?
+                        <ProductsList products={cache}/>
+                        :
+                        <NoProducts>Товаров не найдено</NoProducts>
+                }
             </ResultsContainer>
         </Content>
     );

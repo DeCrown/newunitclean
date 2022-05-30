@@ -6,7 +6,6 @@ import HeaderContainerMobile from "components/template/header/headerMobile";
 import * as constants from "src/utils/constants";
 import {icons} from "src/utils/icons";
 import {openSearch, showFeedback} from "components/template/header/headerFuncs";
-import styled from "styled-components";
 import {ClearTopBackground, TopBackground} from "components/template/backgrounds/topBackground";
 
 const topButtons = [

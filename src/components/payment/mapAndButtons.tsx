@@ -8,6 +8,12 @@ const MapAndButtonsStyle = styled.div`
   flex-direction: column;
   justify-content: end;
   grid-gap: 20px;
+  
+  .mobile & {
+    width: 100%;
+    margin-bottom: 80px;
+    flex-direction: column-reverse;
+  }
 `;
 
 const MapAndButtons = () => {

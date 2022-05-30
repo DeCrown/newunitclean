@@ -82,6 +82,12 @@ const FormContainerStyle = styled.div<{css: any}>`
     padding: 0 ${Main.values.contentMargin}px;
     align-content: center;
     background: #00000080;
+    
+    .mobile &.background {
+      z-index: 3;
+      width: calc(100% - ${Main.values.contentMobileMargin * 2}px);
+      padding: 0 ${Main.values.contentMobileMargin}px;
+    }
   }
 `
 

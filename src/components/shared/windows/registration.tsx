@@ -6,7 +6,6 @@ import {
     InputPhoneNumber,
 } from "components/shared/forms/inputText";
 import ButtonBlue from "components/shared/forms/buttonBlue";
-import AuthWith from "components/shared/forms/specialForms/authWith";
 import {FormContainer, FormList} from "components/shared/forms/form";
 import {useDispatch} from "react-redux";
 import {DIV_BUTTON_BLUE_STYLE, DIV_BUTTON_WHITE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
@@ -91,9 +90,7 @@ export const Registration = () => {
                 password1.obj.clear();
                 password2.obj.clear();
                 button.Animate({Styled: ButtonSendSuccess, Children: 'Регистрация выполнена', timeOut: 2000});
-                if (url) {
-                    window.open(url, '_self');
-                }
+                WindowsManagerOpen(WINDOW_AUTHORIZATION);
             },
             errorFunc: () => {
                 button.Animate({Styled: ButtonSendError, Children: 'Введенные данные некорректны', timeOut: 2000});

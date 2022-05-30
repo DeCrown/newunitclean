@@ -5,6 +5,11 @@ import {icons} from "src/utils/icons";
 import logo from "src/logo/logo.png";
 import * as constants from "src/utils/constants";
 import HeaderButton from "components/template/header/headerButton";
+import {useDispatch} from "react-redux";
+import {CloseMobileMenu, OpenMobileMenu, SwitchMobileMenu} from "src/actions/MobileMenuAction/MobileMenuAction";
+import {useTypedSelector} from "src/store/configureStore";
+import {IStateTabsMenu} from "src/reducers/TabsMenuReducer/TabsMenuReducer.types";
+import {IStateMobileMenu} from "src/reducers/MobileMenuReducer/MobileMenuReducer.types";
 
 const HeaderTab = styled.div`
   background: ${({ theme }) => theme.font.color.mobileTopTab};
@@ -69,12 +74,9 @@ const MovingTabLine = styled.div`
 `;
 
 const HeaderContainerMobile = (props: {topButtons: headerMenuTopButton[]; bottomButtons: headerMenuBottomButton[]}) => {
-
-    const [pos, setPos] = useState(false);
-
-    const switchTab = () => {
-        setPos(!pos);
-    }
+    const MobileMenu = useTypedSelector((store) => store.MobileMenu);
+    const {opened} = MobileMenu as IStateMobileMenu;
+    const dispatch = useDispatch();
 
     let touches:number[] = [];
 
@@ -106,7 +108,7 @@ const HeaderContainerMobile = (props: {topButtons: headerMenuTopButton[]; bottom
 
         if (touches.length > 1) {
             if (touches[touches.length - 2] - touches[touches.length - 1] > 5) {
-                setPos(false);
+                CloseMobileMenu()(dispatch);
             }
         }
         touches = [];
@@ -114,11 +116,11 @@ const HeaderContainerMobile = (props: {topButtons: headerMenuTopButton[]; bottom
 
     return (
         <HeaderTab>
-            <HeaderTabButton onClick={switchTab}><img src={icons.menu}/></HeaderTabButton>
+            <HeaderTabButton onClick={() => SwitchMobileMenu()(dispatch)}><img src={icons.menu}/></HeaderTabButton>
             <Logo><img src={logo}/></Logo>
             <HeaderTabButton><a href={constants.URLs.CART}><img src={icons.cart}/></a></HeaderTabButton>
 
-            <MovingTab className={ pos ? 'opened' : 'closed' } onTouchStart={touchStart} onTouchEnd={touchEnd} onTouchMove={touchMove}>
+            <MovingTab className={ opened ? 'opened' : 'closed' } onTouchStart={touchStart} onTouchEnd={touchEnd} onTouchMove={touchMove}>
                 { props.topButtons.map((button) => <MovingTabButton><MobileButton data={button} /></MovingTabButton>) }
                 <MovingTabLine></MovingTabLine>
                 { props.bottomButtons.map((button) => <MovingTabButton><MobileButton data={button} /></MovingTabButton>) }

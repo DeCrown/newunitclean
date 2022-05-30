@@ -23,7 +23,7 @@ export const EmployeeInfo = () => {
             <InfoPhotoContainer><InfoPhoto src={employee.avatar ? employee.avatar : icons.avatar} /></InfoPhotoContainer>
             <EditRows>
                 <EditRow save={(val) => stableDispatch(PatchEmployee({full_name: val}))} value={employee.full_name}></EditRow>
-                <EditRow save={(val) => stableDispatch(PatchEmployee({email: val}))} title={'E-mail'} value={employee.email}></EditRow>
+                <EditRow title={'E-mail'} value={employee.email} nonEditable={true}></EditRow>
                 <EditRow save={(val) => stableDispatch(PatchEmployee({phone_number: val}))} title={'Телефон'} value={employee.phone_number}></EditRow>
                 <EditRow save={(val) => stableDispatch(PatchEmployee({address: val}))} title={'Адрес'} value={employee.address}></EditRow>
             </EditRows>

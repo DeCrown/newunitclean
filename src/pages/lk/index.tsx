@@ -15,6 +15,7 @@ import {DIV_BUTTON_WHITE_STYLE} from "components/shared/forms/primitives/DIV_BUT
 import {GetCompany} from "src/actions/CompanyAction/CompanyAction";
 import {useTypedSelector} from "src/store/configureStore";
 import {IStateCompany} from "src/reducers/CompanyReducer/CompanyReducer.types";
+import {isMobile} from "react-device-detect";
 
 const HeaderWithButton = styled.div`
   display: grid;
@@ -41,6 +42,10 @@ const LkButtons = styled.div`
 
 const ToCompanyButton = styled(DIV_BUTTON_WHITE_STYLE)`
   width: min-content;
+  
+  .mobile & {
+    width: 100%;
+  }
 `;
 
 const Lk = () => {
@@ -66,6 +71,13 @@ const Lk = () => {
         window.open(URLs.COMPANY_LK, '_self');
     }
 
+    const downloadPriceList = () => {
+        /*downloadExcel({
+            abc: 1,
+            bcd: 2
+        })*/
+    }
+
     return (
         <Content>
             <HeaderWithButton>
@@ -76,13 +88,25 @@ const Lk = () => {
             <EmployeeInfo></EmployeeInfo>
 
             {
+                isMobile ?
+                    <ButtonBlue styled={ToCompanyButton} func={downloadPriceList}>Скачать прайс-лист</ButtonBlue>
+                    :
+                    <LkButtons>
+                        <ButtonBlue styled={ToCompanyButton} func={downloadPriceList}>Скачать прайс-лист</ButtonBlue>
+                    </LkButtons>
+            }
+
+            {
                 error
                     ?
                     <Registration></Registration>
                     :
-                    <LkButtons>
+                    isMobile ?
                         <ButtonBlue styled={ToCompanyButton} func={toCompany}>Личный кабинет компании</ButtonBlue>
-                    </LkButtons>
+                        :
+                        <LkButtons>
+                            <ButtonBlue styled={ToCompanyButton} func={toCompany}>Личный кабинет компании</ButtonBlue>
+                        </LkButtons>
             }
 
             <BuyHistory></BuyHistory>

@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
-import ButtonBlue from "components/shared/forms/buttonBlue";
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import {DIV_BUTTON_BLUE_STYLE, DIV_BUTTON_WHITE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
+import {ProductSizeType} from "src/utils/types";
+import RadioButtonBlue from "components/shared/forms/radioButton";
 
 const ButtonSelected = styled(DIV_BUTTON_BLUE_STYLE)`
   font-size: ${({ theme }) => theme.font.size[20]};
@@ -21,16 +22,16 @@ const ButtonUnSelected = styled(DIV_BUTTON_WHITE_STYLE)`
   }
 `;
 
-const RadioButton = (props: {children: any; pos: number; func: (i: number) => void; self: number}) => {
+const RadioButton = (props: {title: string; pos: string; func: (i: string) => void;}) => {
     function click() {
-        props.func(props.self);
+        props.func(props.title);
     }
 
     return (
-        props.pos == props.self ?
-            <ButtonBlue styled={ButtonSelected} func={click}>{props.children}</ButtonBlue>
+        props.pos == props.title ?
+            <RadioButtonBlue styled={ButtonSelected} func={click}>{props.title}</RadioButtonBlue>
             :
-            <ButtonBlue styled={ButtonUnSelected} func={click}>{props.children}</ButtonBlue>
+            <RadioButtonBlue styled={ButtonUnSelected} func={click}>{props.title}</RadioButtonBlue>
     );
 }
 
@@ -45,16 +46,21 @@ const RadioButtonsStyle = styled.div`
   overflow-x: auto;
 `;
 
-const RadioButtons = (props: {buttons: string[]}) => {
-    const [pos, setPos] = useState(0);
+const RadioButtons = (props: {buttons: ProductSizeType[]; setSize: (title: string) => void}) => {
+    const [pos, setPos] = useState(props.buttons[0].title);
 
-    const select = (i: number) => {
+    const select = (i: string) => {
         setPos(i);
+        props.setSize(i);
     }
+
+    useEffect(() => {
+        props.setSize(pos);
+    }, [])
 
     return (
         <RadioButtonsStyle>
-            {props.buttons.map((button, i) => <RadioButton pos={pos} key={i} func={select} self={i}>{button}</RadioButton>)}
+            {props.buttons.map((button, i) => <RadioButton title={button.title} pos={pos} key={i} func={select}/>)}
         </RadioButtonsStyle>
     );
 };

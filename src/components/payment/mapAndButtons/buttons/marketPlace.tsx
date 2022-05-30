@@ -3,7 +3,9 @@ import styled, {css} from "styled-components";
 import {DIV_BUTTON_WHITE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
 
 const MarketPlaceStyle = styled.div`
-  grid-area: marketPlace;
+  .mobile & {
+    width: 100%;
+  }
 `;
 
 const ButtonStyle = styled(DIV_BUTTON_WHITE_STYLE)`
@@ -16,6 +18,7 @@ const ButtonStyle = styled(DIV_BUTTON_WHITE_STYLE)`
   .mobile & {
     margin-top: 0px;
     font-size: ${({theme}) => theme.font.size[12]};
+    width: 100%;
   }
 `;
 

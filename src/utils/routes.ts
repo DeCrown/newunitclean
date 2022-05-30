@@ -64,11 +64,15 @@ export const freeRoutes:route[] = [
     },
     {
         url: constants.URLs.SEARCH,
-        page: Search
+        page: Search,
+        mobileClearBackground: true,
+        browserClearBackground: true
     },
     {
         url: constants.URLs.SEARCH_WITH_PARAM,
-        page: Search
+        page: Search,
+        mobileClearBackground: true,
+        browserClearBackground: true
     },
     {
         url: constants.URLs.PRODUCT,

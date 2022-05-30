@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import INPUT_TEXT from "./primitives/INPUT_TEXT";
+import styled, {StyledComponent} from "styled-components";
 
 interface InputProps {
-    css?: any;
+    styled?: StyledComponent<any, any>;
     placeholder?: string;
     name?: string;
     setObj?: (obj: any) => void;
+    styledContainer?: StyledComponent<any, any>;
 };
 
 interface InputState {
@@ -70,14 +72,17 @@ export class InputText extends Component<InputProps, InputState> {
     }
 
     render() {
+
+        const Styled = this.props.styledContainer ? this.props.styledContainer : styled.div``;
+
         return (
-            <div>
+            <Styled>
                 <INPUT_TEXT inputState={this.state}
                             inputProps={this.props}
                             onFocus={this.onFocus}
                             onInput={this.onInput}
                             type={this.getType()} />
-            </div>
+            </Styled>
         );
     }
 }

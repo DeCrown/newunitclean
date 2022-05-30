@@ -13,7 +13,7 @@ export const errorAnimation = keyframes`
   }
 `;
 
-const INPUT_TEXT_STYLE = styled.input<{css?: any}>`
+export const INPUT_TEXT_STYLE = styled.input`
   border: 1px solid rgba(0, 0, 0, 0.3);
   height: 47px;
   background: #FFFFFF;
@@ -25,7 +25,6 @@ const INPUT_TEXT_STYLE = styled.input<{css?: any}>`
   color: ${({ theme }) => theme.font.color.black};
   padding: 0 20px;
   width: calc(100% - 40px);
-  ${props => props.css};
   
   &.active {
     border: 1px solid #2196F3;
@@ -56,7 +55,7 @@ interface INPUT_TEXT_STATE {
 }
 
 interface INPUT_TEXT_PROPS {
-    css?: any;
+    styled?: any;
     placeholder?: string;
     name?: string;
 }
@@ -70,11 +69,12 @@ const INPUT_TEXT = (props: {inputState: INPUT_TEXT_STATE; inputProps: INPUT_TEXT
         props.onFocus(false);
     }
 
+    const Styled = props.inputProps.styled ? props.inputProps.styled : INPUT_TEXT_STYLE;
+
     return (
-        <INPUT_TEXT_STYLE value={props.inputState.value}
+        <Styled value={props.inputState.value}
                           type={props.type ? props.type : 'text'}
                           name={props.inputProps.name}
-                          css={props.inputProps.css}
                           onChange={props.onInput}
                           onFocus={focus}
                           onBlur={blur}

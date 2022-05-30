@@ -12,7 +12,9 @@ import {IStateFavourites} from "src/reducers/FavouritesReducer/FavouritesReducer
 import {GetCart} from "src/actions/CartAction/CartAction";
 import {GetFavourites} from "src/actions/FavouritesAction/FavouritesAction";
 
-const ButtonsContainer = styled.div``;
+const ButtonsContainer = styled.div`
+  position: relative;
+`;
 
 const ProductStyle = styled.a`
   position: relative;
@@ -126,11 +128,12 @@ const Buttons = styled.div`
   margin: 0 26px;
   
   .mobile .withButtons & {
-    margin: 0 40px 0 0;
+    margin: 0;
     height: 100%;
     position: absolute;
     grid-auto-flow: row;
     right: 0;
+    top: 0;
     align-content: space-between;
   }
 `
@@ -147,6 +150,10 @@ const Button = styled.div`
   justify-content: center;
   opacity: 0.7;
 
+  font-size: ${({ theme }) => theme.font.size[16]};
+  font-weight: ${({ theme }) => theme.font.weight[700]};
+  color: ${({ theme }) => theme.font.color.blue};
+
   &:hover {
     opacity: 1;
   }
@@ -161,6 +168,15 @@ const ButtonDelete = styled(Button)``
 
 const ButtonFavourite = styled(Button)``
 
+const Counter = styled(Button)`
+  width: auto;
+  padding: 0 20px;
+  opacity: 1;
+  
+  .mobile & {
+    padding: 0;
+  }
+`;
 
 
 export const Product = (props: {data: ProductType}) => {
@@ -170,57 +186,16 @@ export const Product = (props: {data: ProductType}) => {
             <Image src={props.data.image ? props.data.image[0] : ''} />
             <Info>
                 <Title>{props.data.title}</Title>
-                <Description>{/*props.data.description.map((desc, i) => {
-                    if (typeof desc.text == "string") {
-                        return <span key={i}>{desc.text}<br/></span>
-                    }
-                    else {
-                        return <span key={i}>{desc.text.join(', ')}<br/></span>
-                    }
-                })*/ props.data.description}</Description>
-                <Price>{props.data.price} РУБ</Price>
+                <Description>{props.data.description}</Description>
+                {
+                    props.data.price ?
+                        <Price>{props.data.price} РУБ</Price>
+                        : null
+                }
             </Info>
         </ProductStyle>
     );
 }
-
-/*export const ProductWithButtonsOld = (props: {data: ProductType}) => {
-
-    function delete_() {
-        Api.Cart.all.deleteProduct(props.data.id);
-    }
-    function favourite() {
-        if (props.data.favourite !== undefined) {
-            Api.Cart.favourites.markFavourite(props.data.id, props.data.favourite);
-        }
-    }
-
-    return (
-        <ProductStyle className={'withButtons'} href={URLs.PRODUCT.replace(':id', '' + props.data.id)}>
-            <Image src={props.data.image ? props.data.image[0] : ''}/>
-            <Info>
-                <Title>{props.data.title}</Title>
-                <Description>{props.data.description.map((desc) => {
-                    if (typeof desc.text == "string") {
-                        return desc.text
-                    }
-                    else {
-                        return desc.text.join(',')
-                    }
-                }) props.data.description}</Description>
-                <Price>{props.data.price} РУБ</Price>
-                <Buttons>
-                    <ButtonDelete onClick={delete_}>
-                        <img src={icons.delete}/>
-                    </ButtonDelete>
-                    <ButtonFavourite onClick={favourite}>
-                        <img src={props.data.favourite ? icons.favourite : icons.not_favourite}/>
-                    </ButtonFavourite>
-                </Buttons>
-            </Info>
-        </ProductStyle>
-    );
-}*/
 
 export const ProductWithButtons = (props: {data: ProductType; onlyFavourite?: boolean}) => {
 
@@ -230,7 +205,12 @@ export const ProductWithButtons = (props: {data: ProductType; onlyFavourite?: bo
     const stableDispatch = useCallback(dispatch, []);
 
     const DeleteFromCart = () => {
-        AppendApiMethod({func: 'delete', data: {product_id: props.data.id}, url: '/product/api/v2/order/delete_product/',
+        AppendApiMethod({func: 'patch',
+            data: {
+                product_id: props.data.id,
+                product_size: props.data.product_order_size,
+                decrease_amount: true
+            }, url: '/product/api/v2/order/add_product/',
             success: (success) => {
                 stableDispatch(GetCart());
                 //console.log(success)
@@ -276,21 +256,25 @@ export const ProductWithButtons = (props: {data: ProductType; onlyFavourite?: bo
                 <Image src={props.data.image ? props.data.image[0] : ''}/>
                 <Info>
                     <Title>{props.data.title}</Title>
-                    <Description>{/*props.data.description.map((desc) => {
-                        if (typeof desc.text == "string") {
-                            return desc.text
-                        }
-                        else {
-                            return desc.text.join(',')
-                        }
-                    })*/ props.data.description}</Description>
-                    <Price>{props.data.price} РУБ</Price>
+                    <Description>{props.data.description}</Description>
+                    {
+                        props.data.price ?
+                            <Price>{props.data.price} РУБ</Price>
+                            : null
+                    }
                 </Info>
             </ProductStyle>
             <Buttons>
                 <ButtonDelete onClick={DeleteFromCart}>
                     <img src={icons.delete}/>
                 </ButtonDelete>
+                {
+                    props.data.amount_of_product ?
+                        <Counter>
+                            x{props.data.amount_of_product}
+                        </Counter>
+                        : null
+                }
                 <ButtonFavourite onClick={MarkAsFavourite}>
                     <img src={IsFavourite() ? icons.favourite : icons.not_favourite}/>
                 </ButtonFavourite>

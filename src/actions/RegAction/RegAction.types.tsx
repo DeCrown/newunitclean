@@ -8,10 +8,6 @@ interface RequestRegUserAction {
 
 interface SuccessRegUserAction {
   type: typeof GET_REG_SUCCESS;
-  payload: {
-    access: string,
-    refresh: string
-  };
 }
 
 interface FailRegUserAction {

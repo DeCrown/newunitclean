@@ -6,6 +6,10 @@ import styled from "styled-components";
 const ButtonsStyle = styled.div`
   display: flex;
   grid-gap: 30px;
+  
+  .mobile & {
+    flex-wrap: wrap;
+  }
 `;
 
 const Buttons = () => {

@@ -24,6 +24,10 @@ const All = () => {
         stableDispatch(GetCart());
     }, []);
 
+    const toPayment = () => {
+        window.open(URLs.PAYMENT, '_self')
+    }
+
     return (
         cart.product.length
             ?
@@ -33,7 +37,7 @@ const All = () => {
                     <Line></Line>
                 </BrowserView>
                 <ButtonContainerCenter>
-                    <ButtonBlue styled={Button}>Купить за {cart.full_price} ₽</ButtonBlue>
+                    <ButtonBlue styled={Button} func={toPayment}>Купить за {cart.full_price} ₽</ButtonBlue>
                 </ButtonContainerCenter>
             </TabContent>
             :

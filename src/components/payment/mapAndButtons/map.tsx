@@ -7,14 +7,18 @@ import {CONTACT_MAP, INFO} from "src/utils/constants";
 const MapStyle = styled.div`
   width: 100%;
   height: 100%;
-  
-  .mobile & {
-    margin-bottom: 80px;
-  }
 `;
 
 const FrameStyle = styled.div`
   box-shadow: 0px 2px 12px 2px rgba(0, 0, 0, 0.1);
+
+  .mobile & {
+    width: 100%;
+
+    & iframe {
+      width: 100%;
+    }
+  }
 `;
 
 const Address = styled.div`

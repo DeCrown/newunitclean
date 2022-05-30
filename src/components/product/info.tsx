@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {H1} from "components/shared/fonts/specialFonts";
 import {ProductType} from "src/utils/types";
 import styled from "styled-components";
@@ -9,6 +9,8 @@ import {isMobile} from "react-device-detect";
 import {AppendApiMethod} from "src/actions/ApiMethodAction/ApiMethodAction";
 import {Dispatch} from "redux";
 import {useDispatch} from "react-redux";
+import RadioButtons from "components/shared/forms/radioButtons";
+import {getAuth} from "src/store/localStorage";
 
 const InfoStyle = styled.div`
   display: grid;
@@ -50,36 +52,57 @@ const ButtonStyle = styled(DIV_BUTTON_BLUE_STYLE)`
   }
 `;
 
-const AddToCart = (id: number) => (dispatch:Dispatch) => {
-    AppendApiMethod({func: 'patch', data: {product_id: id}, url: '/product/api/v2/order/add_product/',
-        success: (success) => {
-
-        },
-        error: (error) => {
-
-        }, auth: true})(dispatch);
-}
-
 const Info = (props: {data: ProductType}) => {
+    const auth = getAuth();
+    const [size, setSize] = useState('');
+    const [button, setButton] = useState<any>(null);
     const dispatch = useDispatch();
+
+    const AddToCart = () => {
+        button.Animate({Children: 'Добавляем...'});
+        AppendApiMethod({
+            func: 'patch',
+            data: {
+                product_id: props.data.id,
+                product_size: size
+            },
+            url: '/product/api/v2/order/add_product/',
+            success: (success) => {
+                button.Animate({Children: 'Добавлено в корзину', timeOut: 2000});
+            },
+            error: (error) => {
+                button.Animate({Children: 'Ошибка', timeOut: 2000});
+            }, auth: true})(dispatch);
+    }
 
     return (
         <InfoStyle>
             { isMobile ? '' : <Header>{props.data.title}</Header>}
 
-            <Price>{props.data.price.toLocaleString()} РУБ</Price>
+            <Price>{props.data.price ? props.data.price.toLocaleString() + ' РУБ' : null}</Price>
             <Description>
-                <InfoRow title={'Описание'}>
-                    {props.data.description}
-                </InfoRow>
                 {
-                    /*typeof props.data.description == "string" ? '' : props.data.description.map((row, i) =>
-                                        <InfoRow key={i} title={row.header}>
-                                            {typeof row.text == "string" ? row.text : <RadioButtons buttons={row.text}></RadioButtons>}
-                                        </InfoRow>)}*/
+                    props.data.description
+                        ?
+                        <InfoRow title={'Описание'}>
+                            {props.data.description}
+                        </InfoRow>
+                        : null
+                }
+                {
+                    props.data.sizes?.length
+                        ?
+                        <InfoRow title={'Размеры'}>
+                            <RadioButtons setSize={setSize} buttons={props.data.sizes} />
+                        </InfoRow>
+                        : null
                 }
             </Description>
-            <ButtonBlue styled={ButtonStyle} func={() => AddToCart(props.data.id)(dispatch)}>Добавить в корзину</ButtonBlue>
+            {
+                auth.isAuthorized
+                    ? <ButtonBlue styled={ButtonStyle} func={AddToCart} setObj={setButton}>Добавить в корзину</ButtonBlue>
+                    : <div>Чтобы добавить в корзину, авторизуйтесь</div>
+            }
         </InfoStyle>
     );
 };

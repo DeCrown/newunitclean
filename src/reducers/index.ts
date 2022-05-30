@@ -17,6 +17,7 @@ import {ProductReducer} from "src/reducers/ProductReducer/ProductReducer";
 import {MostTradingReducer} from "src/reducers/MostTradingReducer/MostTradingReducer";
 import {MainPageReducer} from "src/reducers/MainPageReducer/MainPageReducer";
 import {CompanyPreviousOrdersReducer} from "src/reducers/CompanyPreviousOrdersReducer/CompanyPreviousOrdersReducer";
+import {MobileMenuReducer} from "src/reducers/MobileMenuReducer/MobileMenuReducer";
 
 const appReducer = combineReducers({
   Auth: AuthReducer,
@@ -36,6 +37,7 @@ const appReducer = combineReducers({
   MostTrading: MostTradingReducer,
   MainPage: MainPageReducer,
   CompanyPreviousOrders: CompanyPreviousOrdersReducer,
+  MobileMenu: MobileMenuReducer,
   Session: sessionReducer
 })
 

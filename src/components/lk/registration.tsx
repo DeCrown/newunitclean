@@ -10,11 +10,10 @@ import {
 } from "components/shared/forms/inputText";
 import ButtonBlue from "components/shared/forms/buttonBlue";
 import {FormContainer, FormList} from "components/shared/forms/form";
-import AuthWith from "components/shared/forms/specialForms/authWith";
-import {MobileView} from "react-device-detect";
 import {DIV_BUTTON_BLUE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
 import {useDispatch} from "react-redux";
 import {AppendApiMethod} from "src/actions/ApiMethodAction/ApiMethodAction";
+import {URLs} from "src/utils/constants";
 
 const RegistrationStyle = css`
   margin-top: 210px;
@@ -34,6 +33,14 @@ const ButtonStyle = styled(DIV_BUTTON_BLUE_STYLE)`
   }
 `;
 
+const ButtonSendSuccess = styled(ButtonStyle)`
+  box-shadow: 0px 0px 0px 4px rgba(0, 255, 0, 0.2);
+`;
+
+const ButtonSendError = styled(ButtonStyle)`
+  box-shadow: 0px 0px 0px 4px rgba(255, 0, 0, 0.2);
+`;
+
 const Registration = () => {
     const [title, setTitle] = useState<any>(null);
     const [inn, setInn] = useState<any>(null);
@@ -41,10 +48,21 @@ const Registration = () => {
     const [ur_address, setUrAddress] = useState<any>(null);
     const [real_address, setRealAddress] = useState<any>(null);
     const [phone, setPhone] = useState<any>(null);
+    const [button, setButton] = useState<any>(null);
 
     const dispatch = useDispatch();
 
     const reg = () => {
+        if (title.obj.checkError()
+            + inn.obj.checkError()
+            + kpp.obj.checkError()
+            + ur_address.obj.checkError()
+            + real_address.obj.checkError()
+            + phone.obj.checkError()) {
+            button.Animate({Styled: ButtonSendError, Children: 'Введенные данные некорректны', timeOut: 2000});
+            return false;
+        }
+        button.Animate({Children: 'Выполняется...'});
         AppendApiMethod({
             func: 'post', url: '/employee/api/v2/company/create/',
             data: {
@@ -56,10 +74,17 @@ const Registration = () => {
                 real_address: real_address.value
             },
             success: (success) => {
-
+                title.obj.clear();
+                inn.obj.clear();
+                ur_address.obj.clear();
+                phone.obj.clear();
+                kpp.obj.clear();
+                real_address.obj.clear();
+                button.Animate({Styled: ButtonSendSuccess, Children: 'Регистрация выполнена', timeOut: 2000});
+                window.open(URLs.COMPANY_LK, '_self');
             },
             error: (error) => {
-
+                button.Animate({Styled: ButtonSendError, Children: 'Введенные данные некорректны', timeOut: 2000});
             }, auth: true
         })(dispatch);
     }
@@ -74,11 +99,8 @@ const Registration = () => {
                 <InputUR_KPP placeholder={'КПП'} setObj={setKpp}></InputUR_KPP>
                 <InputPhoneNumber placeholder={'Телефон'} setObj={setPhone}></InputPhoneNumber>
                 <InputAddress placeholder={'Фактический адрес'} setObj={setRealAddress}></InputAddress>
-                <ButtonBlue styled={ButtonStyle} func={reg}>Зарегистрировать</ButtonBlue>
+                <ButtonBlue styled={ButtonStyle} func={reg} setObj={setButton}>Зарегистрировать</ButtonBlue>
             </FormList>
-            <MobileView>
-                <AuthWith></AuthWith>
-            </MobileView>
         </FormContainer>
     );
 };

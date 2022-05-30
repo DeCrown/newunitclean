@@ -14,9 +14,6 @@ const MonthTrendContainer = styled.div`
 `;
 
 const Shares = () => {
-
-    /*const promotions = Api.Promotions.get();*/
-
     const Promotions = useTypedSelector((store) => store.Promotions);
     const {promotions, isFetching, error} = Promotions as IStatePromotions;
     const dispatch = useDispatch();

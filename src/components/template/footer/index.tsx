@@ -3,7 +3,7 @@ import * as constants from "src/utils/constants";
 import logo from "src/logo/logo.png";
 import styled from "styled-components";
 import {isMobile} from "react-device-detect";
-import {InputText} from "components/shared/forms/inputText";
+import BottomSearch from "components/template/footer/bottomSearch";
 
 const FooterStyle = styled.div`
   background: #1C446EAB;
@@ -103,15 +103,6 @@ const Link = styled.a`
   }
 `;
 
-const Search = styled.div`
-  display: grid;
-  padding: 60px 40px;
-  
-  .mobile & {
-    padding: 0px;
-  }
-`;
-
 const Footer = () => {
     return (
         isMobile ?
@@ -119,9 +110,7 @@ const Footer = () => {
                 <Info>
                     <Logo><img src={logo} /></Logo>
                     <Title>{constants.INFO.TITLE}</Title>
-                    <Search>
-                        <InputText placeholder='Поиск'></InputText>
-                    </Search>
+                    <BottomSearch />
                     <HighText>{constants.INFO.PHONE_NUMBER}</HighText>
                     <HighText>{constants.INFO.EMAIL}</HighText>
                     <div>{constants.INFO.ADDRESS}</div>
@@ -162,9 +151,7 @@ const Footer = () => {
                         <Link href={constants.URLs.LK}>Личный кабинет</Link>
                     </NavigationList>
                 </Navigation>
-                <Search>
-                    <InputText placeholder='Поиск'></InputText>
-                </Search>
+                <BottomSearch />
             </FooterStyle>
     );
 };

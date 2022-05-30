@@ -1,11 +1,12 @@
 import React from 'react';
-import {PromotionType} from "src/utils/types";
+import {ProductType} from "src/utils/types";
 import styled from "styled-components";
 import Discount from "components/promotions/shared/promotion/discount";
 import Price from "components/promotions/shared/promotion/price";
 import Title from "components/promotions/shared/promotion/title";
 
 import img from "src/bdsim/products/e.png"
+import {URLs} from "src/utils/constants";
 
 const PromotionStyle = styled.div`
   width: 370px;
@@ -57,14 +58,19 @@ const Image = styled.div<{src: string}>`
   top: -20%;
 `;
 
-const Promotion = (props: {data: PromotionType}) => {
+const Promotion = (props: {data: ProductType}) => {
+
+    const openProduct = () => {
+        window.open(URLs.PRODUCT.replace(':id', '' + props.data.id), '_self');
+    }
+
     return (
         <PromotionStyle>
-            <Image src={img} />
-            <Discount discount={props.data.percentage_amount}></Discount>
+            <Image src={props.data.image ? props.data.image : img} />
+            <Discount discount={props.data.discount ? props.data.discount : '0%'}></Discount>
             <Price sum={props.data.price}></Price>
             <Title val={props.data.title}></Title>
-            <Button>Подробнее</Button>
+            <Button onClick={openProduct}>Подробнее</Button>
         </PromotionStyle>
     );
 };

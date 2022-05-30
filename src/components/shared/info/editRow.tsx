@@ -103,6 +103,10 @@ const EditSaveButton = styled.div`
   &:hover > svg {
     opacity: 0.8;
   }
+  
+  .mobile & {
+    margin-left: 10px;
+  }
 `;
 
 const EditValue = styled.input`
@@ -124,7 +128,7 @@ const EditValue = styled.input`
   padding: 0 10px;
 `;
 
-export const EditRow = (props: {title?: string; value: string; verified?: boolean; save?: (val: string) => void}) => {
+export const EditRow = (props: {nonEditable?: boolean; title?: string; value: string; verified?: boolean; save?: (val: string) => void}) => {
     const [editing, setEditing] = useState(false);
     const [value, setValue] = useState('');
 
@@ -155,9 +159,11 @@ export const EditRow = (props: {title?: string; value: string; verified?: boolea
                 <LargeValue>
                     {editing ? <EditValue type={'text'} defaultValue={props.value} onInput={setVal}></EditValue> : props.value}
                 </LargeValue> }
-            { editing
-                ? <EditSaveButton onClick={save}><SaveIcon/>Сохр.</EditSaveButton>
-                : <EditSaveButton onClick={switchEditing}><EditIcon/>Ред.</EditSaveButton>
+            { props.nonEditable
+                ? null
+                : editing
+                    ? <EditSaveButton onClick={save}><SaveIcon/>Сохр.</EditSaveButton>
+                    : <EditSaveButton onClick={switchEditing}><EditIcon/>Ред.</EditSaveButton>
             }
         </EditRowStyle>
     );

@@ -13,7 +13,7 @@ const ContentStyle = styled.div`
 const Content = (props: {children: any}) => {
     return (
         <ContentStyle>
-            <Windows></Windows>
+            <Windows />
             {props.children}
         </ContentStyle>
     )

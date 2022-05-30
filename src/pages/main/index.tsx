@@ -8,7 +8,6 @@ import {useTypedSelector} from "src/store/configureStore";
 import {useDispatch} from "react-redux";
 import {IStateMainPage} from "src/reducers/MainPageReducer/MainPageReducer.types";
 import {GetMainPage} from "src/actions/MainPageAction/MainPageAction";
-import {Api} from "src/api";
 
 const Main = () => {
     const MainPage = useTypedSelector((store) => store.MainPage);
@@ -20,13 +19,11 @@ const Main = () => {
         stableDispatch(GetMainPage());
     }, []);
 
-    console.log(products);
-
-    const products_ = Api.Cart.all.get();
-
     return (
         <Content>
-            <Suggestion title='Успей купить!' product={products_[0]} discount={50} background={'#AB2B324D'}></Suggestion>
+            { products[0]
+                ? <Suggestion title='Успей купить!' product={products[0]} background={'#AB2B324D'}></Suggestion>
+                : null }
             <About></About>
             <WhyWe></WhyWe>
             <Products></Products>

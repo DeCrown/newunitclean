@@ -8,6 +8,7 @@ import {IStatePreviousOrders} from "src/reducers/PreviousOrdersReducer/PreviousO
 import {useDispatch} from "react-redux";
 import {GetPreviousOrders} from "src/actions/PreviousOrdersAction/PreviousOrdersAction";
 import {ProductType} from "src/utils/types";
+import NoProducts from "components/shared/productsList/noProducts";
 
 const BuyHistoryStyle = styled.div`
   padding: 80px 0 200px 0;
@@ -33,7 +34,12 @@ const BuyHistory = () => {
     return (
         <BuyHistoryStyle>
             <H2>История покупок</H2>
-            <ProductsList products={products}></ProductsList>
+            {
+                products.length ?
+                    <ProductsList products={products}></ProductsList>
+                    :
+                    <NoProducts>Вы еще не совершали покупок</NoProducts>
+            }
         </BuyHistoryStyle>
     );
 };

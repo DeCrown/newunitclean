@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import {SuggestionType} from "components/main/suggestion/type";
+import {SuggestionType} from "src/utils/types";
 
 const SuggestionStyle = styled.div`
   position: relative;
@@ -27,7 +27,7 @@ const Header = styled.div`
   padding: 28px;
   margin-right: -${({ theme }) => theme.values.contentMobileMargin}px;
   position: absolute;
-  bottom: 50px;
+  bottom: -48px; /* 50px */
   right: 0px;
 `;
 
@@ -35,7 +35,7 @@ const MobileSuggestion = (props: SuggestionType) => {
     return (
         <SuggestionStyle>
             <Title>{props.title}</Title>
-            <Image src={props.product.image[0]} />
+            <Image src={props.product.image ? props.product.image : ''} />
             <Header>Химические средства для клининга</Header>
         </SuggestionStyle>
     );

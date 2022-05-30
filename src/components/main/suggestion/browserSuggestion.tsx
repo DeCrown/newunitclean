@@ -2,14 +2,16 @@ import React from 'react';
 import {icons} from "src/utils/icons";
 import ExpositionEllipse from "src/icons/exposition_ellipse";
 import ButtonBlue from "components/shared/forms/buttonBlue";
-import {SuggestionType} from "components/main/suggestion/type";
 import styled from "styled-components";
 import {DIV_BUTTON_BLUE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
+import {SuggestionType} from "src/utils/types";
+import {URLs} from "src/utils/constants";
 
 const SuggestionStyle = styled.div`
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: 50% 50%;
+  grid-gap: 16px;
 
   @media (max-width : 1460px) {
     & {
@@ -24,6 +26,7 @@ const Exposition = styled.div`
   position: relative;
   display: grid;
   justify-content: end;
+  width: min-content;
 `;
 
 const ExpositionEllipse1 = styled.svg<{background?: string}>`
@@ -39,13 +42,12 @@ const ExpositionEllipse2 = styled.svg<{background?: string}>`
 `;
 
 const Image = styled.img`
-  z-index: 1;
-  position: relative;
+  position: absolute;
   mix-blend-mode: normal;
   backdrop-filter: blur(4px);
-  top: 100px;
-  width: 100px;
-  display: none;
+  width: 100%;
+  bottom: -32px;
+  right: 56px;
 `;
 
 const Title = styled.h1`
@@ -82,20 +84,29 @@ const ButtonsStyle = styled(DIV_BUTTON_BLUE_STYLE)`
 `;
 
 const BrowserSuggestion = (props: SuggestionType) => {
+
+    const openProduct = () => {
+        window.open(URLs.PRODUCT.replace(':id', '' + props.product.id), '_self');
+    }
+
     return (
         <SuggestionStyle>
             <div>
                 <Title>{props.title}</Title>
-                <ButtonBlue styled={ButtonsStyle}>КУПИТЬ</ButtonBlue>
+                <ButtonBlue styled={ButtonsStyle} func={openProduct}>КУПИТЬ</ButtonBlue>
             </div>
             <Exposition>
                 <ExpositionEllipse styled={ExpositionEllipse1} background={props.background}></ExpositionEllipse>
                 <ExpositionEllipse styled={ExpositionEllipse2} background={props.background}></ExpositionEllipse>
-                <Image src={props.product.image[0]} />
-                <Discount>
-                    <img src={icons.discount}/>
-                    <div>{props.discount}%<br/>off</div>
-                </Discount>
+                <Image src={props.product.image ? props.product.image : ''} />
+                {
+                    props.product.discount
+                        ? <Discount>
+                            <img src={icons.discount}/>
+                            <div>{props.product.discount}<br/>off</div>
+                        </Discount>
+                        : null
+                }
             </Exposition>
         </SuggestionStyle>
     );
