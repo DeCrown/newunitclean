@@ -27,6 +27,9 @@ const InfoStyle = styled.div`
 const Header = styled(H1)`
   padding: 0;
   text-align: left;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Price = styled.div`

@@ -81,6 +81,9 @@ const Title = styled.div`
   overflow: hidden;
   align-self: center;
 
+  overflow: hidden;
+  text-overflow: ellipsis;
+
   .mobile .withButtons & {
     font-size: ${({ theme }) => theme.font.size[14]};
   }

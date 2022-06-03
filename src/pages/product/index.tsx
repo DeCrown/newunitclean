@@ -13,7 +13,6 @@ import {useTypedSelector} from "src/store/configureStore";
 import {useDispatch} from "react-redux";
 import {GetProduct} from "src/actions/ProductAction/ProductAction";
 import {IStateProduct} from "src/reducers/ProductReducer/ProductReducer.types";
-import {ProductType} from "src/utils/types";
 import {BASE_URL} from "src/utils/constants";
 
 const Container = styled.div`
@@ -27,6 +26,12 @@ const Container = styled.div`
     grid-template-columns: 100%;
     margin-top: 20px;
   }
+`;
+
+const ProductHeader = styled(H1)`
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const MonthTrendContainer = styled.div`
@@ -58,7 +63,7 @@ const Product = () => {
 
     return (
         <Content>
-            { isMobile ? <H1>{productState.product.title}</H1> : ''}
+            { isMobile ? <ProductHeader>{productState.product.title}</ProductHeader> : ''}
 
             <Container>
                 { isMobile ?

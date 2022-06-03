@@ -29,6 +29,7 @@ const ImagesContainer = styled.div`
   width: 100%;
   position: relative;
   overflow: hidden;
+  background-color: rgba(196, 196, 196, 0.23);
 `;
 
 const Image = styled.div<{src: string; left: number}>`
@@ -74,7 +75,7 @@ const ImagesMobile = (props: {images: string[]}) => {
         <div>
             <ImagesContainer onTouchStart={start} onTouchMove={move} onTouchEnd={end}>
                 { props.images.map((image, i) => {
-                    return <Image left={-100 * selected} src={image} />
+                    return <Image left={-100 * (selected - i)} src={image} />
                 }) }
             </ImagesContainer>
             <PointsContainer>

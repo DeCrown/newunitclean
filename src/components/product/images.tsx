@@ -33,12 +33,17 @@ const Other = styled.div`
 
 const ImageStyle = styled.div<{src: string}>`
   cursor: pointer;
-  background-color: rgba(196, 196, 196, 0.23);
   background-image: url(${props => props.src});
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   aspect-ratio: 1;
+`;
+
+const NoImage = styled.div`
+  height: 400px;
+  width: 100%;
+  background-color: rgba(196,196,196,0.23);
 `;
 
 const Image = (props: {src: string; self: number; func: (i: number) => void}) => {
@@ -59,7 +64,14 @@ const Images = (props: {images: string[]}) => {
 
     return (
         <div>
-            <Main><img src={props.images[selected]} /></Main>
+            <Main>
+                {
+                    props.images[selected] ?
+                        <img src={props.images[selected]} />
+                        :
+                        <NoImage />
+                }
+            </Main>
             <Other>
                 { props.images.map((image, i) =>
                     <Image key={i} func={select} self={i} src={image} />
