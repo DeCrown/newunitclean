@@ -2,7 +2,6 @@ import {combineReducers } from 'redux'
 import {AuthReducer} from "./AuthReducer/AuthReducer";
 import {WindowsManagerReducer} from "src/reducers/WindowsManagerReducer/WindowsManagerReducer";
 import {TabsMenuReducer} from "src/reducers/TabsMenuReducer/TabsMenuReducer";
-import {sessionReducer } from 'redux-react-session';
 import {CartReducer} from "src/reducers/CartReducer/CartReducer";
 import {ApiMethodReducer} from "src/reducers/ApiMethodReducer/ApiMethodReducer";
 import {ProductListReducer} from "src/reducers/ProductListReducer/ProductListReducer";
@@ -18,6 +17,7 @@ import {MostTradingReducer} from "src/reducers/MostTradingReducer/MostTradingRed
 import {MainPageReducer} from "src/reducers/MainPageReducer/MainPageReducer";
 import {CompanyPreviousOrdersReducer} from "src/reducers/CompanyPreviousOrdersReducer/CompanyPreviousOrdersReducer";
 import {MobileMenuReducer} from "src/reducers/MobileMenuReducer/MobileMenuReducer";
+import {PriceListReducer} from "src/reducers/PriceListReducer/PriceListReducer";
 
 const appReducer = combineReducers({
   Auth: AuthReducer,
@@ -38,7 +38,7 @@ const appReducer = combineReducers({
   MainPage: MainPageReducer,
   CompanyPreviousOrders: CompanyPreviousOrdersReducer,
   MobileMenu: MobileMenuReducer,
-  Session: sessionReducer
+  PriceList: PriceListReducer
 })
 
 export const rootReducer = (state: any, action: any) => {

@@ -1,7 +1,6 @@
 import React, {useCallback, useEffect} from 'react';
 import {H2} from "components/shared/fonts/specialFonts";
 import ProductsList from "components/shared/productsList";
-import {Api} from "src/api";
 import styled from "styled-components";
 import {useTypedSelector} from "src/store/configureStore";
 import {IStatePreviousOrders} from "src/reducers/PreviousOrdersReducer/PreviousOrdersReducer.types";
@@ -20,7 +19,7 @@ const BuyHistoryStyle = styled.div`
 
 const BuyHistory = () => {
     const PreviousOrder = useTypedSelector((store) => store.PreviousOrders);
-    const {orders, isFetching, error} = PreviousOrder as IStatePreviousOrders;
+    const {orders} = PreviousOrder as IStatePreviousOrders;
     const dispatch = useDispatch();
     const stableDispatch = useCallback(dispatch, []);
 

@@ -19,7 +19,7 @@ const PriceStyle = styled.div`
 const Price = (props: {sum?: number}) => {
     return (
         <PriceStyle>
-            {props.sum ? props.sum + 'р' : ''}
+            {props.sum ? 'от ' + props.sum + 'р' : ''}
         </PriceStyle>
     );
 };

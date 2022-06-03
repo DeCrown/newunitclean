@@ -1,14 +1,11 @@
 import React, {useCallback, useEffect} from 'react';
 import styled from "styled-components";
-import {Api} from "src/api";
 import {H2} from "components/shared/fonts/specialFonts";
 import ProductsList from "components/shared/productsList";
 import {useTypedSelector} from "src/store/configureStore";
 import {IStateProductList} from "src/reducers/ProductListReducer/ProductListReducer.types";
-import {IStateCategories} from "src/reducers/CategoriesReducer/CategoriesReducer.types";
 import {useDispatch} from "react-redux";
 import {GetProductList} from "src/actions/ProductListAction/ProductListAction";
-import {GetCategories} from "src/actions/CategoriesAction/CategoriesAction";
 
 const OtherProductsStyle = styled.div`
   padding: 80px 0 0 0;
@@ -32,7 +29,7 @@ const OtherProducts = (props: {self: number}) => {
     return (
         <OtherProductsStyle>
             <H2>Другие товары</H2>
-            <ProductsList products={productListState.products.filter(product => product.id != props.self).slice(0, 4)}></ProductsList>
+            <ProductsList products={productListState.products.filter(product => product.id !== props.self).slice(0, 4)}></ProductsList>
         </OtherProductsStyle>
     );
 };

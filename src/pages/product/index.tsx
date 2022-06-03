@@ -13,6 +13,8 @@ import {useTypedSelector} from "src/store/configureStore";
 import {useDispatch} from "react-redux";
 import {GetProduct} from "src/actions/ProductAction/ProductAction";
 import {IStateProduct} from "src/reducers/ProductReducer/ProductReducer.types";
+import {ProductType} from "src/utils/types";
+import {BASE_URL} from "src/utils/constants";
 
 const Container = styled.div`
   display: grid;
@@ -44,15 +46,25 @@ const Product = () => {
         stableDispatch(GetProduct(id));
     }, []);
 
+    let images:string[] = [];
+    if (productState.product.image) {
+        images.push(BASE_URL + productState.product.image);
+    }
+    if (productState.product.images) {
+        productState.product.images.map(image => {
+            images.push(BASE_URL + image);
+        });
+    }
+
     return (
         <Content>
             { isMobile ? <H1>{productState.product.title}</H1> : ''}
 
             <Container>
                 { isMobile ?
-                    <ImagesMobile images={productState.product.images ? productState.product.images : []}></ImagesMobile>
+                    <ImagesMobile images={images}></ImagesMobile>
                     :
-                    <Images images={productState.product.images ? productState.product.images : []}></Images> }
+                    <Images images={images}></Images> }
                 <Info data={productState.product}></Info>
             </Container>
 
@@ -60,7 +72,7 @@ const Product = () => {
 
             <BrowserView>
                 <MonthTrendContainer>
-                    <Banner header={'Хит продаж'} text={'В честь начала летнего сезона скидки на товары месяца 15%. Успей заказать и в поход!'} image={'https://vgtimes.ru/uploads/gallery/main/171845/1583179297_6664.jpeg'}></Banner>
+                    <Banner header={'Хит продаж'} text={'В честь начала летнего сезона скидки на товары месяца 15%. Успей заказать и в поход!'}></Banner>
                 </MonthTrendContainer>
             </BrowserView>
         </Content>

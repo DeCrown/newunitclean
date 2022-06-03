@@ -67,14 +67,16 @@ const Order = (props: {order: OrderType}) => {
         <OrderStyle key={props.order.id}>
             <OrderInfo>
                 <OrderNum>№{props.order.id}</OrderNum>
-                <OrderInfoRow title={'Адрес доставки'} value={props.order.address ? props.order.address : ''} />
-                <OrderInfoRow title={'Дата доставки'} value={''} />
+                <OrderInfoRow title={'Адрес доставки'} value={props.order.address ? props.order.address : 'нет данных'} />
+                <OrderInfoRow title={'Дата доставки'} value={props.order.date_to_receive ? props.order.date_to_receive : 'нет данных'} />
                 <OrderInfoRow title={'Сумма заказа'} value={'' + props.order.full_price} />
             </OrderInfo>
             <ProductsList products={props.order.product} buttons={true}></ProductsList>
-            <ButtonContainerLeft>
-                <ButtonBlue styled={Button}>Скачать счет</ButtonBlue>
-            </ButtonContainerLeft>
+            {/*
+                <ButtonContainerLeft>
+                    <ButtonBlue styled={Button}>Скачать счет</ButtonBlue>
+                </ButtonContainerLeft>
+            */}
         </OrderStyle>
     );
 };

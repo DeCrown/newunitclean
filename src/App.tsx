@@ -1,5 +1,5 @@
 import React from 'react';
-import {authRoutes, freeRoutes} from "src/utils/routes";
+import {routes} from "src/utils/routes";
 import Template from "components/template";
 import {route} from "src/utils/types";
 import {Main} from "src/themes/main";
@@ -11,7 +11,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 const Page = (route:route, i:number) => {
     return (
         <Route key={i} path={route.url} element={
-            <Template clearBackground = { isMobile ? route.mobileClearBackground : route.browserClearBackground}>
+            <Template auth={route.auth} clearBackground = { isMobile ? route.mobileClearBackground : route.browserClearBackground}>
                 {<route.page/>}
             </Template>
         }
@@ -25,8 +25,7 @@ function App() {
           <ThemeProvider theme={Main}>
               <BrowserRouter>
                   <Routes>
-                      { authRoutes.map((route, i) => Page(route, i)) }
-                      { freeRoutes.map((route, i) => Page(route, i)) }
+                      { routes.map((route, i) => Page(route, i)) }
                   </Routes>
               </BrowserRouter>
               <GlobalStyles />

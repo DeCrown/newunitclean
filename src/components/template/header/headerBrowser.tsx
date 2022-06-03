@@ -89,13 +89,13 @@ const PhoneNumberButton = styled.div`
   display: flex;
   align-items: center;
   padding: 0px 5px;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   cursor: pointer;
   background: #ADB8C4;
-  transition: filter 0.5s;
+  transition: box-shadow 0.5s;
   
   &:hover {
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5));
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
   }
 `;
 

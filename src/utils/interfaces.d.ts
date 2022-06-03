@@ -19,4 +19,4 @@ declare module "*.jpg" {
     export default content;
 }
 
-declare module "react-export-table-to-excel"
+declare module "@linways/table-to-excel"

@@ -4,9 +4,8 @@ import styled from "styled-components";
 import Discount from "components/promotions/shared/promotion/discount";
 import Price from "components/promotions/shared/promotion/price";
 import Title from "components/promotions/shared/promotion/title";
-
-import img from "src/bdsim/products/e.png"
-import {URLs} from "src/utils/constants";
+import {BASE_URL, URLs} from "src/utils/constants";
+import {icons} from "src/utils/icons";
 
 const PromotionStyle = styled.div`
   width: 370px;
@@ -66,7 +65,7 @@ const Promotion = (props: {data: ProductType}) => {
 
     return (
         <PromotionStyle>
-            <Image src={props.data.image ? props.data.image : img} />
+            <Image src={props.data.image ? BASE_URL + props.data.image : icons.promotionEmpty} />
             <Discount discount={props.data.discount ? props.data.discount : '0%'}></Discount>
             <Price sum={props.data.price}></Price>
             <Title val={props.data.title}></Title>

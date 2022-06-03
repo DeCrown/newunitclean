@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import SELECT from "components/shared/forms/primitives/SELECT";
 import {selectOption} from "src/utils/types";
+import styled from "styled-components";
+import {ErrorMessage} from "components/shared/forms/inputText";
+
+export const DefaultSelectStyle = styled.div``;
 
 interface SelectProps {
     css?: any;
@@ -12,6 +16,7 @@ interface SelectProps {
 interface SelectState {
     value: string | undefined;
     error: boolean;
+    errorText: string;
     active: boolean;
     errorAnimation: boolean;
     obj: any;
@@ -20,7 +25,7 @@ interface SelectState {
 export class Select extends Component<SelectProps, SelectState> {
     constructor(props: SelectProps) {
         super(props);
-        this.state = {value: props.defaultOption?.value, error: false, errorAnimation: false, active: false, obj: this};
+        this.state = {value: props.defaultOption?.value, error: false, errorAnimation: false, active: false, obj: this, errorText: ''};
         if (this.props.setObj) {
             this.props.setObj(this.state);
         }
@@ -66,17 +71,26 @@ export class Select extends Component<SelectProps, SelectState> {
     }
 
     clear = () => {
-        this.setState({value: undefined})
+        this.setState({value: ''})
+    }
+
+    setError = (errorText?: string) => {
+        this.setState({error: true, errorText: errorText ? errorText : this.state.errorText});
     }
 
     render() {
         return (
-            <div>
+            <DefaultSelectStyle>
                 <SELECT selectState={this.state}
                         selectProps={this.props}
                         onFocus={this.onFocus}
                         onInput={this.onInput} />
-            </div>
+                {
+                    this.state.error ?
+                        <ErrorMessage>{this.state.errorText}</ErrorMessage>
+                        : null
+                }
+            </DefaultSelectStyle>
         );
     }
 }

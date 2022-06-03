@@ -1,15 +1,22 @@
-import React from 'react';
+import React, {useCallback, useEffect} from 'react';
 import styled from "styled-components";
 import {HEADER_STYLE} from "components/shared/fonts/specialFonts";
 import {DIV_BUTTON_BLUE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
 import ButtonBlue from "components/shared/forms/buttonBlue";
+import {useTypedSelector} from "src/store/configureStore";
+import {useDispatch} from "react-redux";
+import {IStateMostTrading} from "src/reducers/MostTradingReducer/MostTradingReducer.types";
+import {GetMostTrading} from "src/actions/MostTradingAction/MostTradingAction";
+import {BASE_URL, URLs} from "src/utils/constants";
 
 const BannerStyle = styled.div`
-  height: 184px;
+  min-height: 184px;
   background: #A5AFBA;
   display: flex;
   padding: 30px 75px 30px 150px;
   margin-top: 146px;
+  flex-wrap: wrap-reverse;
+  grid-gap: 20px;
 `;
 
 const Info = styled.div`
@@ -17,6 +24,7 @@ const Info = styled.div`
   align-content: space-between;
   justify-items: left;
   grid-gap: 20px;
+  width: 40%;
 `;
 
 const Title = styled.div`
@@ -39,6 +47,12 @@ const ButtonStyle = styled(DIV_BUTTON_BLUE_STYLE)`
   width: 200px;
 `;
 
+const ImageContainer = styled.div`
+  height: 184px;
+  width: 500px;
+  position: relative;
+`;
+
 const Image = styled.div`
   width: 500px;
   background: rgba(196, 196, 196, 0.23);
@@ -48,6 +62,9 @@ const Image = styled.div`
   display: grid;
   align-content: center;
   justify-items: center;
+  position: absolute;
+  right: 0;
+  bottom: 0;
   
   & img {
     max-width: 100%;
@@ -55,19 +72,40 @@ const Image = styled.div`
   }
 `;
 
-const Banner = (props: {header: string; text: string; image?: string}) => {
-    return (
-        <BannerStyle>
-            <Info>
-                <Title>{props.header}</Title>
-                <Text>{props.text}</Text>
-                <ButtonBlue styled={ButtonStyle}>Подробнее</ButtonBlue>
-            </Info>
-            <Image>
-                <img src={props.image}></img>
-            </Image>
-        </BannerStyle>
-    );
+const Banner = (props: {header: string; text: string}) => {
+
+    const MostTrading = useTypedSelector((store) => store.MostTrading);
+    const {products} = MostTrading as IStateMostTrading;
+    const dispatch = useDispatch();
+    const stableDispatch = useCallback(dispatch, []);
+
+    useEffect(() => {
+        stableDispatch(GetMostTrading());
+    }, []);
+
+    const open = (product_id: number) => {
+        window.open(URLs.PRODUCT.replace(':id', '' + product_id), '_self')
+    }
+
+    if (products.length) {
+        return (
+            <BannerStyle>
+                <Info>
+                    <Title>{props.header}</Title>
+                    <Text>{props.text}</Text>
+                    <ButtonBlue styled={ButtonStyle} func={() => open(products[0].id)}>Подробнее</ButtonBlue>
+                </Info>
+                <ImageContainer>
+                    <Image>
+                        <img src={BASE_URL + products[0].image}></img>
+                    </Image>
+                </ImageContainer>
+            </BannerStyle>
+        );
+    }
+    else {
+        return <div></div>
+    }
 };
 
 export default Banner;

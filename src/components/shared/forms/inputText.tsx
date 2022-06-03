@@ -2,6 +2,14 @@ import React, {Component} from 'react';
 import INPUT_TEXT from "./primitives/INPUT_TEXT";
 import styled, {StyledComponent} from "styled-components";
 
+export const DefaultInputTextStyle = styled.div``;
+
+export const ErrorMessage = styled.div`
+  color: ${({ theme }) => theme.font.color.red};
+  padding-top: 4px;
+  text-align: left;
+`;
+
 interface InputProps {
     styled?: StyledComponent<any, any>;
     placeholder?: string;
@@ -10,21 +18,22 @@ interface InputProps {
     styledContainer?: StyledComponent<any, any>;
 };
 
-interface InputState {
+export interface InputState {
     value: string;
     error: boolean;
     errorAnimation: boolean;
+    errorText: string;
     active: boolean;
     obj: any;
 };
 
 export class InputText extends Component<InputProps, InputState> {
 
-    defaultStyled = styled.div``;
+    defaultStyled = DefaultInputTextStyle; //styled.div``;
 
     constructor(props: InputProps) {
         super(props);
-        this.state = {value: '', error: false, errorAnimation: false, active: false, obj: this};
+        this.state = {value: '', error: false, errorAnimation: false, active: false, obj: this, errorText: ''};
         if (this.props.setObj) {
             this.props.setObj(this.state);
         }
@@ -50,6 +59,10 @@ export class InputText extends Component<InputProps, InputState> {
             }, 500);
         }
         return val
+    }
+
+    setError = (errorText?: string) => {
+        this.setState({error: true, errorText: errorText ? errorText : this.state.errorText});
     }
 
     onInput = (event?: any) => {
@@ -85,6 +98,11 @@ export class InputText extends Component<InputProps, InputState> {
                             onFocus={this.onFocus}
                             onInput={this.onInput}
                             type={this.getType()} />
+                {
+                    this.state.error ?
+                        <ErrorMessage>{this.state.errorText}</ErrorMessage>
+                        : null
+                }
             </Styled>
         );
     }
@@ -233,5 +251,23 @@ export class InputLoginOrEMail extends InputText {
         else {
             return true
         }
+    }
+}
+
+export class OutputDetail extends InputText {
+    check = (value: string) => {
+        return false
+    }
+
+    render() {
+        return (
+            <DefaultInputTextStyle>
+                {
+                    this.state.error ?
+                        <ErrorMessage>{this.state.errorText}</ErrorMessage>
+                        : null
+                }
+            </DefaultInputTextStyle>
+        );
     }
 }

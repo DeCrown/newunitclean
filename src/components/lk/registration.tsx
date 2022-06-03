@@ -1,12 +1,12 @@
-import React, {useCallback, useState} from 'react';
+import React, {useState} from 'react';
 import styled, {css} from "styled-components";
 import {FormHeader} from "components/shared/fonts/specialFonts";
 import {
     InputAddress,
     InputCompany,
-    InputPhoneNumber,
+    InputPhoneNumber, InputState,
     InputUR_INN,
-    InputUR_KPP
+    InputUR_KPP, OutputDetail
 } from "components/shared/forms/inputText";
 import ButtonBlue from "components/shared/forms/buttonBlue";
 import {FormContainer, FormList} from "components/shared/forms/form";
@@ -42,48 +42,40 @@ const ButtonSendError = styled(ButtonStyle)`
 `;
 
 const Registration = () => {
-    const [title, setTitle] = useState<any>(null);
-    const [inn, setInn] = useState<any>(null);
-    const [kpp, setKpp] = useState<any>(null);
-    const [ur_address, setUrAddress] = useState<any>(null);
-    const [real_address, setRealAddress] = useState<any>(null);
-    const [phone, setPhone] = useState<any>(null);
+    const form:any = {};
+
+    let setTitle, setInn, setKpp, setUrAddress, setRealAddress, setPhone, setDetail = null;
+    [form.title, setTitle] = useState<any>(null);
+    [form.inn, setInn] = useState<any>(null);
+    [form.official_address, setUrAddress] = useState<any>(null);
+    [form.phone_number, setPhone] = useState<any>(null);
+    [form.kpp, setKpp] = useState<any>(null);
+    [form.real_address, setRealAddress] = useState<any>(null);
+    [form.detail, setDetail] = useState<any>(null);
     const [button, setButton] = useState<any>(null);
 
     const dispatch = useDispatch();
 
     const reg = () => {
-        if (title.obj.checkError()
-            + inn.obj.checkError()
-            + kpp.obj.checkError()
-            + ur_address.obj.checkError()
-            + real_address.obj.checkError()
-            + phone.obj.checkError()) {
+        if (Object.values(form).map(value => !value || (value as InputState).obj.checkError()).some(error => error)) {
             button.Animate({Styled: ButtonSendError, Children: 'Введенные данные некорректны', timeOut: 2000});
             return false;
         }
         button.Animate({Children: 'Выполняется...'});
         AppendApiMethod({
             func: 'post', url: '/employee/api/v2/company/create/',
-            data: {
-                title: title.value,
-                inn: inn.value,
-                official_address: ur_address.value,
-                phone_number: phone.value,
-                kpp: kpp.value,
-                real_address: real_address.value
-            },
+            data: Object.keys(form).reduce((target, key) => ({...target, [key]: form[key].value}), {}),
             success: (success) => {
-                title.obj.clear();
-                inn.obj.clear();
-                ur_address.obj.clear();
-                phone.obj.clear();
-                kpp.obj.clear();
-                real_address.obj.clear();
+                Object.values(form).map(value => (value as InputState).obj.clear());
                 button.Animate({Styled: ButtonSendSuccess, Children: 'Регистрация выполнена', timeOut: 2000});
                 window.open(URLs.COMPANY_LK, '_self');
             },
             error: (error) => {
+                Object.keys(error.response.data).map(key => {
+                    if (form[key]) {
+                        form[key].obj.setError(error.response.data[key]);
+                    }
+                });
                 button.Animate({Styled: ButtonSendError, Children: 'Введенные данные некорректны', timeOut: 2000});
             }, auth: true
         })(dispatch);
@@ -99,6 +91,7 @@ const Registration = () => {
                 <InputUR_KPP placeholder={'КПП'} setObj={setKpp}></InputUR_KPP>
                 <InputPhoneNumber placeholder={'Телефон'} setObj={setPhone}></InputPhoneNumber>
                 <InputAddress placeholder={'Фактический адрес'} setObj={setRealAddress}></InputAddress>
+                <OutputDetail setObj={setDetail}></OutputDetail>
                 <ButtonBlue styled={ButtonStyle} func={reg} setObj={setButton}>Зарегистрировать</ButtonBlue>
             </FormList>
         </FormContainer>

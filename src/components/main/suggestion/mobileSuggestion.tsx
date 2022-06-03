@@ -27,7 +27,7 @@ const Header = styled.div`
   padding: 28px;
   margin-right: -${({ theme }) => theme.values.contentMobileMargin}px;
   position: absolute;
-  bottom: -48px; /* 50px */
+  bottom: 50px;
   right: 0px;
 `;
 

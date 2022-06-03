@@ -5,6 +5,7 @@ import {INPUT_TEXT_STYLE} from "components/shared/forms/primitives/INPUT_TEXT";
 import {ProductType} from "src/utils/types";
 import {URLs} from "src/utils/constants";
 import React from "react";
+import {DefaultInputTextStyle} from "components/shared/forms/inputText";
 
 export const HeaderSearchStyle = styled.div`
   display: grid;
@@ -31,10 +32,10 @@ export const SearchContainer = styled.div`
   position: relative;
 `;
 
-export const SearchInputTextContainerStyle = styled.div`
+export const SearchInputTextContainerStyle = styled(DefaultInputTextStyle)`
   position: relative;
   
-  &:after {
+  &:before {
     content: "";
     position: absolute;
     left: 0;
@@ -67,6 +68,8 @@ export const SearchNoResults = styled.div`
   cursor: pointer;
   border-radius: 10px;
   font-style: italic;
+
+  color: ${({ theme }) => theme.font.color.black};
 `;
 
 export const SearchResultStyle = styled(SearchNoResults)`
@@ -75,6 +78,12 @@ export const SearchResultStyle = styled(SearchNoResults)`
   color: ${({ theme }) => theme.font.color.black};
   &:hover {
     background: #e6e6e6;
+  }
+  
+  .mobile & {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 `;
 

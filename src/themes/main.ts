@@ -2,6 +2,7 @@
 export const Main = {
     font: {
         size: {
+            8: '8px',
             12: '12px',
             13: '13px',
             14: '14px',

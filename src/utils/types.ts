@@ -4,6 +4,7 @@ export interface route {
     page: (prop?: any) => JSX.Element;
     mobileClearBackground?: boolean;
     browserClearBackground?: boolean;
+    auth?: boolean;
 }
 
 export interface selectOption {
@@ -50,7 +51,8 @@ export interface ProductType {
     buttons?: boolean;
     promotion?: boolean;
     amount_of_product?: number;
-    product_order_size?: string
+    product_order_size?: string;
+    order_size_price?: number
 }
 
 export interface CategoryType {
@@ -75,6 +77,7 @@ export interface OrderType {
     receiving_type: "САМОВЫВОЗ" | "ДОСТАВКА" | null;
     address: string | null;
     promo_code: string | null;
+    date_to_receive?: string;
 }
 
 export interface EmployeeType {

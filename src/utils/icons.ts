@@ -51,6 +51,10 @@ import security from "../icons/reasons/security.png";
 import exit from "../icons/exit.svg";
 import search_gray from "../icons/search_gray.svg";
 
+import dropInput from "../icons/dropInput.svg";
+import star from "../icons/star.svg";
+import promotionEmpty from "../icons/promotionEmpty.png";
+
 export const icons = {
     lk: lk,
     cart: cart,
@@ -97,5 +101,8 @@ export const icons = {
         security: security
     },
     exit: exit,
-    search_gray: search_gray
+    search_gray: search_gray,
+    dropInput: dropInput,
+    star: star,
+    promotionEmpty: promotionEmpty
 }

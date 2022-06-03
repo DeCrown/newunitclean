@@ -34,7 +34,7 @@ const CompanyPreviousOrders = () => {
                 orders.length
                     ?
                     <TabContent>
-                        { orders.map((order) =>
+                        { orders.reverse().map((order) =>
                             <Order key={order.id} order={order}/>
                         ) }
                     </TabContent>

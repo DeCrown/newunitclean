@@ -1,10 +1,8 @@
 import React, {useCallback} from 'react';
 import {icons} from "src/utils/icons";
-import {Api} from "src/api";
 import styled from "styled-components";
 import {ProductType} from "src/utils/types";
-import {URLs} from "src/utils/constants";
-import {Dispatch} from "redux";
+import {BASE_URL, URLs} from "src/utils/constants";
 import {AppendApiMethod} from "src/actions/ApiMethodAction/ApiMethodAction";
 import {useDispatch} from "react-redux";
 import {useTypedSelector} from "src/store/configureStore";
@@ -127,7 +125,7 @@ const Buttons = styled.div`
   height: 90px;
   margin: 0 26px;
   
-  .mobile .withButtons & {
+  .mobile & {
     margin: 0;
     height: 100%;
     position: absolute;
@@ -168,29 +166,94 @@ const ButtonDelete = styled(Button)``
 
 const ButtonFavourite = styled(Button)``
 
-const Counter = styled(Button)`
+const Counter = styled.div`
+    
+`;
+
+const ButtonInfoStyle = styled(Button)`
   width: auto;
   padding: 0 20px;
   opacity: 1;
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  grid-gap: 10px;
   
   .mobile & {
+    grid-auto-flow: row;
     padding: 0;
   }
 `;
 
+const Size = styled.div`
+`;
 
-export const Product = (props: {data: ProductType}) => {
+const SizeHeader = styled.div`
+  font-size: ${({ theme }) => theme.font.size[8]};
+`;
+
+const SizeValue = styled.div`
+  
+`;
+
+const ButtonInfo = (props: {size?: string; count?: number}) => {
+    return <ButtonInfoStyle>
+        { props.size ?
+            <Size>
+                <SizeHeader>размер</SizeHeader>
+                <SizeValue>{props.size}</SizeValue>
+            </Size>
+            :null
+        }
+        { props.count ?
+            <Counter>{props.count} шт.</Counter>
+            :null
+        }
+    </ButtonInfoStyle>
+}
+
+const StarStyle = styled.div`
+  background-image: url(${icons.star});
+  position: absolute;
+  width: 86px;
+  height: 86px;
+  z-index: 1;
+
+  font-size: ${({ theme }) => theme.font.size[16]};
+  font-weight: ${({ theme }) => theme.font.weight[800]};
+  color: ${({ theme }) => theme.font.color.white};
+
+  display: grid;
+  align-content: center;
+  transform: rotate(-33deg);
+`;
+
+const Star = (props: {children: string}) => {
+    return <StarStyle>
+        {props.children}
+    </StarStyle>
+}
+
+export const Product = (props: {data: ProductType; noStar?: boolean}) => {
 
     return (
         <ProductStyle href={URLs.PRODUCT.replace(':id', '' + props.data.id)}>
-            <Image src={props.data.image ? props.data.image[0] : ''} />
+            {
+                props.data.discount && !props.noStar ?
+                    <Star>{props.data.discount}</Star>
+                    :
+                    null
+            }
+            <Image src={props.data.image ? BASE_URL + props.data.image : ''} />
             <Info>
                 <Title>{props.data.title}</Title>
                 <Description>{props.data.description}</Description>
                 {
-                    props.data.price ?
-                        <Price>{props.data.price} РУБ</Price>
-                        : null
+                    props.data.order_size_price ?
+                        <Price>{props.data.order_size_price} РУБ</Price>
+                        : props.data.price ?
+                            <Price>от {props.data.price} РУБ</Price>
+                            : null
                 }
             </Info>
         </ProductStyle>
@@ -200,7 +263,7 @@ export const Product = (props: {data: ProductType}) => {
 export const ProductWithButtons = (props: {data: ProductType; onlyFavourite?: boolean}) => {
 
     const Favourites = useTypedSelector((store) => store.Favourites);
-    const {products, isFetching, error} = Favourites as IStateFavourites;
+    const {products} = Favourites as IStateFavourites;
     const dispatch = useDispatch();
     const stableDispatch = useCallback(dispatch, []);
 
@@ -213,10 +276,8 @@ export const ProductWithButtons = (props: {data: ProductType; onlyFavourite?: bo
             }, url: '/product/api/v2/order/add_product/',
             success: (success) => {
                 stableDispatch(GetCart());
-                //console.log(success)
             },
             error: (error) => {
-                //console.log(error)
             }, auth: true})(dispatch);
     }
 
@@ -230,10 +291,8 @@ export const ProductWithButtons = (props: {data: ProductType; onlyFavourite?: bo
                 func: 'delete', url: '/product/api/v2/favorite_products/' + props.data.id + '/', data: {product_id: props.data.id},
                 success: (success) => {
                     stableDispatch(GetFavourites());
-                    //console.log(success)
                 },
                 error: (error) => {
-                    console.log(error)
                 }, auth: true
             })(dispatch);
         }
@@ -242,39 +301,20 @@ export const ProductWithButtons = (props: {data: ProductType; onlyFavourite?: bo
                 func: 'post', url: '/product/api/v2/favorite_products/' + props.data.id + '/',
                 success: (success) => {
                     stableDispatch(GetFavourites());
-                    //console.log(success)
                 },
                 error: (error) => {
-                    //console.log(error)
                 }, auth: true})(dispatch);
         }
     }
 
     return (
         <ButtonsContainer>
-            <ProductStyle href={URLs.PRODUCT.replace(':id', '' + props.data.id)}>
-                <Image src={props.data.image ? props.data.image[0] : ''}/>
-                <Info>
-                    <Title>{props.data.title}</Title>
-                    <Description>{props.data.description}</Description>
-                    {
-                        props.data.price ?
-                            <Price>{props.data.price} РУБ</Price>
-                            : null
-                    }
-                </Info>
-            </ProductStyle>
+            <Product data={props.data}></Product>
             <Buttons>
                 <ButtonDelete onClick={DeleteFromCart}>
                     <img src={icons.delete}/>
                 </ButtonDelete>
-                {
-                    props.data.amount_of_product ?
-                        <Counter>
-                            x{props.data.amount_of_product}
-                        </Counter>
-                        : null
-                }
+                <ButtonInfo size={props.data.product_order_size} count={props.data.amount_of_product} />
                 <ButtonFavourite onClick={MarkAsFavourite}>
                     <img src={IsFavourite() ? icons.favourite : icons.not_favourite}/>
                 </ButtonFavourite>

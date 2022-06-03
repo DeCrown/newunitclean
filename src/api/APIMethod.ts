@@ -23,17 +23,9 @@ const configDefault = {
     }
 }
 
-const dataToUrl = (data: any) => {
-    if (!data) {
-        return '';
-    }
-    let pairs = Object.keys(data).map(key => key + '=' + data[key]);
-    return pairs.length ? '?' + pairs.join('&') : '';
-}
-
 const funcs = {
     get: (url: string, data: any, access_token: string, auth?: boolean) =>
-        axios.get(BASE_URL + url + dataToUrl(data), auth ? config(access_token) : configDefault),
+        axios.get(BASE_URL + url, {...(auth ? config(access_token) : configDefault), params: data}),
     post: (url: string, data: any, access_token: string, auth?: boolean) =>
         axios.post(BASE_URL + url, data,auth ? config(access_token) : configDefault),
     patch: (url: string, data: any, access_token: string, auth?: boolean) =>

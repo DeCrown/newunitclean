@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {H1} from "components/shared/fonts/specialFonts";
 import {ProductType} from "src/utils/types";
 import styled from "styled-components";
@@ -7,12 +7,12 @@ import ButtonBlue from "components/shared/forms/buttonBlue";
 import {DIV_BUTTON_BLUE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
 import {isMobile} from "react-device-detect";
 import {AppendApiMethod} from "src/actions/ApiMethodAction/ApiMethodAction";
-import {Dispatch} from "redux";
 import {useDispatch} from "react-redux";
 import RadioButtons from "components/shared/forms/radioButtons";
 import {getAuth} from "src/store/localStorage";
 import {WindowsManagerOpen} from "src/actions/WindowsManagerAction/WindowsManagerAction";
 import {WINDOW_AUTHORIZATION} from "src/actions/WindowsManagerAction/WindowsManagerAction.types";
+import {GetProduct} from "src/actions/ProductAction/ProductAction";
 
 const InfoStyle = styled.div`
   display: grid;
@@ -54,6 +54,14 @@ const ButtonStyle = styled(DIV_BUTTON_BLUE_STYLE)`
   }
 `;
 
+const ButtonSendSuccess = styled(ButtonStyle)`
+  box-shadow: 0px 0px 0px 4px rgba(0, 255, 0, 0.2);
+`;
+
+const ButtonSendError = styled(ButtonStyle)`
+  box-shadow: 0px 0px 0px 4px rgba(255, 0, 0, 0.2);
+`;
+
 const ButtonFrozenStyle = styled(ButtonStyle)`
   font-size: ${({ theme }) => theme.font.size[14]};
   background: ${({ theme }) => theme.font.color.light_gray};
@@ -65,10 +73,17 @@ const Info = (props: {data: ProductType}) => {
     const [size, setSize] = useState('');
     const [button, setButton] = useState<any>(null);
     const dispatch = useDispatch();
+    const stableDispatch = useCallback(dispatch, []);
 
     const openAuth = () => {
         WindowsManagerOpen(WINDOW_AUTHORIZATION)(dispatch);
     }
+
+    useEffect(() => {
+        if (auth.isAuthorized) {
+            stableDispatch(GetProduct(props.data.id, size));
+        }
+    }, [size]);
 
     const AddToCart = () => {
         button.Animate({Children: 'Добавляем...'});
@@ -80,10 +95,10 @@ const Info = (props: {data: ProductType}) => {
             },
             url: '/product/api/v2/order/add_product/',
             success: (success) => {
-                button.Animate({Children: 'Добавлено в корзину', timeOut: 2000});
+                button.Animate({Styled: ButtonSendSuccess, Children: 'Добавлено в корзину', timeOut: 2000});
             },
             error: (error) => {
-                button.Animate({Children: 'Ошибка', timeOut: 2000});
+                button.Animate({Styled: ButtonSendError, Children: 'Ошибка', timeOut: 2000});
             }, auth: true})(dispatch);
     }
 
@@ -91,7 +106,7 @@ const Info = (props: {data: ProductType}) => {
         <InfoStyle>
             { isMobile ? '' : <Header>{props.data.title}</Header>}
 
-            <Price>{props.data.price ? props.data.price.toLocaleString() + ' РУБ' : null}</Price>
+            <Price>{props.data.price ? (auth.isAuthorized ? '' : 'от ') + props.data.price.toLocaleString() + ' РУБ' : null}</Price>
             <Description>
                 {
                     props.data.description

@@ -15,7 +15,7 @@ import {DIV_BUTTON_WHITE_STYLE} from "components/shared/forms/primitives/DIV_BUT
 import {GetCompany} from "src/actions/CompanyAction/CompanyAction";
 import {useTypedSelector} from "src/store/configureStore";
 import {IStateCompany} from "src/reducers/CompanyReducer/CompanyReducer.types";
-import {isMobile} from "react-device-detect";
+import {GetTable, Table} from "components/excel/table";
 
 const HeaderWithButton = styled.div`
   display: grid;
@@ -38,6 +38,14 @@ const LkButtons = styled.div`
   padding: 58px 0 0 0;
   display: grid;
   justify-content: right;
+  grid-auto-flow: column;
+  grid-gap: 20px;
+  
+  .mobile & {
+    justify-content: stretch;
+    padding: 0;
+    grid-auto-flow: row;
+  }
 `;
 
 const ToCompanyButton = styled(DIV_BUTTON_WHITE_STYLE)`
@@ -72,10 +80,7 @@ const Lk = () => {
     }
 
     const downloadPriceList = () => {
-        /*downloadExcel({
-            abc: 1,
-            bcd: 2
-        })*/
+        GetTable();
     }
 
     return (
@@ -87,26 +92,22 @@ const Lk = () => {
 
             <EmployeeInfo></EmployeeInfo>
 
-            {
-                isMobile ?
-                    <ButtonBlue styled={ToCompanyButton} func={downloadPriceList}>Скачать прайс-лист</ButtonBlue>
-                    :
-                    <LkButtons>
-                        <ButtonBlue styled={ToCompanyButton} func={downloadPriceList}>Скачать прайс-лист</ButtonBlue>
-                    </LkButtons>
-            }
+            <Table></Table>
+
+            <LkButtons>
+                <ButtonBlue styled={ToCompanyButton} func={downloadPriceList}>Скачать прайс-лист</ButtonBlue>
+                {
+                    error ? null
+                        : <ButtonBlue styled={ToCompanyButton} func={toCompany}>Личный кабинет компании</ButtonBlue>
+                }
+            </LkButtons>
 
             {
                 error
                     ?
                     <Registration></Registration>
                     :
-                    isMobile ?
-                        <ButtonBlue styled={ToCompanyButton} func={toCompany}>Личный кабинет компании</ButtonBlue>
-                        :
-                        <LkButtons>
-                            <ButtonBlue styled={ToCompanyButton} func={toCompany}>Личный кабинет компании</ButtonBlue>
-                        </LkButtons>
+                    null
             }
 
             <BuyHistory></BuyHistory>

@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 import INPUT_TEXT_FIELD from "./primitives/INPUT_TEXT_FIELD";
+import styled from "styled-components";
+import {ErrorMessage} from "components/shared/forms/inputText";
+
+export const DefaultInputTextFieldStyle = styled.div``;
 
 interface InputFieldProps {
     placeholder?: string;
@@ -11,12 +15,13 @@ interface InputFieldState {
     error: boolean;
     active: boolean;
     obj: any;
+    errorText: string;
 };
 
 export class InputTextField extends Component<InputFieldProps, InputFieldState> {
     constructor(props: InputFieldProps) {
         super(props);
-        this.state = {value: '', error: false, active: false, obj: this};
+        this.state = {value: '', error: false, active: false, obj: this, errorText: ''};
         if (this.props.setObj) {
             this.props.setObj(this.state);
         }
@@ -56,14 +61,23 @@ export class InputTextField extends Component<InputFieldProps, InputFieldState> 
         this.setState({value: ''})
     }
 
+    setError = (errorText?: string) => {
+        this.setState({error: true, errorText: errorText ? errorText : this.state.errorText});
+    }
+
     render() {
         return (
-            <div>
+            <DefaultInputTextFieldStyle>
                 <INPUT_TEXT_FIELD inputFieldState={this.state}
                             inputFieldProps={this.props}
                             onFocus={this.onFocus}
                             onInput={this.onInput} />
-            </div>
+                {
+                    this.state.error ?
+                        <ErrorMessage>{this.state.errorText}</ErrorMessage>
+                        : null
+                }
+            </DefaultInputTextFieldStyle>
         );
     }
 }

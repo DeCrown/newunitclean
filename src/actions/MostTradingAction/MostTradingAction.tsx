@@ -15,7 +15,6 @@ export const GetMostTrading = () : ThunkAction<void,RootState,unknown,Action<str
     })
     AppendApiMethod({func: 'get', url: '/product/api/v2/list_trending_products/',
         success: (success) => {
-            console.log(success)
             dispatch({
                 type: GET_MOST_TRADING_SUCCESS,
                 payload: success as ProductType[]

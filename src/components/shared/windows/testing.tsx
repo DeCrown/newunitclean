@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import styled from "styled-components";
-import {InputEMail, InputFIO, InputPhoneNumber} from "components/shared/forms/inputText";
+import {InputEMail, InputFIO, InputPhoneNumber, InputState, OutputDetail} from "components/shared/forms/inputText";
 import InputTextField from "components/shared/forms/inputTextField";
 import ButtonBlue from "components/shared/forms/buttonBlue";
 import {DIV_BUTTON_BLUE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
@@ -9,6 +9,7 @@ import {FormCloseStyle} from "components/shared/forms/form";
 import {WindowsManagerClear} from "src/actions/WindowsManagerAction/WindowsManagerAction";
 import {useDispatch} from "react-redux";
 import {AppendApiMethod} from "src/actions/ApiMethodAction/ApiMethodAction";
+import {Main} from "src/themes/main";
 
 const TestingContainer = styled.div`
   position: fixed;
@@ -19,6 +20,12 @@ const TestingContainer = styled.div`
   top: 0;
   display: grid;
   align-content: center;
+  
+  .mobile & {
+    width: calc(100% - ${Main.values.contentMobileMargin * 2}px);
+    padding: 0 ${Main.values.contentMobileMargin}px;
+    right: 0;
+  }
 `;
 
 const TestingStyle = styled.div`
@@ -27,6 +34,8 @@ const TestingStyle = styled.div`
   border-radius: 12px;
   padding: 40px 16px;
   height: min-content;
+  max-height: calc(100% - 80px);
+  overflow-y: auto;
 `;
 
 const Close = styled.div`
@@ -82,37 +91,35 @@ const Testing = () => {
     const dispatch = useDispatch();
     const stableDispatch = useCallback(dispatch, []);
 
-    const [fio, setFio] = useState<any>(null);
-    const [email, setEmail] = useState<any>(null);
-    const [phone, setPhone] = useState<any>(null);
-    const [comment, setComment] = useState<any>(null);
+    const form:any = {};
+
+    let setFio, setEmail, setPhone, setComment, setDetail = null;
+    [form.full_name, setFio] = useState<any>(null);
+    [form.email, setEmail] = useState<any>(null);
+    [form.phone_number, setPhone] = useState<any>(null);
+    [form.comment, setComment] = useState<any>(null);
+    [form.detail, setDetail] = useState<any>(null);
     const [button, setButton] = useState<any>(null);
 
     const send = () => {
-        if (fio.obj.checkError()
-            + email.obj.checkError()
-            + phone.obj.checkError()
-            + comment.obj.checkError()) {
+        if (Object.values(form).map(value => !value || (value as InputState).obj.checkError()).some(error => error)) {
             button.Animate({Styled: ButtonSendError, Children: 'Введенные данные некорректны', timeOut: 2000});
             return false;
         }
         button.Animate({Children: 'Выполняется...'});
         AppendApiMethod({
             func: 'post', url: '/employee/api/v2/test_order/',
-            data: {
-                full_name: fio.value,
-                email: email.value,
-                phone_number: phone.value,
-                comment: comment.value
-            },
+            data: Object.keys(form).reduce((target, key) => ({...target, [key]: form[key].value}), {}),
             success: (success) => {
-                fio.obj.clear();
-                email.obj.clear();
-                phone.obj.clear();
-                comment.obj.clear();
+                Object.values(form).map(value => (value as InputState).obj.clear())
                 button.Animate({Styled: ButtonSendSuccess, Children: 'Заявка отправлена', timeOut: 2000});
             },
             error: (error) => {
+                Object.keys(error.response.data).map(key => {
+                    if (form[key]) {
+                        form[key].obj.setError(error.response.data[key]);
+                    }
+                });
                 button.Animate({Styled: ButtonSendError, Children: 'Введенные данные некорректны', timeOut: 2000});
             }
         })(dispatch);
@@ -141,6 +148,7 @@ const Testing = () => {
                     <RowHeader>Какую продукцию вы хотите отправить на тестирование?</RowHeader>
                     <InputTextField setObj={setComment}></InputTextField>
                 </Row>
+                <OutputDetail setObj={setDetail}></OutputDetail>
                 <ButtonBlue styled={ButtonSend} func={send} setObj={setButton}>Отправить</ButtonBlue>
             </TestingStyle>
         </TestingContainer>

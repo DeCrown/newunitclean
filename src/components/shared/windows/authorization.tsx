@@ -3,8 +3,9 @@ import styled from "styled-components";
 import {FormContainer, FormList} from "components/shared/forms/form";
 import {FormHeader} from "components/shared/fonts/specialFonts";
 import {
+    DefaultInputTextStyle,
     InputLoginOrEMail,
-    InputPassword,
+    InputPassword, InputState, OutputDetail,
 } from "components/shared/forms/inputText";
 import ButtonBlue from "components/shared/forms/buttonBlue";
 import {DIV_BUTTON_BLUE_STYLE, DIV_BUTTON_WHITE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
@@ -13,7 +14,7 @@ import {useDispatch} from "react-redux";
 import {useTypedSelector} from "src/store/configureStore";
 import {IStateWindows} from "src/reducers/WindowsManagerReducer/WindowsManagerReducer.types";
 import {WindowsManagerClear, WindowsManagerOpen} from "src/actions/WindowsManagerAction/WindowsManagerAction";
-import {WINDOW_AUTHORIZATION, WINDOW_REGISTRATION} from "src/actions/WindowsManagerAction/WindowsManagerAction.types";
+import {WINDOW_REGISTRATION} from "src/actions/WindowsManagerAction/WindowsManagerAction.types";
 
 const ButtonStyle = styled(DIV_BUTTON_BLUE_STYLE)`
   font-size: ${({ theme }) => theme.font.size[20]};
@@ -46,26 +47,30 @@ export const Authorization = () => {
     const WindowsManager = useTypedSelector((store) => store.WindowsManager);
     const {url} = WindowsManager as IStateWindows;
 
-    const [login, setLogin] = useState<any>(null);
-    const [password, setPass] = useState<any>(null);
+    const form:any = {
+        username: null,
+        password: null,
+        detail: null,
+    };
+    let setLogin, setPass, setDetail = null;
+    [form.username, setLogin] = useState<any>(null);
+    [form.password, setPass] = useState<any>(null);
+    [form.detail, setDetail] = useState<any>(null);
     const [button, setButton] = useState<any>(null);
 
     const dispatch = useDispatch();
     const stableDispatch = useCallback(dispatch, []);
 
     const auth = () => {
-        if (login.obj.checkError()
-            + password.obj.checkError()) {
+        if (Object.values(form).map(value => !value || (value as InputState).obj.checkError()).some(error => error)) {
             button.Animate({Styled: ButtonSendError, Children: 'Введенные данные некорректны', timeOut: 2000});
             return false;
         }
         button.Animate({Children: 'Выполняется...'});
         stableDispatch(LoginUser({
-                data:
-                    {username: login.value, password: password.value},
+                data: {username: form.username.value, password: form.password.value},
                 successFunc: () => {
-                    login.obj.clear();
-                    password.obj.clear();
+                    Object.values(form).map(value => (value as InputState).obj.clear())
                     button.Animate({Styled: ButtonSendSuccess, Children: 'Вход выполнен', timeOut: 2000});
                     WindowsManagerClear()(dispatch);
                     if (url) {
@@ -75,7 +80,12 @@ export const Authorization = () => {
                         window.location.reload();
                     }
                 },
-                errorFunc: () => {
+                errorFunc: (error) => {
+                    Object.keys(error.response.data).map(key => {
+                        if (form[key]) {
+                            form[key].obj.setError(error.response.data[key]);
+                        }
+                    });
                     button.Animate({Styled: ButtonSendError, Children: 'Неверный логин или пароль', timeOut: 2000});
                 }
             }));
@@ -91,6 +101,7 @@ export const Authorization = () => {
             <FormList>
                 <InputLoginOrEMail placeholder={'Логин или E-mail'} name='login' setObj={setLogin}></InputLoginOrEMail>
                 <InputPassword placeholder={'Пароль'} name='password' setObj={setPass}></InputPassword>
+                <OutputDetail setObj={setDetail}></OutputDetail>
                 <ButtonBlue styled={ButtonStyle} func={auth} setObj={setButton}>Войти</ButtonBlue>
                 <ButtonBlue styled={ButtonRegStyle} func={switchToReg}>Зарегистрировать</ButtonBlue>
             </FormList>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="1000px" height="1000px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 1000 1000"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+  </style>
+  <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="756.931" y1="545.174" x2="197.948" y2="392.077">
+   <stop offset="0" style="stop-opacity:1; stop-color:#2196F3"/>
+   <stop offset="0.0392157" style="stop-opacity:1; stop-color:#2196F3"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#2196F3"/>
+  </linearGradient>
+ </defs>
+ <g id="Слой_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_1000818183488" filter="url(#filter0_d_483_3320)">
+   <polygon fill="url(#id0)" points="213,403 826,403 826,534 129,534 "/>
+  </g>
+ </g>
+</svg>

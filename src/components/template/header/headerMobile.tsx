@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {headerMenuBottomButton, headerMenuTopButton} from "src/utils/types";
 import styled from "styled-components";
 import {icons} from "src/utils/icons";
@@ -6,9 +6,8 @@ import logo from "src/logo/logo.png";
 import * as constants from "src/utils/constants";
 import HeaderButton from "components/template/header/headerButton";
 import {useDispatch} from "react-redux";
-import {CloseMobileMenu, OpenMobileMenu, SwitchMobileMenu} from "src/actions/MobileMenuAction/MobileMenuAction";
+import {CloseMobileMenu, SwitchMobileMenu} from "src/actions/MobileMenuAction/MobileMenuAction";
 import {useTypedSelector} from "src/store/configureStore";
-import {IStateTabsMenu} from "src/reducers/TabsMenuReducer/TabsMenuReducer.types";
 import {IStateMobileMenu} from "src/reducers/MobileMenuReducer/MobileMenuReducer.types";
 
 const HeaderTab = styled.div`
@@ -118,7 +117,11 @@ const HeaderContainerMobile = (props: {topButtons: headerMenuTopButton[]; bottom
         <HeaderTab>
             <HeaderTabButton onClick={() => SwitchMobileMenu()(dispatch)}><img src={icons.menu}/></HeaderTabButton>
             <Logo><img src={logo}/></Logo>
-            <HeaderTabButton><a href={constants.URLs.CART}><img src={icons.cart}/></a></HeaderTabButton>
+            <HeaderTabButton>
+                <HeaderButton styled={styled.a``} href={constants.URLs.CART} auth={true} >
+                    <img src={icons.cart}/>
+                </HeaderButton>
+            </HeaderTabButton>
 
             <MovingTab className={ opened ? 'opened' : 'closed' } onTouchStart={touchStart} onTouchEnd={touchEnd} onTouchMove={touchMove}>
                 { props.topButtons.map((button) => <MovingTabButton><MobileButton data={button} /></MovingTabButton>) }

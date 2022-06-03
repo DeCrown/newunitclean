@@ -1,5 +1,4 @@
 import React, {useCallback, useEffect} from 'react';
-import ProductsList from "components/shared/productsList";
 import ButtonBlue from "components/shared/forms/buttonBlue";
 import TabContent from "components/shared/tabsMenu/tabContent";
 import {ButtonContainerCenter, ButtonContainerLeft} from "components/cart/shared/buttonContainers";
@@ -9,7 +8,6 @@ import EmptyBasket from "components/shared/productsList/empty";
 import {useTypedSelector} from "src/store/configureStore";
 import {IStatePreviousOrders} from "src/reducers/PreviousOrdersReducer/PreviousOrdersReducer.types";
 import {URLs} from "src/utils/constants";
-import {useNavigate} from "react-router-dom";
 import {GetPreviousOrders} from "src/actions/PreviousOrdersAction/PreviousOrdersAction";
 import {useDispatch} from "react-redux";
 import Order from "components/cart/shared/order";
@@ -29,7 +27,7 @@ const PreviousOrders = () => {
         orders.length
             ?
             <TabContent>
-                { orders.map((order) =>
+                { orders.reverse().map((order) =>
                     <Order key={order.id} order={order}/>
                 ) }
             </TabContent>

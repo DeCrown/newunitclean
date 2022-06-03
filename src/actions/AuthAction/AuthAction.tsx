@@ -8,8 +8,6 @@ import {
     GET_FAIL, GET_LOGOUT_AUTH
 } from "./AuthAction.types";
 import {BASE_URL} from "src/utils/constants";
-import {store} from "src/store/configureStore";
-import {IStateAuth} from "src/reducers/AuthReducer/AuthReducer.types";
 import {getAuth} from "src/store/localStorage";
 
 
@@ -26,7 +24,7 @@ const config = {
 }
 
 
-export const LoginUser = (props: { data: {username: string; password: string}; successFunc?: () => void; errorFunc?: () => void } ) : ThunkAction<void,RootState,unknown,Action<string> > => async dispatch => {
+export const LoginUser = (props: { data: {username: string; password: string}; successFunc?: () => void; errorFunc?: (error: any) => void } ) : ThunkAction<void,RootState,unknown,Action<string> > => async dispatch => {
     dispatch({
       type: GET_AUTH_REQUEST
     })
@@ -47,7 +45,7 @@ export const LoginUser = (props: { data: {username: string; password: string}; s
               payload: error
           })
           if (props.errorFunc) {
-              props.errorFunc()
+              props.errorFunc(error)
           }
       });
 }

@@ -5,7 +5,7 @@ import ButtonBlue from "components/shared/forms/buttonBlue";
 import styled from "styled-components";
 import {DIV_BUTTON_BLUE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
 import {SuggestionType} from "src/utils/types";
-import {URLs} from "src/utils/constants";
+import {BASE_URL, URLs} from "src/utils/constants";
 
 const SuggestionStyle = styled.div`
   display: grid;
@@ -98,7 +98,7 @@ const BrowserSuggestion = (props: SuggestionType) => {
             <Exposition>
                 <ExpositionEllipse styled={ExpositionEllipse1} background={props.background}></ExpositionEllipse>
                 <ExpositionEllipse styled={ExpositionEllipse2} background={props.background}></ExpositionEllipse>
-                <Image src={props.product.image ? props.product.image : ''} />
+                <Image src={props.product.image ? BASE_URL + props.product.image : ''} />
                 {
                     props.product.discount
                         ? <Discount>

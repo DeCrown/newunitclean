@@ -16,7 +16,6 @@ import styled from "styled-components";
 import {Main} from "src/themes/main";
 
 const SearchTabStyle = styled.div`
-  background: #BA172C;
   position: fixed;
   z-index: 3;
   display: grid;

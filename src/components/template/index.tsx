@@ -5,6 +5,9 @@ import Header from "./header";
 import Feedback from "./feedback";
 import Footer from "./footer";
 import {FooterContainerBackground} from "components/template/backgrounds/footerContainerBackground";
+import {getAuth} from "src/store/localStorage";
+import {URLs} from "src/utils/constants";
+import Unauthorized from "src/pages/special/unauthorized";
 
 const Background = styled.div`
   position: absolute;
@@ -40,11 +43,16 @@ const FooterContainer = styled.div`
   }
 `;
 
-const Template = (props: {children: any; clearBackground?: boolean}) => {
+const Template = (props: {children: any; clearBackground?: boolean; auth?: boolean}) => {
     return (
         <div>
             <Header clearBackground={props.clearBackground}></Header>
-            {props.children}
+            {
+                props.auth && !getAuth().isAuthorized ?
+                    <Unauthorized></Unauthorized>
+                    :
+                    props.children
+            }
             <FooterContainer>
                 <FooterContainerBackground/>
                 <Feedback></Feedback>

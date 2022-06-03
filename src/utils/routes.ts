@@ -10,33 +10,35 @@ import Payment from "src/pages/payment";
 import Product from "src/pages/product";
 import CompanyLk from "src/pages/company_lk";
 import Search from "src/pages/search";
+import Page404 from "src/pages/special/page404";
 
-export const authRoutes:route[] = [
+export const routes:route[] = [
     {
         url: constants.URLs.LK,
         page: Lk,
         mobileClearBackground: true,
+        auth: true
     },
     {
         url: constants.URLs.COMPANY_LK,
         page: CompanyLk,
         mobileClearBackground: true,
+        auth: true
     },
     {
         url: constants.URLs.PAYMENT,
         page: Payment,
         mobileClearBackground: true,
-        browserClearBackground: true
+        browserClearBackground: true,
+        auth: true
     },
     {
         url: constants.URLs.CART,
         page: Cart,
         mobileClearBackground: true,
-        browserClearBackground: true
+        browserClearBackground: true,
+        auth: true
     },
-]
-
-export const freeRoutes:route[] = [
     {
         url: constants.URLs.ROOT,
         page: Main
@@ -51,10 +53,6 @@ export const freeRoutes:route[] = [
         page: Promotions,
         mobileClearBackground: true,
         browserClearBackground: false
-    },
-    {
-        url: constants.URLs.REVIEWS,
-        page: Main
     },
     {
         url: constants.URLs.CONTACTS,
@@ -81,6 +79,6 @@ export const freeRoutes:route[] = [
     },
     {
         url: constants.URLs.P404,
-        page: Main
+        page: Page404
     },
 ]

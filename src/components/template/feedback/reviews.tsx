@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import Review from "./review";
 import {icons} from "src/utils/icons";
-import {Api} from "src/api";
-import styled, {css} from "styled-components";
-import {isMobile, BrowserView, MobileView} from "react-device-detect";
+import styled from "styled-components";
+import {isMobile} from "react-device-detect";
 import ButtonBlue from "components/shared/forms/buttonBlue";
 import {DIV_BUTTON_WHITE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
+import {getReviews} from "api/getReviews";
 
 const ReviewsStyle = styled.div`
   width: 400px;
@@ -120,7 +120,7 @@ const Reviews: React.FC = () => {
     const [reviewsList, setReviews] = useState<Review[]>([]);
 
     useEffect(() => {
-        setReviews(Api.getReviews());
+        setReviews(getReviews());
     }, []);
 
     function leftArrow() {

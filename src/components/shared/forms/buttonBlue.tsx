@@ -7,6 +7,7 @@ interface ButtonBlueProps {
     styled?: StyledComponent<any, any>;
     func?: () => void;
     setObj?: (obj: any) => void;
+    className?: string
 };
 
 interface ButtonBlueState {
@@ -59,7 +60,7 @@ export class ButtonBlue extends Component<ButtonBlueProps, ButtonBlueState> {
 
     render() {
         return (
-            <this.state.currentStyle onClick={ this.props.func }>
+            <this.state.currentStyle className={this.props.className} onClick={ this.props.func }>
                 { this.state.currentChildren }
             </this.state.currentStyle>
         );

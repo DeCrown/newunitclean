@@ -19,18 +19,20 @@ const config = {
   }
 }
 
+export interface RegPropsData {
+    username: string,
+    email: string,
+    full_name: string,
+    phone_number: string,
+    address: string,
+    password: string,
+    password2: string
+}
+
 interface RegProps {
-    data: {
-        username: string,
-        email: string,
-        full_name: string,
-        phone_number: string,
-        address: string,
-        password: string,
-        password2: string
-    };
+    data: RegPropsData;
     successFunc?: () => void;
-    errorFunc?: () => void
+    errorFunc?: (error: any) => void
 }
 
 export const RegUser = (props: RegProps ) : ThunkAction<void,RootState,unknown,Action<string> > => async dispatch => {
@@ -53,7 +55,7 @@ export const RegUser = (props: RegProps ) : ThunkAction<void,RootState,unknown,A
                 payload: error
             })
             if (props.errorFunc) {
-                props.errorFunc()
+                props.errorFunc(error)
             }
         });
 }

@@ -15,7 +15,6 @@ export const GetMainPage = () : ThunkAction<void,RootState,unknown,Action<string
     })
     AppendApiMethod({func: 'get', url: '/product/api/v2/list_main_page_products/',
         success: (success) => {
-            console.log(success)
             dispatch({
                 type: GET_MAIN_PAGE_SUCCESS,
                 payload: success as ProductType[]

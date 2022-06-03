@@ -1,7 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import styled from "styled-components";
 import {H2Main} from "components/shared/fonts/specialFonts";
-import {Api} from "src/api";
 import Category from "components/main/products/category";
 import Product from "components/main/products/product";
 import {useTypedSelector} from "src/store/configureStore";
@@ -61,7 +60,7 @@ const ProductsBrowser = () => {
 
     const [selected, setSelected] = useState(-1);
 
-    if (categoriesState.categories.length && selected == -1) {
+    if (categoriesState.categories.length && selected === -1) {
         setSelected(categoriesState.categories[0].id);
     }
 

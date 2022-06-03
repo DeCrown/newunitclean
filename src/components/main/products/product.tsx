@@ -3,7 +3,7 @@ import {ProductType} from "src/utils/types";
 import styled from "styled-components";
 import ButtonBlue from "components/shared/forms/buttonBlue";
 import {DIV_BUTTON_BLUE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
-import {URLs} from "src/utils/constants";
+import {BASE_URL, URLs} from "src/utils/constants";
 
 const Price = styled.div`
   font-size: ${({ theme }) => theme.font.size[16]};
@@ -87,10 +87,15 @@ const Product = (props: {data: ProductType}) => {
         <ProductStyle href={URLs.PRODUCT.replace(':id', '' + props.data.id)}>
             <Info>
                 <Title>{props.data.title}</Title>
-                <Price>Цены от <span>{props.data.price ? props.data.price.toLocaleString() + ' руб.' : null}</span></Price>
+                {
+                    props.data.price ?
+                        <Price>Цены от <span>{props.data.price.toLocaleString() + ' руб.'}</span></Price>
+                        :
+                        null
+                }
                 <ButtonBlue styled={ButtonStyle}>ПОСМОТРЕТЬ КАТАЛОГ</ButtonBlue>
             </Info>
-            <Image src={props.data.image ? props.data.image[0] : ''}></Image>
+            <Image src={props.data.image ? BASE_URL + props.data.image : ''}></Image>
         </ProductStyle>
     );
 };
