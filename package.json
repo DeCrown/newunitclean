@@ -1,7 +1,6 @@
 {
   "name": "cleanunit",
   "version": "0.1.0",
-  "homepage": "./",
   "private": true,
   "dependencies": {
     "@linways/table-to-excel": "^1.0.4",
