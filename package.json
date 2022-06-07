@@ -2,6 +2,7 @@
   "name": "cleanunit",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://84.23.55.240:5050/",
   "dependencies": {
     "@linways/table-to-excel": "^1.0.4",
     "@testing-library/jest-dom": "^5.16.4",
