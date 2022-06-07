@@ -4,7 +4,7 @@ import styled from "styled-components";
 const PointsContainer = styled.div`
   display: grid;
   grid-auto-flow: column;
-  grid-gap: 20px;
+  grid-gap: 20px; gap: 20px;
   justify-content: center;
   padding: 40px 0;
 `;

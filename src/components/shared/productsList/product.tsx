@@ -180,7 +180,7 @@ const ButtonInfoStyle = styled(Button)`
   display: grid;
   grid-auto-flow: column;
   align-items: center;
-  grid-gap: 10px;
+  grid-gap: 10px; gap: 10px;
   
   .mobile & {
     grid-auto-flow: row;

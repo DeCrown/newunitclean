@@ -39,7 +39,7 @@ const LkButtons = styled.div`
   display: grid;
   justify-content: right;
   grid-auto-flow: column;
-  grid-gap: 20px;
+  grid-gap: 20px; gap: 20px;
   
   .mobile & {
     justify-content: stretch;

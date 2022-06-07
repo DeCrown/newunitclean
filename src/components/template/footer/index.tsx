@@ -26,7 +26,7 @@ const Info = styled.div`
   display: grid;
   justify-content: center;
   align-content: start;
-  grid-gap: 20px;
+  grid-gap: 20px; gap: 20px;
   font-size: ${({ theme }) => theme.font.size[12]};
   font-weight: ${({ theme }) => theme.font.weight[400]};
   color: ${({ theme }) => theme.font.white};
@@ -57,7 +57,7 @@ const Navigation = styled.div`
   display: grid;
   justify-content: center;
   align-content: center;
-  grid-gap: 20px;
+  grid-gap: 20px; gap: 20px;
   
   .mobile & {
     margin-top: 40px;
@@ -70,7 +70,7 @@ const NavigationList = styled.div`
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
   grid-auto-flow: column;
-  grid-gap: 16px 32px;
+  grid-gap: 16px 32px; gap: 16px 32px;
   font-size: ${({ theme }) => theme.font.size[12]};
   font-weight: ${({ theme }) => theme.font.weight[400]};
   color: ${({ theme }) => theme.font.white};

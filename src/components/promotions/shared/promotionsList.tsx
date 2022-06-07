@@ -6,7 +6,7 @@ import Promotion from "components/promotions/shared/promotion";
 const PromotionsStyle = styled.div`
   display: flex;
   flex-wrap: wrap;
-  grid-gap: 30px;
+  grid-gap: 30px; gap: 30px;
   margin-top: 32px;
   
   .mobile & {

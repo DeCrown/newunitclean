@@ -8,8 +8,6 @@ import {useTypedSelector} from "src/store/configureStore";
 import {IStateWindows} from "src/reducers/WindowsManagerReducer/WindowsManagerReducer.types";
 
 const ReasonStyle = styled.div`
-  width: 270px;
-  height: 280px;
   background: #FFFFFF;
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
@@ -20,13 +18,35 @@ const ReasonStyle = styled.div`
   grid-template-rows: 60%;
   justify-items: center;
   cursor: pointer;
+  overflow: hidden;
+  
+  .mobile & {
+    width: 270px;
+    height: 280px;
+  }
 `;
 
 const Text = styled.div`
-  font-size: ${({ theme }) => theme.font.size[16]};
   font-weight: ${({ theme }) => theme.font.weight[400]};
   color: ${({ theme }) => theme.font.color.black};
   text-align: left;
+  font-size: calc((100vw - 920px)/(${window.screen.width} - 920) * (16 - 9) + 9px);
+
+  @media (max-width : 920px) {
+    & {
+      font-size: 9px;
+    }
+  }
+
+  @media (min-width : ${window.screen.width}px) {
+    & {
+      font-size: ${({ theme }) => theme.font.size[16]};
+    }
+  }
+  
+  .mobile & {
+    font-size: ${({ theme }) => theme.font.size[16]};
+  }
 `;
 
 const Image = styled.img`

@@ -11,7 +11,7 @@ const SuggestionStyle = styled.div`
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: 50% 50%;
-  grid-gap: 16px;
+  grid-gap: 16px; gap: 16px;
 
   @media (max-width : 1460px) {
     & {

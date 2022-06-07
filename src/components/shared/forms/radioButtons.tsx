@@ -38,7 +38,7 @@ const RadioButton = (props: {title: string; pos: string; func: (i: string) => vo
 const RadioButtonsStyle = styled.div`
   display: grid;
   grid-auto-flow: column;
-  grid-gap: 12px;
+  grid-gap: 12px; gap: 12px;
   justify-content: start;
 
   margin: 0px -${({ theme }) => theme.values.contentMobileMargin}px;

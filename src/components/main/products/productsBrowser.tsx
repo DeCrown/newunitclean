@@ -34,13 +34,13 @@ const Header = styled(H2Main)`
 
 const Container = styled.div`
   display: grid;
-  grid-gap: 32px;
+  grid-gap: 32px; gap: 32px;
   grid-template-columns: 270px auto;
 `;
 
 const ProductsList = styled.div`
   display: flex;
-  grid-gap: 32px;
+  grid-gap: 32px; gap: 32px;
   flex-wrap: wrap;
 `;
 

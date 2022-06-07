@@ -7,7 +7,7 @@ const InputCodeStyle = styled.div`
   padding: 26px 214px;
   margin: 0 416px;
   display: grid;
-  grid-gap: 20px;
+  grid-gap: 20px; gap: 20px;
   
   .mobile & {
     padding: 35px 20px;

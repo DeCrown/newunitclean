@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const ButtonsStyle = styled.div`
   display: flex;
-  grid-gap: 30px;
+  grid-gap: 30px; gap: 30px;
   
   .mobile & {
     flex-wrap: wrap;

@@ -93,7 +93,7 @@ const EditSaveButton = styled.div`
   font-size: ${({ theme }) => theme.font.size[12]};
   font-weight: ${({ theme }) => theme.font.weight[400]};
   color: rgba(0, 0, 0, 0.3);
-  grid-gap: 6px;
+  grid-gap: 6px; gap: 6px;
   cursor: pointer;
   
   &:hover {
@@ -171,5 +171,5 @@ export const EditRow = (props: {nonEditable?: boolean; title?: string; value: st
 
 export const EditRows = styled.div`
   display: grid;
-  grid-gap: 40px;
+  grid-gap: 40px; gap: 40px;
 `;

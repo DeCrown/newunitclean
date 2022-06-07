@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const ReviewStyle = styled.div`
   display: grid;
-  grid-gap: 15px;
+  grid-gap: 15px; gap: 15px;
   position: relative;
   transition: left 0.3s;
 `;

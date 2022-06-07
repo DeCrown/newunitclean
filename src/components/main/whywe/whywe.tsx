@@ -21,12 +21,7 @@ const WhyWeStyle = styled.div`
   }
 `;
 
-const WhyWeContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  grid-gap: 30px;
-  
+const WhyWeContainer = styled.div`  
   .mobile & {
     display: grid;
     grid-auto-flow: column;
@@ -34,6 +29,26 @@ const WhyWeContainer = styled.div`
     overflow-x: scroll;
     margin: -30px -${({ theme }) => theme.values.contentMobileMargin}px;
     padding: 30px ${({ theme }) => theme.values.contentMobileMargin}px;
+    //grid-auto-columns: 270px;
+  }
+`;
+
+const WhyWeReasons = styled.div`
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: center;
+  grid-gap: 30px; gap: 30px;
+  grid-auto-columns: 1fr;
+  position: relative;
+
+  &:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 0px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    filter: drop-shadow(0px 4px 1px rgb(0, 0, 0, 1));
+    top: 43%;
   }
 `;
 
@@ -42,7 +57,9 @@ const WhyWe = () => {
         <WhyWeStyle>
             <H2Main>Почему выбирают нас?</H2Main>
             <WhyWeContainer>
-                { Reasons.map((reason, i) => <Reason key={i} reason={reason}></Reason>) }
+                <WhyWeReasons>
+                    { Reasons.map((reason, i) => <Reason key={i} reason={reason}></Reason>) }
+                </WhyWeReasons>
             </WhyWeContainer>
         </WhyWeStyle>
     );

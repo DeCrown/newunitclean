@@ -33,7 +33,7 @@ const DiscountText = styled.div`
   width: 100%;
   position: relative;
   height: 100%;
-  grid-gap: 10px;
+  grid-gap: 10px; gap: 10px;
 
   & span {
     font-size: ${({ theme }) => theme.font.size[30]};

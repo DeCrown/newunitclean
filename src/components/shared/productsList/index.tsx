@@ -6,7 +6,7 @@ import {ProductType} from "src/utils/types";
 const ProductsStyle = styled.div`
   display: flex;
   flex-wrap: wrap;
-  grid-gap: 30px;
+  grid-gap: 30px; gap: 30px;
   
   .mobile & {
     display: grid;
@@ -19,7 +19,7 @@ const ProductsStyle = styled.div`
     &.withButtons {
       display: grid;
       grid-auto-flow: row;
-      grid-gap: 20px;
+      grid-gap: 20px; gap: 20px;
     }
   }
 `

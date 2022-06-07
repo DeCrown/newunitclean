@@ -14,7 +14,7 @@ const AuthWithText = styled.div`
 const Links = styled.div`
   display: grid;
   grid-auto-flow: column;
-  grid-gap: 32px;
+  grid-gap: 32px; gap: 32px;
   justify-content: center;
 `;
 

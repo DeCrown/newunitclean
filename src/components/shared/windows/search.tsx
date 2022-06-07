@@ -90,7 +90,7 @@ export const SearchResultStyle = styled(SearchNoResults)`
 export const SearchButtons = styled.div`
   display: grid;
   grid-auto-flow: column;
-  grid-gap: 10px;
+  grid-gap: 10px; gap: 10px;
   justify-content: start;
   margin-left: 30px;
 `;

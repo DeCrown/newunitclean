@@ -10,12 +10,12 @@ const Container = styled.div`
   flex-wrap: wrap;
   justify-content: space-around;
   margin: 65px 0 142px 0;
-  grid-gap: 16px;
+  grid-gap: 16px; gap: 16px;
   
   .mobile & {
     margin: 20px 0 60px 0;
     justify-content: start;
-    grid-gap: 55px;
+    grid-gap: 55px; gap: 55px;
   }
 `;
 

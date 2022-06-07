@@ -78,7 +78,7 @@ const FormContainerStyle = styled.div<{css: any}>`
     height: 100%;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 2;
     padding: 0 ${Main.values.contentMargin}px;
     align-content: center;
     background: #00000080;
@@ -104,7 +104,7 @@ export const FormContainer = (props: {children: any; css?: any; background?: boo
 
 export const FormList = styled.div`
   display: grid;
-  grid-gap: 15px;
+  grid-gap: 15px; gap: 15px;
   margin: 0 220px;
   justify-content: center;
   grid-template-columns: 1fr;

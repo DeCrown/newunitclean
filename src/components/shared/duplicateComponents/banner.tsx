@@ -16,14 +16,14 @@ const BannerStyle = styled.div`
   padding: 30px 75px 30px 150px;
   margin-top: 146px;
   flex-wrap: wrap-reverse;
-  grid-gap: 20px;
+  grid-gap: 20px; gap: 20px;
 `;
 
 const Info = styled.div`
   display: grid;
   align-content: space-between;
   justify-items: left;
-  grid-gap: 20px;
+  grid-gap: 20px; gap: 20px;
   width: 40%;
 `;
 

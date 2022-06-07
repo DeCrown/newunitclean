@@ -40,7 +40,7 @@ const MovingTab = styled.div`
   position: fixed;
   z-index: 2;
   display: grid;
-  grid-gap: 30px;
+  grid-gap: 30px; gap: 30px;
   justify-items: start;
   min-width: 80%;
   min-height: calc(100% + 60px);

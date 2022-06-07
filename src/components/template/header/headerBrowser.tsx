@@ -71,7 +71,7 @@ const PhoneNumber = styled.div`
   justify-content: right;
   align-items: center;
   flex-wrap: wrap;
-  grid-gap: 24px;
+  grid-gap: 24px; gap: 24px;
 `;
 
 const PhoneNumberText = styled.div`

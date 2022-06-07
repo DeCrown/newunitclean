@@ -23,7 +23,7 @@ const Other = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   padding: 0 30px;
-  grid-gap: 16px;
+  grid-gap: 16px; gap: 16px;
   grid-auto-rows: 1fr;
   
   .mobile & {

@@ -36,7 +36,7 @@ const links = [
 
 const Rows = styled.div`
   display: grid;
-  grid-gap: 20px;
+  grid-gap: 20px; gap: 20px;
 `;
 
 const Links = styled.div`
@@ -45,7 +45,7 @@ const Links = styled.div`
   //grid-auto-flow: column;
   justify-content: start;
   align-items: center;
-  grid-gap: 16px;
+  grid-gap: 16px; gap: 16px;
   flex-wrap: wrap;
 `;
 

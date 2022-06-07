@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const TabContentStyle = styled.div`
   display: grid;
-  grid-gap: 56px;
+  grid-gap: 56px; gap: 56px;
   margin-bottom: 70px;
 `;
 

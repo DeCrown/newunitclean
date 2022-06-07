@@ -7,7 +7,7 @@ const MapAndButtonsStyle = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: end;
-  grid-gap: 20px;
+  grid-gap: 20px; gap: 20px;
   
   .mobile & {
     width: 100%;

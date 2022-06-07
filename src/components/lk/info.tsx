@@ -7,7 +7,7 @@ export const InfoStyle = styled.div`
   display: grid;
   grid-template-columns: 20% 60%;
   justify-content: end;
-  grid-gap: 56px;
+  grid-gap: 56px; gap: 56px;
   padding: 48px 0;
 
   .mobile & {

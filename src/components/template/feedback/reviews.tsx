@@ -13,7 +13,7 @@ const ReviewsStyle = styled.div`
   border-radius: 10px;
   display: grid;
   grid-template-rows: 70% 5% 25%;
-  grid-gap: 10px;
+  grid-gap: 10px; gap: 10px;
   /* overflow: hidden; */
   position: relative;
   
@@ -23,7 +23,7 @@ const ReviewsStyle = styled.div`
     height: 442px;
     box-shadow: 0px 9px 18px 7px rgba(0, 0, 0, 0.17);
     grid-template-rows: 70% 30% 20%;
-    grid-gap: 0px;
+    grid-gap: 0px; gap: 0px;
   }
 `
 
@@ -39,7 +39,7 @@ const ReviewsCounter = styled.div`
   display: grid;
   justify-content: center;
   grid-auto-flow: column;
-  grid-gap: 20px;
+  grid-gap: 20px; gap: 20px;
   align-items: center;
 `
 

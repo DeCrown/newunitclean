@@ -12,7 +12,7 @@ const topButtons = [
     {href: constants.URLs.ROOT, text: "Главная"},
     {href: constants.URLs.CATALOG, text: "Каталог"},
     {href: constants.URLs.PROMOTION, text: "Акции"},
-    {href: constants.URLs.PAYMENT, text: "Доставка и оплата", auth: true},
+    {href: constants.URLs.PAYMENT, text: "Доставка и оплата"},
     {func: showFeedback, text: "Отзывы"},
     {href: constants.URLs.CONTACTS, text: "Контакты"}
 ];
@@ -21,7 +21,7 @@ const topButtonsMobile = [
     {href: constants.URLs.ROOT, text: "Главная"},
     {href: constants.URLs.CATALOG, text: "Каталог"},
     {href: constants.URLs.PROMOTION, text: "Акции"},
-    {href: constants.URLs.PAYMENT, text: "Доставка и оплата", auth: true},
+    {href: constants.URLs.PAYMENT, text: "Доставка и оплата"},
     {href: constants.URLs.CONTACTS, text: "Контакты"}
 ];
 

@@ -69,6 +69,10 @@ const ButtonFrozenStyle = styled(ButtonStyle)`
   font-size: ${({ theme }) => theme.font.size[14]};
   background: ${({ theme }) => theme.font.color.light_gray};
   border-color: ${({ theme }) => theme.font.color.gray};
+  
+  .mobile & {
+    white-space: normal;
+  }
 `;
 
 const Info = (props: {data: ProductType}) => {

@@ -30,7 +30,6 @@ export const routes:route[] = [
         page: Payment,
         mobileClearBackground: true,
         browserClearBackground: true,
-        auth: true
     },
     {
         url: constants.URLs.CART,

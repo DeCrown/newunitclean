@@ -45,7 +45,7 @@ const TabsButtonsStyle = styled.div`
   display: grid;
   grid-auto-flow: column;
   justify-content: center;
-  grid-gap: 20px;
+  grid-gap: 20px; gap: 20px;
   margin-top: 30px;
   margin-bottom: 50px;
   

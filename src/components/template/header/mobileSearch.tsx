@@ -24,7 +24,7 @@ const SearchTabStyle = styled.div`
   padding: 18px ${Main.values.contentMobileMargin}px;
   left: 0;
   top: 0;
-  grid-gap: 4px;
+  grid-gap: 4px; gap: 4px;
 `;
 
 const SearchContainer = styled.div`

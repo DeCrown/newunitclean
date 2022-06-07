@@ -13,13 +13,13 @@ const Container = styled.div`
     "inputs map map"
     "inputs marketPlace moreInfo";
   grid-template-columns: 40%;
-  grid-gap: 30px;
+  grid-gap: 30px; gap: 30px;
   align-items: end;*/
   
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  grid-gap: 30px;
+  grid-gap: 30px; gap: 30px;
   
   .mobile & {
     /*grid-template-areas: 

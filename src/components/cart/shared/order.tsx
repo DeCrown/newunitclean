@@ -12,7 +12,7 @@ const OrderStyle = styled.div`
 const OrderInfo = styled.div`
   display: grid;
   justify-content: start;
-  grid-gap: 10px;
+  grid-gap: 10px; gap: 10px;
   margin-bottom: 36px;
 `;
 
@@ -27,7 +27,7 @@ const OrderNum = styled.div`
 const OrderInfoRowStyle = styled.div`
   color: ${({ theme }) => theme.font.color.black};
   display: grid;
-  grid-gap: 8px;
+  grid-gap: 8px; gap: 8px;
   grid-auto-flow: column;
   justify-content: start;
   align-items: center;

@@ -15,10 +15,13 @@ import {useTypedSelector} from "src/store/configureStore";
 import {IStateCart} from "src/reducers/CartReducer/CartReducer.types";
 import {GetCart} from "src/actions/CartAction/CartAction";
 import {URLs} from "src/utils/constants";
+import {WindowsManagerOpen} from "src/actions/WindowsManagerAction/WindowsManagerAction";
+import {WINDOW_AUTHORIZATION} from "src/actions/WindowsManagerAction/WindowsManagerAction.types";
+import {getAuth} from "src/store/localStorage";
 
 const InputListStyle = styled.div`
   display: grid;
-  grid-gap: 20px;
+  grid-gap: 20px; gap: 20px;
   justify-content: end;
   justify-self: start;
   align-content: end;
@@ -50,7 +53,7 @@ const ButtonStyle = styled(DIV_BUTTON_BLUE_STYLE)`
     margin: 0;
   }
   
-  .emptyCart & {
+  .emptyCart &, .unauthed & {
     display: none;
   }
 `;
@@ -64,12 +67,29 @@ const ButtonSendError = styled(ButtonStyle)`
 `;
 
 const ButtonFrozenStyle = styled(ButtonStyle)`
+  font-size: ${({ theme }) => theme.font.size[14]};
   background: ${({ theme }) => theme.font.color.light_gray};
   border-color: ${({ theme }) => theme.font.color.gray};
   display: none;
 
+  .mobile & {
+    white-space: normal;
+  }
+`;
+
+const ButtonFrozenStyleUnAuthed = styled(ButtonFrozenStyle)`
+  .unauthed & {
+    display: grid;
+  }
+`;
+
+const ButtonFrozenStyleEmptyCart = styled(ButtonFrozenStyle)`
   .emptyCart & {
     display: grid;
+  }
+
+  .unauthed & {
+    display: none !important;
   }
 `;
 
@@ -115,6 +135,7 @@ const SuccessPromo = (props: {text: string; func: () => void}) => {
 const InputList = () => {
     const form:any = {};
 
+    const auth = getAuth();
     let setFio, setPhone, setAddress, setReceivingType, setPaymentType, setDetail, setMessage = null;
     [form.full_name, setFio] = useState<any>(null);
     [form.phone_number, setPhone] = useState<any>(null);
@@ -143,6 +164,10 @@ const InputList = () => {
             addPromo()
         }
     }, [promo]);
+
+    const openAuth = () => {
+        WindowsManagerOpen(WINDOW_AUTHORIZATION)(dispatch);
+    }
 
     const dropPromo = () => {
         AppendApiMethod({
@@ -201,7 +226,7 @@ const InputList = () => {
     }
 
     return (
-        <InputListStyle className={cart.product.length ? '' : 'emptyCart'}>
+        <InputListStyle className={(auth.isAuthorized ? '' : 'unauthed ') + (cart.product.length ? '' : 'emptyCart')}>
             <InputFIO placeholder={'Укажите ваше ФИО'} setObj={setFio}></InputFIO>
             <InputPhoneNumber placeholder={'Укажите ваш номер телефона'} setObj={setPhone}></InputPhoneNumber>
             <Select defaultOption={{value: '', text: 'Выберите способ доставки'}} setObj={setReceivingType} options={[
@@ -222,7 +247,8 @@ const InputList = () => {
             <OutputDetail setObj={setMessage}></OutputDetail>
             <OutputDetail setObj={setDetail}></OutputDetail>
             <ButtonBlue styled={ButtonStyle} func={order} setObj={setButton}>Заказать</ButtonBlue>
-            <ButtonBlue styled={ButtonFrozenStyle} func={toCart}>Добавьте товары в корзину</ButtonBlue>
+            <ButtonBlue styled={ButtonFrozenStyleUnAuthed} func={openAuth}>Авторизуйтесь, чтобы оформить заказ</ButtonBlue>
+            <ButtonBlue styled={ButtonFrozenStyleEmptyCart} func={toCart}>Добавьте товары в корзину</ButtonBlue>
         </InputListStyle>
     );
 };

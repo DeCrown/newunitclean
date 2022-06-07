@@ -47,7 +47,7 @@ const Info = styled.div`
   height: calc(100% - 40px);
   color: ${({ theme }) => theme.font.color.white};
   padding: 20px;
-  grid-gap: 8px;
+  grid-gap: 8px; gap: 8px;
   justify-items: start;
 
   position: absolute;
