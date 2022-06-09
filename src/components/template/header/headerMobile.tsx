@@ -124,9 +124,9 @@ const HeaderContainerMobile = (props: {topButtons: headerMenuTopButton[]; bottom
             </HeaderTabButton>
 
             <MovingTab className={ opened ? 'opened' : 'closed' } onTouchStart={touchStart} onTouchEnd={touchEnd} onTouchMove={touchMove}>
-                { props.topButtons.map((button) => <MovingTabButton><MobileButton data={button} /></MovingTabButton>) }
+                { props.topButtons.map((button, i) => <MovingTabButton key={i}><MobileButton data={button} /></MovingTabButton>) }
                 <MovingTabLine></MovingTabLine>
-                { props.bottomButtons.map((button) => <MovingTabButton><MobileButton data={button} /></MovingTabButton>) }
+                { props.bottomButtons.map((button, i) => <MovingTabButton key={i}><MobileButton data={button} /></MovingTabButton>) }
             </MovingTab>
         </HeaderTab>
     );

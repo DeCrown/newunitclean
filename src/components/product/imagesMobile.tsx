@@ -75,16 +75,16 @@ const ImagesMobile = (props: {images: string[]}) => {
         <div>
             <ImagesContainer onTouchStart={start} onTouchMove={move} onTouchEnd={end}>
                 { props.images.map((image, i) => {
-                    return <Image left={-100 * (selected - i)} src={image} />
+                    return <Image key={i} left={-100 * (selected - i)} src={image} />
                 }) }
             </ImagesContainer>
             <PointsContainer>
                 { props.images.map((image, i) => {
                     if (selected == i) {
-                        return <PointSelected></PointSelected>
+                        return <PointSelected key={i}></PointSelected>
                     }
                     else {
-                        return <Point></Point>
+                        return <Point key={i}></Point>
                     }
                 }) }
             </PointsContainer>

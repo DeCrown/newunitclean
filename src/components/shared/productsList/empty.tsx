@@ -30,6 +30,8 @@ const Background = styled.div`{
 
   .mobile & img {
     bottom: 0px;
+    left: calc(50% - 80px);
+    width: 160px;
   }
 `
 

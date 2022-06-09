@@ -136,6 +136,7 @@ const Buttons = styled.div`
     right: 0;
     top: 0;
     align-content: space-between;
+    justify-items: end;
   }
 `
 
