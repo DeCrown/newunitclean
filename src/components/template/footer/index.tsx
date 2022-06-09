@@ -2,7 +2,7 @@ import React from 'react';
 import * as constants from "src/utils/constants";
 import logo from "src/logo/logo.png";
 import styled from "styled-components";
-import {isMobile} from "react-device-detect";
+import {isMobile} from "src/utils/isMobile";
 import BottomSearch from "components/template/footer/bottomSearch";
 
 const FooterStyle = styled.div`
@@ -105,7 +105,7 @@ const Link = styled.a`
 
 const Footer = () => {
     return (
-        isMobile ?
+        isMobile() ?
             <FooterStyle>
                 <Info>
                     <Logo><img src={logo} /></Logo>

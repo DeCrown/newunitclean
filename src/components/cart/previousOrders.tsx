@@ -3,7 +3,7 @@ import ButtonBlue from "components/shared/forms/buttonBlue";
 import TabContent from "components/shared/tabsMenu/tabContent";
 import {ButtonContainerCenter, ButtonContainerLeft} from "components/cart/shared/buttonContainers";
 import Button from "components/cart/shared/button";
-import {isMobile} from "react-device-detect";
+import {isMobile} from "src/utils/isMobile";
 import EmptyBasket from "components/shared/productsList/empty";
 import {useTypedSelector} from "src/store/configureStore";
 import {IStatePreviousOrders} from "src/reducers/PreviousOrdersReducer/PreviousOrdersReducer.types";
@@ -34,7 +34,7 @@ const PreviousOrders = () => {
             :
             <TabContent>
                 <EmptyBasket>Вы еще не сделали свой первый заказ :(</EmptyBasket>
-                {isMobile ?
+                {isMobile() ?
                     ''
                     :
                     <ButtonContainerCenter>

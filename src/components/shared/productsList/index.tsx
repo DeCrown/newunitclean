@@ -14,6 +14,7 @@ const ProductsStyle = styled.div`
     overflow-x: scroll;
     
     margin: -50px -${({ theme }) => theme.values.contentMobileMargin}px;
+    margin-bottom: 0;
     padding: 50px ${({ theme }) => theme.values.contentMobileMargin}px;
     
     &.withButtons {

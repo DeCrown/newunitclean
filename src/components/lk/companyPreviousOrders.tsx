@@ -9,7 +9,7 @@ import {
 import {GetCompanyPreviousOrders} from "src/actions/CompanyPreviousOrdersAction/CompanyPreviousOrdersAction";
 import TabContent from "components/shared/tabsMenu/tabContent";
 import EmptyBasket from "components/shared/productsList/empty";
-import {isMobile} from "react-device-detect";
+import {isMobile} from "src/utils/isMobile";
 import {ButtonContainerCenter} from "components/cart/shared/buttonContainers";
 import ButtonBlue from "components/shared/forms/buttonBlue";
 import Button from "components/cart/shared/button";
@@ -41,7 +41,7 @@ const CompanyPreviousOrders = () => {
                     :
                     <TabContent>
                         <EmptyBasket>Вы еще не сделали свой первый заказ :(</EmptyBasket>
-                        {isMobile ?
+                        {isMobile() ?
                             ''
                             :
                             <ButtonContainerCenter>

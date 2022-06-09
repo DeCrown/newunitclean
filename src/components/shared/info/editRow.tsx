@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styled from "styled-components";
 import {icons} from "src/utils/icons";
-import {isMobile} from "react-device-detect";
+import {isMobile} from "src/utils/isMobile";
 import EditIcon from "src/icons/edit";
 import SaveIcon from "src/icons/save";
 
@@ -149,7 +149,7 @@ export const EditRow = (props: {nonEditable?: boolean; title?: string; value: st
 
     return (
         <EditRowStyle className={props.verified ? 'verified' : ''}>
-            { props.verified ? <Verified><img src={isMobile ? icons.verified_blue : icons.verified} /></Verified> : <div></div> }
+            { props.verified ? <Verified><img src={isMobile() ? icons.verified_blue : icons.verified} /></Verified> : <div></div> }
             { props.title ? <Title>{props.title}:</Title> : <div></div> }
             { props.title ?
                 <Value>

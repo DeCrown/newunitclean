@@ -1,9 +1,9 @@
 import React from 'react';
-import {BrowserView, MobileView} from 'react-device-detect';
 import Reviews from "./reviews";
 import styled from "styled-components";
 import OrderCall from "components/template/feedback/orderCall";
 import {FeedbackBackground} from "components/template/backgrounds/feedbackBackground";
+import {isMobile} from "src/utils/isMobile";
 
 const FeedbackContainer = styled.div`
   position: relative;
@@ -32,21 +32,20 @@ const Feedback = () => {
     return (
         <FeedbackContainer id={"feedback"}>
             <FeedbackBackground></FeedbackBackground>
-            <BrowserView>
+            {isMobile() ?
+                <div>
+                    <ReviewsHeader>Отзывы</ReviewsHeader>
+                    <Reviews></Reviews>
+                    <OrderCall></OrderCall>
+                </div>
+                :
                 <FeedbackStyle>
                     <OrderCall></OrderCall>
                     <ReviewsContainer>
                         <Reviews></Reviews>
                     </ReviewsContainer>
                 </FeedbackStyle>
-            </BrowserView>
-            <MobileView>
-                <div>
-                    <ReviewsHeader>Отзывы</ReviewsHeader>
-                    <Reviews></Reviews>
-                    <OrderCall></OrderCall>
-                </div>
-            </MobileView>
+            }
         </FeedbackContainer>
     );
 };

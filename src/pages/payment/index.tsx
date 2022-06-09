@@ -3,9 +3,9 @@ import Content from "components/template/content";
 import styled from "styled-components";
 import {H1} from "components/shared/fonts/specialFonts";
 import InputList from "components/payment/inputList";
-import {BrowserView} from "react-device-detect";
 import Banner from "components/shared/duplicateComponents/banner";
 import MapAndButtons from "components/payment/mapAndButtons";
+import {isMobile} from "src/utils/isMobile";
 
 const Container = styled.div`
   /*display: grid;
@@ -46,11 +46,11 @@ const Payment = () => {
                 <MapAndButtons></MapAndButtons>
             </Container>
 
-            <BrowserView>
+            { isMobile() ? null :
                 <MonthTrendContainer>
                     <Banner header={'Тренд месяца'} text={'В честь начала летнего сезона скидки на товары месяца 15%. Успей заказать и в поход!'}></Banner>
                 </MonthTrendContainer>
-            </BrowserView>
+            }
         </Content>
     );
 };

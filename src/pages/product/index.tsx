@@ -5,7 +5,7 @@ import Info from "components/product/info";
 import Images from "components/product/images";
 import OtherProducts from "components/product/otherProducts";
 import Banner from "components/shared/duplicateComponents/banner";
-import {BrowserView, isMobile} from "react-device-detect";
+import {isMobile} from "src/utils/isMobile";
 import {H1} from "components/shared/fonts/specialFonts";
 import ImagesMobile from "components/product/imagesMobile";
 import {useParams} from "react-router-dom";
@@ -63,10 +63,10 @@ const Product = () => {
 
     return (
         <Content>
-            { isMobile ? <ProductHeader>{productState.product.title}</ProductHeader> : ''}
+            { isMobile() ? <ProductHeader>{productState.product.title}</ProductHeader> : ''}
 
             <Container>
-                { isMobile ?
+                { isMobile() ?
                     <ImagesMobile images={images}></ImagesMobile>
                     :
                     <Images images={images}></Images> }
@@ -75,11 +75,11 @@ const Product = () => {
 
             <OtherProducts self={productState.product.id}></OtherProducts>
 
-            <BrowserView>
+            { isMobile() ? null :
                 <MonthTrendContainer>
                     <Banner header={'Хит продаж'} text={'В честь начала летнего сезона скидки на товары месяца 15%. Успей заказать и в поход!'}></Banner>
                 </MonthTrendContainer>
-            </BrowserView>
+            }
         </Content>
     );
 };

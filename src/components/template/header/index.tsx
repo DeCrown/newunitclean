@@ -1,12 +1,11 @@
 import React from 'react';
-import {BrowserView, MobileView} from 'react-device-detect';
-
 import { HeaderContainer } from "components/template/header/headerBrowser";
 import HeaderContainerMobile from "components/template/header/headerMobile";
 import * as constants from "src/utils/constants";
 import {icons} from "src/utils/icons";
 import {openSearch, showFeedback} from "components/template/header/headerFuncs";
 import {ClearTopBackground, TopBackground} from "components/template/backgrounds/topBackground";
+import {isMobile} from "src/utils/isMobile";
 
 const topButtons = [
     {href: constants.URLs.ROOT, text: "Главная"},
@@ -35,12 +34,12 @@ const Header = (props: {clearBackground?: boolean}) => {
     return (
         <div>
             { props.clearBackground ? <ClearTopBackground></ClearTopBackground> : <TopBackground></TopBackground>}
-            <BrowserView>
-                <HeaderContainer topButtons={topButtons} bottomButtons={bottomButtons}></HeaderContainer>
-            </BrowserView>
-            <MobileView>
-                <HeaderContainerMobile topButtons={topButtonsMobile} bottomButtons={bottomButtons}></HeaderContainerMobile>
-            </MobileView>
+            {
+                isMobile() ?
+                    <HeaderContainerMobile topButtons={topButtonsMobile} bottomButtons={bottomButtons}></HeaderContainerMobile>
+                    :
+                    <HeaderContainer topButtons={topButtons} bottomButtons={bottomButtons}></HeaderContainer>
+            }
         </div>
     );
 };

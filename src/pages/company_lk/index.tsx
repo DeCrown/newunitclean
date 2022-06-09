@@ -7,7 +7,7 @@ import ButtonBlue from "components/shared/forms/buttonBlue";
 import {DIV_BUTTON_WHITE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
 import CompanyPreviousOrders from "components/lk/companyPreviousOrders";
 import {URLs} from "src/utils/constants";
-import {isMobile} from "react-device-detect";
+import {isMobile} from "src/utils/isMobile";
 
 const CompanyButtons = styled.div`
   padding: 58px 0 0 0;
@@ -35,7 +35,7 @@ const CompanyLk = () => {
             <CompanyInfo></CompanyInfo>
 
             {
-                isMobile ?
+                isMobile() ?
                     <ButtonBlue styled={ToLkButton} func={toLk}>Личный кабинет</ButtonBlue>
                     :
                     <CompanyButtons>

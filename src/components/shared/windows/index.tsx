@@ -10,7 +10,7 @@ import {IStateWindows} from "src/reducers/WindowsManagerReducer/WindowsManagerRe
 import {useTypedSelector} from "src/store/configureStore";
 import EmptyBackground from "components/shared/windows/empty_background";
 import Testing from "components/shared/windows/testing";
-import {isMobile} from "react-device-detect";
+import {isMobile} from "src/utils/isMobile";
 import MobileSearch from "components/template/header/mobileSearch";
 
 const Windows = () => {
@@ -27,7 +27,7 @@ const Windows = () => {
         return <Testing></Testing>;
     }
     else if (window == WINDOW_SEARCH) {
-        if (isMobile) {
+        if (isMobile()) {
             return <div>
                 <EmptyBackground></EmptyBackground>
                 <MobileSearch></MobileSearch>

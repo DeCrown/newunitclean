@@ -18,6 +18,7 @@ const ButtonStyle = styled(DIV_BUTTON_WHITE_STYLE)`
   
   .mobile & {
     margin: -20px 0 -20px 0;
+    margin-bottom: 0;
     font-size: ${({theme}) => theme.font.size[12]};
     width: 100%;
   }

@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://84.23.55.240:5050/",
   "dependencies": {
+    "@babel/preset-env": "^7.18.2",
     "@linways/table-to-excel": "^1.0.4",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.4",
@@ -28,6 +29,7 @@
     "jquery": "^3.6.0",
     "query-string": "^5.1.1",
     "react": "^16.14.0",
+    "react-app-polyfill": "^3.0.0",
     "react-device-detect": "^2.2.2",
     "react-dom": "^16.14.0",
     "react-redux": "^7.2.8",
@@ -55,12 +57,14 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "ie 11"
     ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
-      "last 1 safari version"
+      "last 1 safari version",
+      "ie 11"
     ]
   },
   "devDependencies": {

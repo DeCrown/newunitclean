@@ -2,7 +2,7 @@ import React, {useCallback, useEffect} from 'react';
 import ProductsList from "components/shared/productsList";
 import Line from "components/shared/duplicateComponents/line";
 import ButtonBlue from "components/shared/forms/buttonBlue";
-import {BrowserView, isMobile} from "react-device-detect";
+import {isMobile} from "src/utils/isMobile";
 import TabContent from "components/shared/tabsMenu/tabContent";
 import Button from "components/cart/shared/button";
 import {ButtonContainerCenter} from "components/cart/shared/buttonContainers";
@@ -33,9 +33,7 @@ const All = () => {
             ?
             <TabContent>
                 <ProductsList products={cart.product} buttons={true}></ProductsList>
-                <BrowserView>
-                    <Line></Line>
-                </BrowserView>
+                { isMobile() ? null : <Line></Line> }
                 <ButtonContainerCenter>
                     <ButtonBlue styled={Button} func={toPayment}>Купить за {cart.full_price} ₽</ButtonBlue>
                 </ButtonContainerCenter>
@@ -43,7 +41,7 @@ const All = () => {
             :
             <TabContent>
                 <EmptyBasket>Ваша корзина пуста</EmptyBasket>
-                { isMobile ?
+                { isMobile() ?
                     ''
                     :
                     <ButtonContainerCenter>

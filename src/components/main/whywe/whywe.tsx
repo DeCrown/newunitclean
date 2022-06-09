@@ -28,6 +28,7 @@ const WhyWeContainer = styled.div`
     justify-content: left;
     overflow-x: scroll;
     margin: -30px -${({ theme }) => theme.values.contentMobileMargin}px;
+    margin-bottom: 0;
     padding: 30px ${({ theme }) => theme.values.contentMobileMargin}px;
     //grid-auto-columns: 270px;
   }

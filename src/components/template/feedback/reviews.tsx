@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Review from "./review";
 import {icons} from "src/utils/icons";
 import styled from "styled-components";
-import {isMobile} from "react-device-detect";
+import {isMobile} from "src/utils/isMobile";
 import ButtonBlue from "components/shared/forms/buttonBlue";
 import {DIV_BUTTON_WHITE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
 import {getReviews} from "api/getReviews";
@@ -131,7 +131,7 @@ const Reviews: React.FC = () => {
     }
 
     return (
-        isMobile ?
+        isMobile() ?
         <ReviewsStyle>
             <ReviewsContainer>
                 { reviewsList.map((review) => <Review pos={pos} key={review.id} name={review.name} photo={review.photo} role={review.role} text={review.text} />) }
