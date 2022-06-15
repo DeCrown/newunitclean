@@ -9,6 +9,7 @@ import {useDispatch} from "react-redux";
 import {CloseMobileMenu, SwitchMobileMenu} from "src/actions/MobileMenuAction/MobileMenuAction";
 import {useTypedSelector} from "src/store/configureStore";
 import {IStateMobileMenu} from "src/reducers/MobileMenuReducer/MobileMenuReducer.types";
+import {URLs} from "src/utils/constants";
 
 const HeaderTab = styled.div`
   background: ${({ theme }) => theme.font.color.mobileTopTab};
@@ -26,7 +27,7 @@ const HeaderTabButton = styled.div`
   z-index: 3;
 `;
 
-const Logo = styled.div`
+const LogoStyle = styled.div`
   height: 100%;
   & img {
     position: relative;
@@ -34,6 +35,16 @@ const Logo = styled.div`
     height: 80%;
   }
 `;
+
+const Logo = () => {
+    const home = () => {
+        window.open(URLs.ROOT, '_self');
+    }
+
+    return (<LogoStyle onClick={home}>
+        <img src={logo} />
+    </LogoStyle>)
+}
 
 const MovingTab = styled.div`
   background: #ADB8C4F5;
@@ -116,7 +127,7 @@ const HeaderContainerMobile = (props: {topButtons: headerMenuTopButton[]; bottom
     return (
         <HeaderTab>
             <HeaderTabButton onClick={() => SwitchMobileMenu()(dispatch)}><img src={icons.menu}/></HeaderTabButton>
-            <Logo><img src={logo}/></Logo>
+            <Logo />
             <HeaderTabButton>
                 <HeaderButton styled={styled.a``} href={constants.URLs.CART} auth={true} >
                     <img src={icons.cart}/>

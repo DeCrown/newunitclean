@@ -57,14 +57,25 @@ const HeaderBottomStyle = styled.div`
   height: 64px;
 `;
 
-const Logo = styled.div`
+const LogoStyle = styled.div`
   height: 100%;
   justify-self: end;
+  cursor: pointer;
   
   & img {
     height: 100%;
   }
 `;
+
+const Logo = () => {
+    const home = () => {
+        window.open(URLs.ROOT, '_self');
+    }
+
+    return (<LogoStyle onClick={home}>
+        <img src={logo} />
+    </LogoStyle>)
+}
 
 const PhoneNumber = styled.div`
   display: flex;
@@ -107,9 +118,7 @@ const HeaderBottomMenu = styled.div`
 
 const HeaderBottom = (props: {bottomButtons: headerMenuBottomButton[]}) => {
     return (<HeaderBottomStyle>
-        <Logo>
-            <img src={logo} />
-        </Logo>
+        <Logo />
         <PhoneNumber onClick={showFeedback}>
             <PhoneNumberText>{constants.INFO.PHONE_NUMBER}</PhoneNumberText>
             <PhoneNumberButton>Заказать звонок</PhoneNumberButton>
@@ -140,9 +149,7 @@ const HeaderBottomSearch = () => {
     }
 
     return (<HeaderSearchStyle>
-        <Logo>
-            <img src={logo} />
-        </Logo>
+        <Logo />
         <SearchContainer>
             <InputText styled={SearchInputTextStyle}
                        styledContainer={SearchInputTextContainerStyle}
