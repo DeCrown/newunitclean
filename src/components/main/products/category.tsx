@@ -22,6 +22,8 @@ const CategoryStyle = styled(DIV_BUTTON_BLUE_STYLE)`
   
   &.selected {
     box-shadow: 0px 12px 16px -8px rgba(209, 54, 49, 0.56);
+    background: #5BB6FF;
+    border-color: #5BB6FF;
   }
 `;
 
