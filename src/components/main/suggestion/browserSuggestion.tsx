@@ -45,7 +45,8 @@ const Image = styled.img`
   position: absolute;
   mix-blend-mode: normal;
   backdrop-filter: blur(4px);
-  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
   bottom: -32px;
   right: 56px;
 `;
