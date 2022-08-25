@@ -77,7 +77,7 @@ const ButtonFrozenStyle = styled(ButtonStyle)`
 
 const Info = (props: {data: ProductType}) => {
     const auth = getAuth();
-    const [size, setSize] = useState('');
+    const [size, setSize] = useState(0);
     const [button, setButton] = useState<any>(null);
     const dispatch = useDispatch();
     const stableDispatch = useCallback(dispatch, []);

@@ -22,13 +22,13 @@ const ButtonUnSelected = styled(DIV_BUTTON_WHITE_STYLE)`
   }
 `;
 
-const RadioButton = (props: {title: string; pos: string; func: (i: string) => void;}) => {
+const RadioButton = (props: {id: number; title: string; pos: number; func: (i: number) => void;}) => {
     function click() {
-        props.func(props.title);
+        props.func(props.id);
     }
 
     return (
-        props.pos == props.title ?
+        props.pos == props.id ?
             <RadioButtonBlue styled={ButtonSelected} func={click}>{props.title}</RadioButtonBlue>
             :
             <RadioButtonBlue styled={ButtonUnSelected} func={click}>{props.title}</RadioButtonBlue>
@@ -46,10 +46,10 @@ const RadioButtonsStyle = styled.div`
   overflow-x: auto;
 `;
 
-const RadioButtons = (props: {buttons: ProductSizeType[]; setSize: (title: string) => void}) => {
-    const [pos, setPos] = useState(props.buttons[0].title);
+const RadioButtons = (props: {buttons: ProductSizeType[]; setSize: (id: number) => void}) => {
+    const [pos, setPos] = useState(props.buttons[0].id);
 
-    const select = (i: string) => {
+    const select = (i: number) => {
         setPos(i);
         props.setSize(i);
     }
@@ -60,7 +60,7 @@ const RadioButtons = (props: {buttons: ProductSizeType[]; setSize: (title: strin
 
     return (
         <RadioButtonsStyle>
-            {props.buttons.map((button, i) => <RadioButton title={button.title} pos={pos} key={i} func={select}/>)}
+            {props.buttons.map((button, i) => <RadioButton id={button.id} title={button.title} pos={pos} key={i} func={select}/>)}
         </RadioButtonsStyle>
     );
 };

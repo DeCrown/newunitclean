@@ -10,7 +10,7 @@ import {
 } from "src/actions/ProductAction/ProductAction.types";
 import {getAuth} from "src/store/localStorage";
 
-export const GetProduct = (product_id: string | number | undefined, currentSize?: string) : ThunkAction<void,RootState,unknown,Action<string> > => async dispatch => {
+export const GetProduct = (product_id: string | number | undefined, currentSize?: number) : ThunkAction<void,RootState,unknown,Action<string> > => async dispatch => {
     dispatch({
         type: GET_PRODUCT_REQUEST
     })

@@ -1,7 +1,7 @@
 import React from 'react';
 import {H2Main} from "components/shared/fonts/specialFonts";
 import styled from "styled-components";
-import about from "src/bdsim/about/about.png";
+import about from "src/images/about.png";
 
 const Header = styled(H2Main)`
   text-align: left;

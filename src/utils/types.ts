@@ -34,6 +34,7 @@ export interface SuggestionType {
 }
 
 export interface ProductSizeType {
+    id: number;
     title: string;
     amount: number
 }
