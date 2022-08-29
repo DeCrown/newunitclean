@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.js": "/static/js/main.8fad2371.js",
+    "main.js": "/static/js/main.bb568c69.js",
     "static/media/basket.png": "/static/media/basket.4d6fd1f778b56ff66c13.png",
-    "static/media/star.svg": "/static/media/star.8b9f02decdca41dcc09e4c987e1d74d8.svg",
+    "static/media/star.svg": "/static/media/star.191833d0b8cf155062a665815b45f4c1.svg",
     "static/media/croppedlogo.png": "/static/media/croppedlogo.06528b05de7c8ab0ee79.png",
     "static/media/security.png": "/static/media/security.d63c720d73fe2ab69026.png",
     "static/media/wallet.png": "/static/media/wallet.0049900589e8cb8f47b9.png",
@@ -22,7 +22,7 @@
     "static/media/menu.svg": "/static/media/menu.5bc339f043909501fd3dfe17f9270048.svg",
     "static/media/discount2.svg": "/static/media/discount2.8fd2ea5a41636c273b367fcf35168102.svg",
     "static/media/ozon.svg": "/static/media/ozon.ed05272561baaaaf07f0829b99084aaf.svg",
-    "static/media/dropInput.svg": "/static/media/dropInput.a4f296a04d46df5851744820925c406c.svg",
+    "static/media/dropInput.svg": "/static/media/dropInput.dc89680b8eb046bdb45cb8e2ce66cf89.svg",
     "static/media/favourite.svg": "/static/media/favourite.b4216c96b2c161d8732a6802c1e90ec8.svg",
     "static/media/not_favourite.svg": "/static/media/not_favourite.2a098d36fc0a805a01f7f54e32305c81.svg",
     "static/media/lk.svg": "/static/media/lk.fbe96b56522d58965706cdb76d508ba3.svg",
@@ -45,9 +45,9 @@
     "static/media/left_arrow_black.svg": "/static/media/left_arrow_black.2d95f7617b22258bf3af23aa213c4fad.svg",
     "static/media/price.svg": "/static/media/price.ecbdd8e79f8ab7710788f83d54c3e028.svg",
     "static/media/button_right_arrow.svg": "/static/media/button_right_arrow.e859afe29b6ac37cac36a683b7f4f9eb.svg",
-    "main.8fad2371.js.map": "/static/js/main.8fad2371.js.map"
+    "main.bb568c69.js.map": "/static/js/main.bb568c69.js.map"
   },
   "entrypoints": [
-    "static/js/main.8fad2371.js"
+    "static/js/main.bb568c69.js"
   ]
 }

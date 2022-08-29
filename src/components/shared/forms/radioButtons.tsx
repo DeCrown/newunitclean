@@ -41,8 +41,8 @@ const RadioButtonsStyle = styled.div`
   grid-gap: 12px; gap: 12px;
   justify-content: start;
 
-  margin: 0px -${({ theme }) => theme.values.contentMobileMargin}px;
-  padding: 0px ${({ theme }) => theme.values.contentMobileMargin}px;
+  margin: -${({ theme }) => theme.values.contentMobileMargin}px;
+  padding: ${({ theme }) => theme.values.contentMobileMargin}px;
   overflow-x: auto;
 `;
 
