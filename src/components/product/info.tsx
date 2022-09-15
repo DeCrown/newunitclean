@@ -13,6 +13,7 @@ import {getAuth} from "src/store/localStorage";
 import {WindowsManagerOpen} from "src/actions/WindowsManagerAction/WindowsManagerAction";
 import {WINDOW_AUTHORIZATION} from "src/actions/WindowsManagerAction/WindowsManagerAction.types";
 import {GetProduct} from "src/actions/ProductAction/ProductAction";
+import {showMoneySum} from "src/utils/functions";
 
 const InfoStyle = styled.div`
   display: grid;
@@ -113,7 +114,7 @@ const Info = (props: {data: ProductType}) => {
         <InfoStyle>
             { isMobile() ? '' : <Header>{props.data.title}</Header>}
 
-            <Price>{props.data.price ? (auth.isAuthorized ? '' : 'от ') + props.data.price.toLocaleString() + ' РУБ' : null}</Price>
+            <Price>{props.data.price ? (auth.isAuthorized ? '' : 'от ') + showMoneySum(props.data.price) + ' РУБ' : null}</Price>
             <Description>
                 {
                     props.data.description

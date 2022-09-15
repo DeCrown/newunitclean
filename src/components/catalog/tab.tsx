@@ -28,6 +28,7 @@ const Tab = (props: {title: string; products: ProductType[]}) => {
             </TabContent>
             :
             <TabContent>
+                <Title>{props.title}</Title>
                 <EmptyBasket>Товаров в данной категории пока нет</EmptyBasket>
             </TabContent>
     );

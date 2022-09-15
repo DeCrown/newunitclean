@@ -4,6 +4,7 @@ import styled from "styled-components";
 import ButtonBlue from "components/shared/forms/buttonBlue";
 import {DIV_BUTTON_BLUE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
 import {BASE_URL, URLs} from "src/utils/constants";
+import {showMoneySum} from "src/utils/functions";
 
 const Price = styled.div`
   font-size: ${({ theme }) => theme.font.size[16]};
@@ -89,7 +90,7 @@ const Product = (props: {data: ProductType}) => {
                 <Title>{props.data.title}</Title>
                 {
                     props.data.price ?
-                        <Price>Цены от <span>{props.data.price.toLocaleString() + ' руб.'}</span></Price>
+                        <Price>Цены от <span>{showMoneySum(props.data.price) + ' руб.'}</span></Price>
                         :
                         null
                 }

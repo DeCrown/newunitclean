@@ -9,6 +9,7 @@ import {useTypedSelector} from "src/store/configureStore";
 import {IStateFavourites} from "src/reducers/FavouritesReducer/FavouritesReducer.types";
 import {GetCart} from "src/actions/CartAction/CartAction";
 import {GetFavourites} from "src/actions/FavouritesAction/FavouritesAction";
+import {showMoneySum} from "src/utils/functions";
 
 const ButtonsContainer = styled.div`
   position: relative;
@@ -254,9 +255,9 @@ export const Product = (props: {data: ProductType; noStar?: boolean}) => {
                 <Description>{props.data.description}</Description>
                 {
                     props.data.order_size_price ?
-                        <Price>{props.data.order_size_price} РУБ</Price>
+                        <Price>{showMoneySum(props.data.order_size_price)} РУБ</Price>
                         : props.data.price ?
-                            <Price>от {props.data.price} РУБ</Price>
+                            <Price>от {showMoneySum(props.data.price)} РУБ</Price>
                             : null
                 }
             </Info>

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import {showMoneySum} from "src/utils/functions";
 
 const PriceStyle = styled.div`
   background: #FFFFFF;
@@ -19,7 +20,7 @@ const PriceStyle = styled.div`
 const Price = (props: {sum?: number}) => {
     return (
         <PriceStyle>
-            {props.sum ? 'от ' + props.sum + 'р' : ''}
+            {props.sum ? 'от ' + showMoneySum(props.sum) + 'р' : ''}
         </PriceStyle>
     );
 };

@@ -1,16 +1,19 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Product, ProductWithButtons} from "./product";
 import styled from "styled-components";
 import {ProductType} from "src/utils/types";
 
 const ProductsStyle = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 270px);
+  justify-content: center;
   grid-gap: 30px; gap: 30px;
   
   .mobile & {
     display: grid;
     grid-auto-flow: column;
+    grid-template-columns: auto;
+    justify-content: left;
     overflow-x: scroll;
     
     margin: -50px -${({ theme }) => theme.values.contentMobileMargin}px;
