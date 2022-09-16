@@ -276,7 +276,7 @@ export const ProductWithButtons = (props: {data: ProductType; onlyFavourite?: bo
         AppendApiMethod({func: 'patch',
             data: {
                 product_id: props.data.id,
-                product_size: props.data.product_order_size,
+                product_size: props.data.product_order_size_id,
                 decrease_amount: true
             }, url: '/product/api/v2/order/add_product/',
             success: (success) => {

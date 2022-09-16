@@ -53,6 +53,7 @@ export interface ProductType {
     promotion?: boolean;
     amount_of_product?: number;
     product_order_size?: string;
+    product_order_size_id?: number;
     order_size_price?: number
 }
 

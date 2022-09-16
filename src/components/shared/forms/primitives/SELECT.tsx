@@ -40,12 +40,12 @@ const SELECT_STYLE = styled.select<{css?: any}>`
   }
 `
 
-const OPTGROUP = styled.optgroup`
+/*const OPTGROUP = styled.optgroup`
   font-family: 'Montserrat';
   font-style: normal;
   font-size: ${({ theme }) => theme.font.size[16]};
   font-weight: ${({ theme }) => theme.font.weight[400]};
-`;
+`;*/
 
 interface SELECT_STATE {
     value: string | undefined;
