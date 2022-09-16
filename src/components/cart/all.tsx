@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import ProductsList from "components/shared/productsList";
 import Line from "components/shared/duplicateComponents/line";
 import ButtonBlue from "components/shared/forms/buttonBlue";
@@ -12,9 +12,10 @@ import {GetCart} from "src/actions/CartAction/CartAction";
 import {useTypedSelector} from "src/store/configureStore";
 import EmptyBasket from "components/shared/productsList/empty";
 import {URLs} from "src/utils/constants";
+import {showMoneySum} from "src/utils/functions";
 
 const All = () => {
-
+    let [price, setPrice] = useState<any>(null);
     const Cart = useTypedSelector((store) => store.Cart);
     const {cart, isFetching, error} = Cart as IStateCart;
     const dispatch = useDispatch();
@@ -23,6 +24,10 @@ const All = () => {
     useEffect(() => {
         stableDispatch(GetCart());
     }, []);
+
+    if (price) {
+        price.state.currentChildren = "Купить за " + showMoneySum(cart.full_price) + " ₽";
+    }
 
     const toPayment = () => {
         window.open(URLs.PAYMENT, '_self')
@@ -35,7 +40,7 @@ const All = () => {
                 <ProductsList products={cart.product} buttons={true}></ProductsList>
                 { isMobile() ? null : <Line></Line> }
                 <ButtonContainerCenter>
-                    <ButtonBlue styled={Button} func={toPayment}>Купить за {cart.full_price} ₽</ButtonBlue>
+                    <ButtonBlue styled={Button} func={toPayment} setObj={setPrice}>Купить за {showMoneySum(cart.full_price)} ₽</ButtonBlue>
                 </ButtonContainerCenter>
             </TabContent>
             :

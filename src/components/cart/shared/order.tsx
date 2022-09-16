@@ -4,6 +4,7 @@ import ButtonBlue from "components/shared/forms/buttonBlue";
 import Button from "components/cart/shared/button";
 import {OrderType} from "src/utils/types";
 import styled from "styled-components";
+import {showMoneySum} from "src/utils/functions";
 
 const OrderStyle = styled.div`
   margin-bottom: 74px;
@@ -69,7 +70,7 @@ const Order = (props: {order: OrderType}) => {
                 <OrderNum>№{props.order.id}</OrderNum>
                 <OrderInfoRow title={'Адрес доставки'} value={props.order.address ? props.order.address : 'нет данных'} />
                 <OrderInfoRow title={'Дата доставки'} value={props.order.date_to_receive ? props.order.date_to_receive : 'нет данных'} />
-                <OrderInfoRow title={'Сумма заказа'} value={'' + props.order.full_price} />
+                <OrderInfoRow title={'Сумма заказа'} value={showMoneySum(props.order.full_price)} />
             </OrderInfo>
             <ProductsList products={props.order.product} buttons={true}></ProductsList>
             {/*
