@@ -14,8 +14,9 @@ const SELECT_STYLE = styled.select<{css?: any}>`
   font-weight: ${({ theme }) => theme.font.weight[400]};
   color: ${({ theme }) => theme.font.color.black};
   padding: 0 20px;
-  width: calc(100% - 40px);
-  box-sizing: content-box;
+  width: 100%;
+  //width: calc(100% - 40px);
+  box-sizing: border-box;
   ${props => props.css};
     
   &.active {
