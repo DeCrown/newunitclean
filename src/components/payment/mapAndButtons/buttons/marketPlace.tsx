@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, {css} from "styled-components";
+import styled from "styled-components";
 import {DIV_BUTTON_WHITE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
 
 const MarketPlaceStyle = styled.div`
@@ -25,7 +25,7 @@ const ButtonStyle = styled(DIV_BUTTON_WHITE_STYLE)`
 const MarketPlace = () => {
     return (
         <MarketPlaceStyle>
-            <ButtonStyle>Купить в маркетплейсе</ButtonStyle>
+            <ButtonStyle>Купить на маркетплейсе</ButtonStyle>
         </MarketPlaceStyle>
     );
 };
