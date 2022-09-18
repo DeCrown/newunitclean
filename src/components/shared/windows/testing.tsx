@@ -36,6 +36,7 @@ const TestingStyle = styled.div`
   height: min-content;
   max-height: calc(100% - 80px);
   overflow-y: auto;
+  position: relative;
 `;
 
 const Close = styled.div`
