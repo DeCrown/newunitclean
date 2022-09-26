@@ -1,7 +1,7 @@
-import { Action } from 'redux'
+import { Action, Dispatch } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 import { RootState } from 'src/reducers/index'
-import {AppendApiMethod} from "src/actions/ApiMethodAction/ApiMethodAction";
+import {ApiMethod} from "src/api/APIMethod";
 import {CompanyType} from "src/utils/types";
 import {
     GET_COMPANY_FAIL,
@@ -9,40 +9,40 @@ import {
     GET_COMPANY_SUCCESS
 } from "src/actions/CompanyAction/CompanyAction.types";
 
-export const GetCompany = () : ThunkAction<void,RootState,unknown,Action<string> > => async dispatch => {
+export const GetCompany = () => (dispatch:Dispatch) => {
     dispatch({
         type: GET_COMPANY_REQUEST
     })
-    AppendApiMethod({func: 'get', url: '/employee/api/v2/company/detail/',
-        success: (success) => {
+    ApiMethod({func: 'get', url: '/employee/api/v2/company/detail/', auth: true})
+        .then(success => {
             dispatch({
                 type: GET_COMPANY_SUCCESS,
                 payload: success as CompanyType
             })
-        },
-        error: (error) => {
+        })
+        .catch(error => {
             dispatch({
                 type: GET_COMPANY_FAIL,
                 payload: error
             })
-        }, auth: true})(dispatch);
+        });
 }
 
-export const PatchCompany = (data: any) : ThunkAction<void,RootState,unknown,Action<string> > => async dispatch => {
+export const PatchCompany = (data: any) => (dispatch:Dispatch) => {
     dispatch({
         type: GET_COMPANY_REQUEST
     })
-    AppendApiMethod({func: 'patch', url: '/employee/api/v2/company/detail/', data: data,
-        success: (success) => {
+    ApiMethod({func: 'patch', url: '/employee/api/v2/company/detail/', data: data, auth: true})
+        .then(success => {
             dispatch({
                 type: GET_COMPANY_SUCCESS,
                 payload: success as CompanyType
             })
-        },
-        error: (error) => {
+        })
+        .catch(error => {
             dispatch({
                 type: GET_COMPANY_FAIL,
                 payload: error
             })
-        }, auth: true})(dispatch);
+        });
 }

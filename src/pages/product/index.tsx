@@ -43,12 +43,12 @@ const Product = () => {
     const productState = state.Product as IStateProduct;
 
     const dispatch = useDispatch();
-    const stableDispatch = useCallback(dispatch, []);
+    //const stableDispatch = useCallback(dispatch, []);
 
     let { id } = useParams();
 
     useEffect(() => {
-        stableDispatch(GetProduct(id));
+        GetProduct(id)(dispatch);
     }, []);
 
     let images:string[] = [];
@@ -56,9 +56,7 @@ const Product = () => {
         images.push(BASE_URL + productState.product.image);
     }
     if (productState.product.images) {
-        productState.product.images.map(image => {
-            images.push(BASE_URL + image);
-        });
+        productState.product.images.map(image => images.push(BASE_URL + image));
     }
 
     return (

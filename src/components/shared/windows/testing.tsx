@@ -8,8 +8,8 @@ import {icons} from "src/utils/icons";
 import {FormCloseStyle} from "components/shared/forms/form";
 import {WindowsManagerClear} from "src/actions/WindowsManagerAction/WindowsManagerAction";
 import {useDispatch} from "react-redux";
-import {AppendApiMethod} from "src/actions/ApiMethodAction/ApiMethodAction";
 import {Main} from "src/themes/main";
+import {ApiMethod} from "src/api/APIMethod";
 
 const TestingContainer = styled.div`
   position: fixed;
@@ -108,22 +108,23 @@ const Testing = () => {
             return false;
         }
         button.Animate({Children: 'Выполняется...'});
-        AppendApiMethod({
+
+        ApiMethod({
             func: 'post', url: '/employee/api/v2/test_order/',
-            data: Object.keys(form).reduce((target, key) => ({...target, [key]: form[key].value}), {}),
-            success: (success) => {
+            data: Object.keys(form).reduce((target, key) => ({...target, [key]: form[key].value}), {})
+        })
+            .then(success => {
                 Object.values(form).map(value => (value as InputState).obj.clear())
                 button.Animate({Styled: ButtonSendSuccess, Children: 'Заявка отправлена', timeOut: 2000});
-            },
-            error: (error) => {
+            })
+            .catch(error => {
                 Object.keys(error.response.data).map(key => {
                     if (form[key]) {
                         form[key].obj.setError(error.response.data[key]);
                     }
                 });
                 button.Animate({Styled: ButtonSendError, Children: 'Введенные данные некорректны', timeOut: 2000});
-            }
-        })(dispatch);
+            });
     }
 
     return (

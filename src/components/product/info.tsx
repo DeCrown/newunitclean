@@ -6,7 +6,7 @@ import InfoRow from "./infoRow";
 import ButtonBlue from "components/shared/forms/buttonBlue";
 import {DIV_BUTTON_BLUE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
 import {isMobile} from "src/utils/isMobile";
-import {AppendApiMethod} from "src/actions/ApiMethodAction/ApiMethodAction";
+import {ApiMethod} from "src/api/APIMethod";
 import {useDispatch} from "react-redux";
 import RadioButtons from "components/shared/forms/radioButtons";
 import {getAuth} from "src/store/localStorage";
@@ -95,19 +95,17 @@ const Info = (props: {data: ProductType}) => {
 
     const AddToCart = () => {
         button.Animate({Children: 'Добавляем...'});
-        AppendApiMethod({
+        ApiMethod({
             func: 'patch',
             data: {
                 product_id: props.data.id,
                 product_size: size
             },
             url: '/product/api/v2/order/add_product/',
-            success: (success) => {
-                button.Animate({Styled: ButtonSendSuccess, Children: 'Добавлено в корзину', timeOut: 2000});
-            },
-            error: (error) => {
-                button.Animate({Styled: ButtonSendError, Children: 'Ошибка', timeOut: 2000});
-            }, auth: true})(dispatch);
+            auth: true
+        })
+            .then(success => button.Animate({Styled: ButtonSendSuccess, Children: 'Добавлено в корзину', timeOut: 2000}))
+            .catch(error => button.Animate({Styled: ButtonSendError, Children: 'Ошибка', timeOut: 2000}))
     }
 
     return (

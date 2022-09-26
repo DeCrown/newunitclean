@@ -12,7 +12,7 @@ import ButtonBlue from "components/shared/forms/buttonBlue";
 import {FormContainer, FormList} from "components/shared/forms/form";
 import {DIV_BUTTON_BLUE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
 import {useDispatch} from "react-redux";
-import {AppendApiMethod} from "src/actions/ApiMethodAction/ApiMethodAction";
+import {ApiMethod} from "src/api/APIMethod";
 import {URLs} from "src/utils/constants";
 
 const RegistrationStyle = css`
@@ -62,23 +62,24 @@ const Registration = () => {
             return false;
         }
         button.Animate({Children: 'Выполняется...'});
-        AppendApiMethod({
+        ApiMethod({
             func: 'post', url: '/employee/api/v2/company/create/',
             data: Object.keys(form).reduce((target, key) => ({...target, [key]: form[key].value}), {}),
-            success: (success) => {
+            auth: true
+        })
+            .then(success => {
                 Object.values(form).map(value => (value as InputState).obj.clear());
                 button.Animate({Styled: ButtonSendSuccess, Children: 'Регистрация выполнена', timeOut: 2000});
                 window.open(URLs.COMPANY_LK, '_self');
-            },
-            error: (error) => {
+            })
+            .catch(error => {
                 Object.keys(error.response.data).map(key => {
                     if (form[key]) {
                         form[key].obj.setError(error.response.data[key]);
                     }
                 });
                 button.Animate({Styled: ButtonSendError, Children: 'Введенные данные некорректны', timeOut: 2000});
-            }, auth: true
-        })(dispatch);
+            })
     }
 
     return (

@@ -68,11 +68,8 @@ const Lk = () => {
     }, []);
 
     const logout = () => {
-        stableDispatch(LogoutUser({
-            successFunc: () => {
-                window.open(URLs.ROOT, '_self');
-            }
-        }));
+        LogoutUser(stableDispatch);
+        //window.open(URLs.ROOT, '_self');
     }
 
     const toCompany = () => {

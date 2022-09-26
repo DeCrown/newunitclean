@@ -1,28 +1,26 @@
-import { Action } from 'redux'
-import { ThunkAction } from 'redux-thunk'
-import { RootState } from 'src/reducers/index'
-import {AppendApiMethod} from "src/actions/ApiMethodAction/ApiMethodAction";
+import { Dispatch } from 'redux'
+import {ApiMethod} from "src/api/APIMethod";
 import {
     GET_PRICE_LIST_FAIL,
     GET_PRICE_LIST_REQUEST,
     GET_PRICE_LIST_SUCCESS
 } from "src/actions/PriceListAction/PriceListAction.types";
 
-export const GetPriceList = () : ThunkAction<void,RootState,unknown,Action<string> > => async dispatch => {
+export const GetPriceList = () => (dispatch:Dispatch) => {
     dispatch({
         type: GET_PRICE_LIST_REQUEST
     })
-    AppendApiMethod({func: 'get', url: '/product/api/v2/products_price_list/',
-        success: (success) => {
+    ApiMethod({func: 'get', url: '/product/api/v2/products_price_list/', auth: true})
+        .then(success => {
             dispatch({
                 type: GET_PRICE_LIST_SUCCESS,
                 payload: success
             })
-        },
-        error: (error) => {
+        })
+        .catch(error => {
             dispatch({
                 type: GET_PRICE_LIST_FAIL,
                 payload: error
             })
-        }, auth: true})(dispatch);
+        })
 }

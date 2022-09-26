@@ -1,7 +1,5 @@
 import axios from 'axios';
-import { Action } from 'redux'
-import { ThunkAction } from 'redux-thunk'
-import { RootState } from 'src/reducers/index'
+import { Dispatch } from 'redux'
 import {
     GET_REG_FAIL, GET_REG_REQUEST, GET_REG_SUCCESS
 } from "./RegAction.types";
@@ -35,7 +33,7 @@ interface RegProps {
     errorFunc?: (error: any) => void
 }
 
-export const RegUser = (props: RegProps ) : ThunkAction<void,RootState,unknown,Action<string> > => async dispatch => {
+export const RegUser = (props: RegProps ) => (dispatch:Dispatch) => {
     dispatch({
         type: GET_REG_REQUEST
     })

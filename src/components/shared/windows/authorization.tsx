@@ -67,9 +67,9 @@ export const Authorization = () => {
             return false;
         }
         button.Animate({Children: 'Выполняется...'});
-        stableDispatch(LoginUser({
-                data: {username: form.username.value, password: form.password.value},
-                successFunc: () => {
+
+        LoginUser({username: form.username.value, password: form.password.value})(stableDispatch)
+            .then(success => {
                     Object.values(form).map(value => (value as InputState).obj.clear())
                     button.Animate({Styled: ButtonSendSuccess, Children: 'Вход выполнен', timeOut: 2000});
                     WindowsManagerClear()(dispatch);
@@ -79,16 +79,15 @@ export const Authorization = () => {
                     else {
                         window.location.reload();
                     }
-                },
-                errorFunc: (error) => {
-                    Object.keys(error.response.data).map(key => {
-                        if (form[key]) {
-                            form[key].obj.setError(error.response.data[key]);
-                        }
-                    });
-                    button.Animate({Styled: ButtonSendError, Children: 'Неверный логин или пароль', timeOut: 2000});
-                }
-            }));
+                })
+            .catch(error => {
+                Object.keys(error.response.data).map(key => {
+                    if (form[key]) {
+                        form[key].obj.setError(error.response.data[key]);
+                    }
+                });
+                button.Animate({Styled: ButtonSendError, Children: 'Неверный логин или пароль', timeOut: 2000});
+            });
     }
 
     const switchToReg = () => {

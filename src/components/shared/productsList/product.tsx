@@ -3,7 +3,7 @@ import {icons} from "src/utils/icons";
 import styled from "styled-components";
 import {ProductType} from "src/utils/types";
 import {BASE_URL, URLs} from "src/utils/constants";
-import {AppendApiMethod} from "src/actions/ApiMethodAction/ApiMethodAction";
+import {ApiMethod} from "src/api/APIMethod";
 import {useDispatch} from "react-redux";
 import {useTypedSelector} from "src/store/configureStore";
 import {IStateFavourites} from "src/reducers/FavouritesReducer/FavouritesReducer.types";
@@ -273,17 +273,19 @@ export const ProductWithButtons = (props: {data: ProductType; onlyFavourite?: bo
     const stableDispatch = useCallback(dispatch, []);
 
     const DeleteFromCart = () => {
-        AppendApiMethod({func: 'patch',
+        ApiMethod({
+            func: 'patch',
             data: {
                 product_id: props.data.id,
                 product_size: props.data.product_order_size_id,
                 decrease_amount: true
-            }, url: '/product/api/v2/order/add_product/',
-            success: (success) => {
-                stableDispatch(GetCart());
             },
-            error: (error) => {
-            }, auth: true})(dispatch);
+            url: '/product/api/v2/order/add_product/',
+            auth: true
+        })
+            .then(success => {
+                stableDispatch(GetCart());
+            });
     }
 
     const IsFavourite = () => {
@@ -292,23 +294,19 @@ export const ProductWithButtons = (props: {data: ProductType; onlyFavourite?: bo
 
     const MarkAsFavourite = () => {
         if (IsFavourite()) {
-            AppendApiMethod({
-                func: 'delete', url: '/product/api/v2/favorite_products/' + props.data.id + '/', data: {product_id: props.data.id},
-                success: (success) => {
-                    stableDispatch(GetFavourites());
-                },
-                error: (error) => {
-                }, auth: true
-            })(dispatch);
+            ApiMethod({
+                func: 'delete',
+                url: '/product/api/v2/favorite_products/' + props.data.id + '/',
+                data: {product_id: props.data.id},
+                auth: true
+            }).then(success => stableDispatch(GetFavourites()))
         }
         else {
-            AppendApiMethod({
-                func: 'post', url: '/product/api/v2/favorite_products/' + props.data.id + '/',
-                success: (success) => {
-                    stableDispatch(GetFavourites());
-                },
-                error: (error) => {
-                }, auth: true})(dispatch);
+            ApiMethod({
+                func: 'post',
+                url: '/product/api/v2/favorite_products/' + props.data.id + '/',
+                auth: true
+            }).then(success => stableDispatch(GetFavourites()))
         }
     }
 

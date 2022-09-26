@@ -4,8 +4,8 @@ import ButtonBlue from "components/shared/forms/buttonBlue";
 import {InputDate, InputFIO, InputPhoneNumber, InputState, OutputDetail} from "components/shared/forms/inputText";
 import InputTextField from "components/shared/forms/inputTextField";
 import {useDispatch} from "react-redux";
-import {AppendApiMethod} from "src/actions/ApiMethodAction/ApiMethodAction";
 import {DIV_BUTTON_BLUE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
+import {ApiMethod} from "src/api/APIMethod";
 
 const OrderCallStyle = styled.div`
   width: 370px;
@@ -81,22 +81,23 @@ const OrderCall = () => {
             return false;
         }
         button.Animate({Children: 'Выполняется...'});
-        AppendApiMethod({
+
+        ApiMethod({
             func: 'post', url: '/employee/api/v2/call_order/',
-            data: Object.keys(form).reduce((target, key) => ({...target, [key]: form[key].value}), {}),
-            success: (success) => {
+            data: Object.keys(form).reduce((target, key) => ({...target, [key]: form[key].value}), {})
+        })
+            .then(success => {
                 Object.values(form).map(value => (value as InputState).obj.clear())
                 button.Animate({Styled: ButtonSendSuccess, Children: 'Заявка отправлена', timeOut: 2000});
-            },
-            error: (error) => {
+            })
+            .catch(error => {
                 Object.keys(error.response.data).map(key => {
                     if (error.response.data[key]) {
                         form[key].obj.setError(error.response.data[key]);
                     }
                 });
                 button.Animate({Styled: ButtonSendError, Children: 'Введенные данные некорректны', timeOut: 2000});
-            }
-        })(dispatch);
+            });
     }
 
     return (

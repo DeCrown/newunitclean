@@ -1,28 +1,28 @@
-import { Action } from 'redux'
+import { Action, Dispatch } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 import { RootState } from 'src/reducers/index'
-import {AppendApiMethod} from "src/actions/ApiMethodAction/ApiMethodAction";
+import {ApiMethod} from "src/api/APIMethod";
 import {OrderType} from "src/utils/types";
 import {
     GET_COMPANY_PREVIOUS_ORDERS_FAIL,
     GET_COMPANY_PREVIOUS_ORDERS_REQUEST, GET_COMPANY_PREVIOUS_ORDERS_SUCCESS
 } from "src/actions/CompanyPreviousOrdersAction/CompanyPreviousOrdersAction.types";
 
-export const GetCompanyPreviousOrders = () : ThunkAction<void,RootState,unknown,Action<string> > => async dispatch => {
+export const GetCompanyPreviousOrders = () => (dispatch:Dispatch) => {
     dispatch({
         type: GET_COMPANY_PREVIOUS_ORDERS_REQUEST
     })
-    AppendApiMethod({func: 'get', url: '/product/api/v2/order/company/previous_orders/',
-        success: (success) => {
+    ApiMethod({func: 'get', url: '/product/api/v2/order/company/previous_orders/', auth: true})
+        .then(success => {
             dispatch({
                 type: GET_COMPANY_PREVIOUS_ORDERS_SUCCESS,
                 payload: success as OrderType[]
             })
-        },
-        error: (error) => {
+        })
+        .catch(error => {
             dispatch({
                 type: GET_COMPANY_PREVIOUS_ORDERS_FAIL,
                 payload: error
             })
-        }, auth: true})(dispatch);
+        });
 }

@@ -1,6 +1,6 @@
 
 export interface route {
-    url: string | any;
+    url: string;
     page: (prop?: any) => JSX.Element;
     mobileClearBackground?: boolean;
     browserClearBackground?: boolean;
@@ -102,4 +102,11 @@ export interface CompanyType {
     real_address: string;
     employee: string;
     email: string;
+}
+
+export interface ApiMethodType {
+    func: 'get' | 'post' | 'patch' | 'delete' | 'put';
+    url: string;
+    data?: any;
+    auth?: boolean;
 }

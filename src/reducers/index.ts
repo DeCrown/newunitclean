@@ -3,7 +3,6 @@ import {AuthReducer} from "./AuthReducer/AuthReducer";
 import {WindowsManagerReducer} from "src/reducers/WindowsManagerReducer/WindowsManagerReducer";
 import {TabsMenuReducer} from "src/reducers/TabsMenuReducer/TabsMenuReducer";
 import {CartReducer} from "src/reducers/CartReducer/CartReducer";
-import {ApiMethodReducer} from "src/reducers/ApiMethodReducer/ApiMethodReducer";
 import {ProductListReducer} from "src/reducers/ProductListReducer/ProductListReducer";
 import {CategoriesReducer} from "src/reducers/CategoriesReducer/CategoriesReducer";
 import {FavouritesReducer} from "src/reducers/FavouritesReducer/FavouritesReducer";
@@ -21,7 +20,6 @@ import {PriceListReducer} from "src/reducers/PriceListReducer/PriceListReducer";
 
 const appReducer = combineReducers({
   Auth: AuthReducer,
-  ApiMethod: ApiMethodReducer,
   WindowsManager: WindowsManagerReducer,
   TabsMenu: TabsMenuReducer,
   Cart: CartReducer,

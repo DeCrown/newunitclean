@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Action } from 'redux'
+import { Action, Dispatch } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 import { RootState } from 'src/reducers/index'
 import {
@@ -7,8 +7,9 @@ import {
     GET_AUTH_SUCCESS,
     GET_FAIL, GET_LOGOUT_AUTH
 } from "./AuthAction.types";
-import {BASE_URL} from "src/utils/constants";
+import {BASE_URL, URLs} from "src/utils/constants";
 import {getAuth} from "src/store/localStorage";
+import {routes} from "src/utils/routes";
 
 
 //включаем защиту токенами от csrf атак
@@ -24,60 +25,76 @@ const config = {
 }
 
 
-export const LoginUser = (props: { data: {username: string; password: string}; successFunc?: () => void; errorFunc?: (error: any) => void } ) : ThunkAction<void,RootState,unknown,Action<string> > => async dispatch => {
-    dispatch({
-      type: GET_AUTH_REQUEST
-    })
-    return axios.post(BASE_URL + '/api/token/', props.data, config)
-    .then((response) => {
-          if (response.status === 200) {
-              dispatch({
-                type: GET_AUTH_SUCCESS,
-                payload: response.data
-              })
-              if (props.successFunc) {
-                  props.successFunc()
-              }
-          }})
-      .catch((error)=> {
-          dispatch({
-              type: GET_FAIL,
-              payload: error
-          })
-          if (props.errorFunc) {
-              props.errorFunc(error)
-          }
-      });
-}
+export const LoginUser = (data: { username: string, password: string }) => (dispatch:Dispatch) =>
+    new Promise((resolve, reject) => {
+        dispatch({
+            type: GET_AUTH_REQUEST
+        })
 
-export const RefreshLoginUser = () : ThunkAction<void,RootState,unknown,Action<string> > => async dispatch => {
-    dispatch({
-        type: GET_AUTH_REQUEST
-    })
-    const Auth = getAuth();
-    return axios.post(BASE_URL + '/api/token/refresh/', {refresh: Auth.refresh_token}, config)
-        .then((response) => {
-            if (response.status === 200) {
-                dispatch({
-                    type: GET_AUTH_SUCCESS,
-                    payload: response.data
-                })
-            }})
-        .catch((error)=> {
+        axios.post(BASE_URL + '/api/token/', data, config)
+            .then(response => {
+                if (response.status === 200) {
+                    dispatch({
+                        type: GET_AUTH_SUCCESS,
+                        payload: response.data
+                    })
+                    return resolve(response)
+                }
+                else {
+                    return reject(response)
+                }
+            })
+            .catch(error => {
                 dispatch({
                     type: GET_FAIL,
                     payload: error
                 })
-                dispatch(LogoutUser())
-            }
-        );
-}
+                return reject(error)
+            });
+    });
 
-export const LogoutUser = (props: {successFunc?: () => void} = {}) : ThunkAction<void,RootState,unknown,Action<string> > => async dispatch => {
+export const RefreshLoginUser = () => (dispatch:Dispatch) =>
+    new Promise((resolve, reject) => {
+        dispatch({
+            type: GET_AUTH_REQUEST
+        })
+
+        const Auth = getAuth();
+        axios.post(BASE_URL + '/api/token/refresh/', {refresh: Auth.refresh_token}, config)
+            .then(response => {
+                if (response.status === 200) {
+                    dispatch({
+                        type: GET_AUTH_SUCCESS,
+                        payload: response.data
+                    })
+                    return resolve(response)
+                }
+                else {
+                    return reject(response)
+                }
+            })
+            .catch(error => {
+                dispatch({
+                    type: GET_FAIL,
+                    payload: error
+                })
+                LogoutUser(dispatch)
+                return reject(error)
+            });
+    });
+
+export const LogoutUser = (dispatch:Dispatch) => {
     dispatch({
         type: GET_LOGOUT_AUTH
     })
-    if (props.successFunc) {
-        props.successFunc()
+
+    let addr = window.location.pathname.match(/\/[^\/]+/) as Array<string>;
+
+    if (addr && addr[0]) {
+        let route = routes.find(r => r.url == addr[0]);
+
+        if (route && route.auth) {
+            window.open(URLs.ROOT, '_self');
+        }
     }
 }

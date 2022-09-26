@@ -1,7 +1,7 @@
-import { Action } from 'redux'
+import { Action, Dispatch } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 import { RootState } from 'src/reducers/index'
-import {AppendApiMethod} from "src/actions/ApiMethodAction/ApiMethodAction";
+import {ApiMethod} from "src/api/APIMethod";
 import {
     GET_MOST_TRADING_FAIL,
     GET_MOST_TRADING_REQUEST,
@@ -9,21 +9,21 @@ import {
 } from "src/actions/MostTradingAction/MostTradingAction.types";
 import {ProductType} from "src/utils/types";
 
-export const GetMostTrading = () : ThunkAction<void,RootState,unknown,Action<string> > => async dispatch => {
+export const GetMostTrading = () => (dispatch:Dispatch) => {
     dispatch({
         type: GET_MOST_TRADING_REQUEST
     })
-    AppendApiMethod({func: 'get', url: '/product/api/v2/list_trending_products/',
-        success: (success) => {
+    ApiMethod({func: 'get', url: '/product/api/v2/list_trending_products/'})
+        .then(success => {
             dispatch({
                 type: GET_MOST_TRADING_SUCCESS,
                 payload: success as ProductType[]
             })
-        },
-        error: (error) => {
+        })
+        .catch(error => {
             dispatch({
                 type: GET_MOST_TRADING_FAIL,
                 payload: error
             })
-        }})(dispatch);
+        })
 }

@@ -8,7 +8,7 @@ import styled from "styled-components";
 import {DIV_BUTTON_BLUE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
 import {Select} from "components/shared/forms/select";
 import {useDispatch} from "react-redux";
-import {AppendApiMethod} from "src/actions/ApiMethodAction/ApiMethodAction";
+import {ApiMethod} from "src/api/APIMethod";
 import ButtonBlue from "components/shared/forms/buttonBlue";
 import {icons} from "src/utils/icons";
 import {useTypedSelector} from "src/store/configureStore";
@@ -170,30 +170,21 @@ const InputList = () => {
     }
 
     const dropPromo = () => {
-        AppendApiMethod({
-            func: 'delete', url: '/product/api/v2/order/delete_promo_code/',
-            success: (success) => {
-                setSuccessPromo('')
-            },
-            error: (error) => {
-                setSuccessPromo('')
-            }, auth: true
-        })(dispatch);
+        ApiMethod({ func: 'delete', url: '/product/api/v2/order/delete_promo_code/', auth: true })
+            .then(success => setSuccessPromo(''))
+            .catch(error => setSuccessPromo(''));
     }
 
     const addPromo = () => {
-        AppendApiMethod({
+        ApiMethod({
             func: 'patch', url: '/product/api/v2/order/add_promo_code/',
             data: {
                 promo_code: promo.value
             },
-            success: (success) => {
-                setSuccessPromo(success.promo_code)
-            },
-            error: (error) => {
-                promo.obj.setState({error: true});
-            }, auth: true
-        })(dispatch);
+            auth: true
+        })
+            .then((success:any) => setSuccessPromo(success.promo_code))
+            .catch(error => promo.obj.setState({error: true}))
     }
 
     const order = () => {
@@ -202,23 +193,25 @@ const InputList = () => {
             return false;
         }
         button.Animate({Children: 'Выполняется...'});
-        AppendApiMethod({
+
+        ApiMethod({
             func: 'patch', url: '/product/api/v2/order/',
             data: Object.keys(form).reduce((target, key) => ({...target, [key]: form[key].value}), {}),
-            success: (success) => {
+            auth: true
+        })
+            .then(success => {
                 Object.values(form).map(value => (value as InputState).obj.clear());
                 setSuccessPromo('');
                 button.Animate({Styled: ButtonSendSuccess, Children: 'Заказ оформлен', timeOut: 2000});
-            },
-            error: (error) => {
+            })
+            .catch(error => {
                 Object.keys(error.response.data).map(key => {
                     if (form[key]) {
                         form[key].obj.setError(error.response.data[key]);
                     }
                 });
                 button.Animate({Styled: ButtonSendError, Children: 'Введенные данные некорректны', timeOut: 2000});
-            }, auth: true
-        })(dispatch);
+            })
     }
 
     const toCart = () => {
