@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from "styled-components";
 import reason from "components/main/whywe/reason";
 import {WindowsManagerClear, WindowsManagerOpen} from "src/actions/WindowsManagerAction/WindowsManagerAction";
@@ -12,13 +12,15 @@ const ReasonStyle = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   border-radius: 10px;
-  filter: drop-shadow(1px 3px 3px rgba(0, 0, 0, 0.5));
+  //filter: drop-shadow(1px 3px 3px rgba(0, 0, 0, 0.5));
   padding: 20px;
   display: grid;
   grid-template-rows: 60%;
   justify-items: center;
   cursor: pointer;
   overflow: hidden;
+  box-shadow: 1px 3px 3px rgba(0,0,0,0.5);
+  position: relative;
   
   .mobile & {
     width: 270px;
