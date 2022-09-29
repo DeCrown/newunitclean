@@ -31,12 +31,21 @@ const Header = styled.div`
   right: 0px;
 `;
 
+const HeaderNoImage = styled(Header)`
+  bottom: -60px;
+`;
+
 const MobileSuggestion = (props: SuggestionType) => {
     return (
         <SuggestionStyle>
             <Title>{props.title}</Title>
             <Image src={props.product.image && props.product.image.length ? props.product.image[0] : ''} />
-            <Header>Химические средства для клининга</Header>
+            {
+                props.product.image && props.product.image.length ?
+                    <Header>Химические средства для клининга</Header>
+                    :
+                    <HeaderNoImage>Химические средства для клининга</HeaderNoImage>
+            }
         </SuggestionStyle>
     );
 };
