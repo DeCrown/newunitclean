@@ -10,6 +10,7 @@ import rarrow from "../icons/right_arrow.svg";
 import delete_ from "../icons/delete.svg";
 import not_favourite from "../icons/not_favourite.svg";
 import favourite from "../icons/favourite.svg";
+import add from "../icons/add.svg";
 
 import basket from "../icons/basket.png";
 
@@ -65,6 +66,7 @@ export const icons = {
     discount: discount,
     exposition_ellipse: ExpositionEllipse,
     delete: delete_,
+    add: add,
     not_favourite: not_favourite,
     favourite: favourite,
     basket: basket,

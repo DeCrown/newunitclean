@@ -18,7 +18,7 @@ const ProductsStyle = styled.div`
     
     margin: -50px -${({ theme }) => theme.values.contentMobileMargin}px;
     margin-bottom: 0;
-    padding: 50px ${({ theme }) => theme.values.contentMobileMargin}px;
+    padding: 50px ${({ theme }) => theme.values.contentMobileMargin}px 20px ${({ theme }) => theme.values.contentMobileMargin}px;
     
     &.withButtons {
       display: grid;

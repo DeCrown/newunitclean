@@ -97,7 +97,7 @@ const Banner = (props: {header: string; text: string}) => {
                 </Info>
                 <ImageContainer>
                     <Image>
-                        <img src={BASE_URL + products[0].image}></img>
+                        <img src={products[0].image && products[0].image.length ? BASE_URL + products[0].image[0] : ''}></img>
                     </Image>
                 </ImageContainer>
             </BannerStyle>

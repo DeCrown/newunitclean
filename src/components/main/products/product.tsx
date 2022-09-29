@@ -96,7 +96,7 @@ const Product = (props: {data: ProductType}) => {
                 }
                 <ButtonBlue styled={ButtonStyle}>ПОСМОТРЕТЬ КАТАЛОГ</ButtonBlue>
             </Info>
-            <Image src={props.data.image ? BASE_URL + props.data.image : ''}></Image>
+            <Image src={props.data.image && props.data.image.length ? BASE_URL + props.data.image[0] : ''}></Image>
         </ProductStyle>
     );
 };

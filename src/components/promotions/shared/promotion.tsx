@@ -65,7 +65,7 @@ const Promotion = (props: {data: ProductType}) => {
 
     return (
         <PromotionStyle>
-            <Image src={props.data.image ? BASE_URL + props.data.image : icons.promotionEmpty} />
+            <Image src={props.data.image && props.data.image.length ? BASE_URL + props.data.image[0] : icons.promotionEmpty} />
             <Discount discount={props.data.discount ? props.data.discount : '0%'}></Discount>
             <Price sum={props.data.price}></Price>
             <Title val={props.data.title}></Title>

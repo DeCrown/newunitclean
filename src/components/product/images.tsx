@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
+import {BASE_URL} from "src/utils/constants";
 
 const Main = styled.div`
   position: relative;
@@ -51,7 +52,7 @@ const Image = (props: {src: string; self: number; func: (i: number) => void}) =>
         props.func(props.self);
     }
     return(
-        <ImageStyle src={props.src} onClick={click} />
+        <ImageStyle src={BASE_URL + props.src} onClick={click} />
     )
 }
 
@@ -67,7 +68,7 @@ const Images = (props: {images: string[]}) => {
             <Main>
                 {
                     props.images[selected] ?
-                        <img src={props.images[selected]} />
+                        <img src={BASE_URL + props.images[selected]} />
                         :
                         <NoImage />
                 }

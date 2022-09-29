@@ -99,7 +99,7 @@ const BrowserSuggestion = (props: SuggestionType) => {
             <Exposition>
                 <ExpositionEllipse styled={ExpositionEllipse1} background={props.background}></ExpositionEllipse>
                 <ExpositionEllipse styled={ExpositionEllipse2} background={props.background}></ExpositionEllipse>
-                <Image src={props.product.image ? BASE_URL + props.product.image : ''} />
+                <Image src={props.product.image && props.product.image.length ? BASE_URL + props.product.image[0] : ''} />
                 {
                     props.product.discount
                         ? <Discount>

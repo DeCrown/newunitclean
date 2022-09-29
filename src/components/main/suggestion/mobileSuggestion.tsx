@@ -35,7 +35,7 @@ const MobileSuggestion = (props: SuggestionType) => {
     return (
         <SuggestionStyle>
             <Title>{props.title}</Title>
-            <Image src={props.product.image ? props.product.image : ''} />
+            <Image src={props.product.image && props.product.image.length ? props.product.image[0] : ''} />
             <Header>Химические средства для клининга</Header>
         </SuggestionStyle>
     );

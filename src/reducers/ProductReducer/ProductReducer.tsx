@@ -11,7 +11,7 @@ const initialStateCart = {
   product: {
     id: -1,
     group: undefined,
-    image: '',
+    image: [],
     title: '',
     description: '',
     price: 0,

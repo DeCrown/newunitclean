@@ -51,23 +51,15 @@ const Product = () => {
         GetProduct(id)(dispatch);
     }, []);
 
-    let images:string[] = [];
-    if (productState.product.image) {
-        images.push(BASE_URL + productState.product.image);
-    }
-    if (productState.product.images) {
-        productState.product.images.map(image => images.push(BASE_URL + image));
-    }
-
     return (
         <Content>
             { isMobile() ? <ProductHeader>{productState.product.title}</ProductHeader> : ''}
 
             <Container>
                 { isMobile() ?
-                    <ImagesMobile images={images}></ImagesMobile>
+                    <ImagesMobile images={productState.product.image ? productState.product.image : []}></ImagesMobile>
                     :
-                    <Images images={images}></Images> }
+                    <Images images={productState.product.image ? productState.product.image : []}></Images> }
                 <Info data={productState.product}></Info>
             </Container>
 

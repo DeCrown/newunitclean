@@ -67,7 +67,7 @@ const Info = styled.div`
   
   .mobile .withButtons & {
     grid-template-rows: 30% 38% 32%;
-    padding: 0 40px 0 0;
+    padding: 0 10px 0 0;
   }
 `;
 
@@ -127,17 +127,20 @@ const Buttons = styled.div`
   grid-auto-flow: column;
   align-content: center;
   height: 90px;
-  margin: 0 26px;
+  //margin: 0 26px;
   
   .mobile & {
-    margin: 0;
+    height: auto;
+    margin: 20px 0;
+    //margin: 20px 26px 0 26px;
+    /*margin: 0;
     height: 100%;
     position: absolute;
     grid-auto-flow: row;
     right: 0;
     top: 0;
     align-content: space-between;
-    justify-items: end;
+    justify-items: end;*/
   }
 `
 
@@ -161,19 +164,25 @@ const Button = styled.div`
     opacity: 1;
   }
   
-  .mobile .withButtons & {
+  /*.mobile .withButtons & {
     background: none;
     box-shadow: none;
-  }
+  }*/
 `
 
-const ButtonDelete = styled(Button)``
+const ButtonDelete = styled(Button)`
+  border-radius: 20px 0 0 20px;
+  box-shadow: none;
+`
+
+const ButtonAdd = styled(Button)`
+  border-radius: 0 20px 20px 0;
+  box-shadow: none;
+`
 
 const ButtonFavourite = styled(Button)``
 
-const Counter = styled.div`
-    
-`;
+const Counter = styled.div``;
 
 const ButtonInfoStyle = styled(Button)`
   width: auto;
@@ -185,36 +194,44 @@ const ButtonInfoStyle = styled(Button)`
   grid-gap: 10px; gap: 10px;
   
   .mobile & {
-    grid-auto-flow: row;
-    padding: 0;
+    /*grid-auto-flow: row;
+    padding: 0;*/
   }
 `;
 
-const Size = styled.div`
-`;
+const Size = styled.div``;
 
 const SizeHeader = styled.div`
   font-size: ${({ theme }) => theme.font.size[8]};
 `;
 
-const SizeValue = styled.div`
-  
+const SizeValue = styled.div``;
+
+const ButtonsAddDelete = styled.div`
+  display: flex;
+  border-radius: 20px;
+  box-shadow: 0px 9px 18px 7px rgba(0,0,0,0.17);
 `;
 
 const ButtonInfo = (props: {size?: string; count?: number}) => {
-    return <ButtonInfoStyle>
-        { props.size ?
-            <Size>
-                <SizeHeader>размер</SizeHeader>
-                <SizeValue>{props.size}</SizeValue>
-            </Size>
-            :null
-        }
-        { props.count ?
-            <Counter>{props.count} шт.</Counter>
-            :null
-        }
-    </ButtonInfoStyle>
+    if (props.size || props.count) {
+        return <ButtonInfoStyle>
+            {props.size ?
+                <Size>
+                    <SizeHeader>размер</SizeHeader>
+                    <SizeValue>{props.size}</SizeValue>
+                </Size>
+                : null
+            }
+            {props.count ?
+                <Counter>{props.count} шт.</Counter>
+                : null
+            }
+        </ButtonInfoStyle>
+    }
+    else {
+        return <></>;
+    }
 }
 
 const StarStyle = styled.div`
@@ -249,7 +266,7 @@ export const Product = (props: {data: ProductType; noStar?: boolean}) => {
                     :
                     null
             }
-            <Image src={props.data.image && props.data.image.length ? BASE_URL + '/' + props.data.image[0] : ''} />
+            <Image src={props.data.image && props.data.image.length ? BASE_URL + props.data.image[0] : ''} />
             <Info>
                 <Title>{props.data.title}</Title>
                 <Description>{props.data.description}</Description>
@@ -289,6 +306,21 @@ export const ProductWithButtons = (props: {data: ProductType; onlyFavourite?: bo
             });
     }
 
+    const AddToCart = () => {
+        ApiMethod({
+            func: 'patch',
+            data: {
+                product_id: props.data.id,
+                product_size: props.data.product_order_size_id
+            },
+            url: '/product/api/v2/order/add_product/',
+            auth: true
+        })
+            .then(success => {
+                GetCart()(dispatch);
+            });
+    }
+
     const IsFavourite = () => {
         return Boolean(products.find(product => product.id == props.data.id))
     }
@@ -315,13 +347,22 @@ export const ProductWithButtons = (props: {data: ProductType; onlyFavourite?: bo
         <ButtonsContainer>
             <Product data={props.data}></Product>
             <Buttons>
-                <ButtonDelete onClick={DeleteFromCart}>
-                    <img src={icons.delete}/>
-                </ButtonDelete>
-                <ButtonInfo size={props.data.product_order_size} count={props.data.amount_of_product} />
                 <ButtonFavourite onClick={MarkAsFavourite}>
                     <img src={IsFavourite() ? icons.favourite : icons.not_favourite}/>
                 </ButtonFavourite>
+                <ButtonInfo size={props.data.product_order_size} count={props.data.amount_of_product} />
+                {
+                    props.data.product_order_size ?
+                    <ButtonsAddDelete>
+                        <ButtonDelete onClick={DeleteFromCart}>
+                            <img src={icons.delete}/>
+                        </ButtonDelete>
+                        <ButtonAdd onClick={AddToCart}>
+                            <img src={icons.add}/>
+                        </ButtonAdd>
+                    </ButtonsAddDelete>
+                        :null
+                }
             </Buttons>
         </ButtonsContainer>
     );

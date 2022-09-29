@@ -42,8 +42,7 @@ export interface ProductSizeType {
 export interface ProductType {
     id: number;
     group?: number;
-    image: string;
-    images?: string[];
+    image: string[]|null;
     title: string;
     description: string;
     sizes: ProductSizeType[]
