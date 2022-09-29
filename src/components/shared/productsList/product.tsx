@@ -249,15 +249,17 @@ export const Product = (props: {data: ProductType; noStar?: boolean}) => {
                     :
                     null
             }
-            <Image src={props.data.image ? BASE_URL + props.data.image : ''} />
+            <Image src={props.data.image && props.data.image.length ? BASE_URL + '/' + props.data.image[0] : ''} />
             <Info>
                 <Title>{props.data.title}</Title>
                 <Description>{props.data.description}</Description>
                 {
                     props.data.order_size_price ?
-                        <Price>{showMoneySum(props.data.order_size_price)} РУБ</Price>
+                        <Price>{showMoneySum(props.data.order_size_price *
+                            (props.data.amount_of_product ? props.data.amount_of_product : 1))} РУБ</Price>
                         : props.data.price ?
-                            <Price>от {showMoneySum(props.data.price)} РУБ</Price>
+                            <Price>от {showMoneySum(props.data.price *
+                                (props.data.amount_of_product ? props.data.amount_of_product : 1))} РУБ</Price>
                             : null
                 }
             </Info>
@@ -270,7 +272,6 @@ export const ProductWithButtons = (props: {data: ProductType; onlyFavourite?: bo
     const Favourites = useTypedSelector((store) => store.Favourites);
     const {products} = Favourites as IStateFavourites;
     const dispatch = useDispatch();
-    const stableDispatch = useCallback(dispatch, []);
 
     const DeleteFromCart = () => {
         ApiMethod({
@@ -284,7 +285,7 @@ export const ProductWithButtons = (props: {data: ProductType; onlyFavourite?: bo
             auth: true
         })
             .then(success => {
-                stableDispatch(GetCart());
+                GetCart()(dispatch);
             });
     }
 
@@ -299,14 +300,14 @@ export const ProductWithButtons = (props: {data: ProductType; onlyFavourite?: bo
                 url: '/product/api/v2/favorite_products/' + props.data.id + '/',
                 data: {product_id: props.data.id},
                 auth: true
-            }).then(success => stableDispatch(GetFavourites()))
+            }).then(success => GetFavourites()(dispatch))
         }
         else {
             ApiMethod({
                 func: 'post',
                 url: '/product/api/v2/favorite_products/' + props.data.id + '/',
                 auth: true
-            }).then(success => stableDispatch(GetFavourites()))
+            }).then(success => GetFavourites()(dispatch))
         }
     }
 
