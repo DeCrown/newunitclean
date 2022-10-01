@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import {SuggestionType} from "src/utils/types";
+import {BASE_URL} from "src/utils/constants";
 
 const SuggestionStyle = styled.div`
   position: relative;
@@ -39,7 +40,7 @@ const MobileSuggestion = (props: SuggestionType) => {
     return (
         <SuggestionStyle>
             <Title>{props.title}</Title>
-            <Image src={props.product.image && props.product.image.length ? props.product.image[0] : ''} />
+            <Image src={props.product.image && props.product.image.length ? BASE_URL + props.product.image[0] : ''} />
             {
                 props.product.image && props.product.image.length ?
                     <Header>Химические средства для клининга</Header>

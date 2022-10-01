@@ -80,20 +80,7 @@ const ImagesMobile = (props: {images: string[]}) => {
                 setSelected(selected - 1);
             }
         }
-
-        //alert(firstTouch + ' ' + lastTouch);
-
-        /*if (lastTouch < 1 && preLastTouch > 1) {
-            setSelected((selected + 1) % props.images.length);
-        }
-        if (lastTouch > 1 && firstTouch < 1) {
-            setSelected((selected - 1 + props.images.length) % props.images.length);
-        }*/
     }
-
-    /*const next = (event: any) => {
-        setSelected((selected + 1) % props.images.length);
-    }*/
 
     return (
         <div>
