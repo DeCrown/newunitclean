@@ -15,7 +15,7 @@ const ReasonStyle = styled.div`
   //filter: drop-shadow(1px 3px 3px rgba(0, 0, 0, 0.5));
   padding: 20px;
   display: grid;
-  grid-template-rows: 60%;
+  grid-template-rows: 60% 40%;
   justify-items: center;
   cursor: pointer;
   overflow: hidden;
