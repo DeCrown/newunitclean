@@ -86,6 +86,7 @@ const PhoneNumber = styled.div`
 `;
 
 const PhoneNumberText = styled.div`
+  user-select: text;
   font-size: ${({ theme }) => theme.font.size[13]};
   font-weight: ${({ theme }) => theme.font.weight[800]};
 `;
@@ -119,9 +120,9 @@ const HeaderBottomMenu = styled.div`
 const HeaderBottom = (props: {bottomButtons: headerMenuBottomButton[]}) => {
     return (<HeaderBottomStyle>
         <Logo />
-        <PhoneNumber onClick={showFeedback}>
+        <PhoneNumber>
             <PhoneNumberText>{constants.INFO.PHONE_NUMBER}</PhoneNumberText>
-            <PhoneNumberButton>Заказать звонок</PhoneNumberButton>
+            <PhoneNumberButton onClick={showFeedback}>Заказать звонок</PhoneNumberButton>
         </PhoneNumber>
         <HeaderBottomMenu>
             {

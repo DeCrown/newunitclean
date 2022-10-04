@@ -49,7 +49,7 @@ const ProductStyle = styled.a`
 const Image = styled.div<{src: string}>`
   margin: 26px 12px 0 12px;
   position: relative;
-  background-color: rgba(196, 196, 196, 0.23);
+  //background-color: rgba(196, 196, 196, 0.23);
   background-image: url(${props => props.src});
   background-position: center;
   background-size: contain;

@@ -68,7 +68,8 @@ const Title = styled.div`
 const Image = styled.div<{src: string}>`
   background-image: url(${props => props.src});
   mix-blend-mode: multiply;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   background-position: center;
   width: 100%;
   height: 100%;
