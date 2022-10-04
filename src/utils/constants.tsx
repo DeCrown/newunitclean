@@ -18,9 +18,9 @@ export const URLs = {
 
 export const INFO = {
     TITLE: 'Химические средства для клининга',
-    PHONE_NUMBER: '+ 7 (960) xxx xx xx',
-    EMAIL: 'info@ХХХХХ.ru',
-    ADDRESS: '935902, Россия, ХХХХХХХХХХХ'
+    PHONE_NUMBER: '+ 7 (495) 151 37 51',
+    EMAIL: 'I.sataeva@pmk-team.ru',
+    ADDRESS: 'ул. 3-я Ямского поля, д.2, корп. 26'
 }
 
 export const LINKS = {
