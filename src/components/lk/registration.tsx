@@ -5,7 +5,7 @@ import {
     InputAddress,
     InputCompany,
     InputPhoneNumber, InputState,
-    InputUR_INN,
+    InputFIZ_OR_UR_INN,
     InputUR_KPP, OutputDetail
 } from "components/shared/forms/inputText";
 import ButtonBlue from "components/shared/forms/buttonBlue";
@@ -87,7 +87,7 @@ const Registration = () => {
             <FormHeader>Регистрация компании</FormHeader>
             <FormList>
                 <InputCompany placeholder={'Наименование организации'} setObj={setTitle}></InputCompany>
-                <InputUR_INN placeholder={'ИНН'} setObj={setInn}></InputUR_INN>
+                <InputFIZ_OR_UR_INN placeholder={'ИНН'} setObj={setInn}></InputFIZ_OR_UR_INN>
                 <InputAddress placeholder={'Юр. адрес'} setObj={setUrAddress}></InputAddress>
                 <InputUR_KPP placeholder={'КПП'} setObj={setKpp}></InputUR_KPP>
                 <InputPhoneNumber placeholder={'Телефон'} setObj={setPhone}></InputPhoneNumber>
