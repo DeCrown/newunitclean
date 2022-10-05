@@ -180,9 +180,7 @@ const ButtonAdd = styled(Button)`
   box-shadow: none;
 `
 
-const ButtonFavourite = styled(Button)``
-
-const Counter = styled.div``;
+const ButtonFavourite = styled(Button)``;
 
 const ButtonInfoStyle = styled(Button)`
   width: auto;
@@ -199,13 +197,9 @@ const ButtonInfoStyle = styled(Button)`
   }
 `;
 
-const Size = styled.div``;
-
-const SizeHeader = styled.div`
-  font-size: ${({ theme }) => theme.font.size[8]};
+const Delimiter = styled.div`
+  
 `;
-
-const SizeValue = styled.div``;
 
 const ButtonsAddDelete = styled.div`
   display: flex;
@@ -217,14 +211,18 @@ const ButtonInfo = (props: {size?: string; count?: number}) => {
     if (props.size || props.count) {
         return <ButtonInfoStyle>
             {props.size ?
-                <Size>
-                    <SizeHeader>размер</SizeHeader>
-                    <SizeValue>{props.size}</SizeValue>
-                </Size>
+                <div>
+                    {props.size}
+                </div>
                 : null
             }
+            {
+                props.size && props.count ?
+                    <Delimiter>•</Delimiter>
+                    : null
+            }
             {props.count ?
-                <Counter>{props.count} шт.</Counter>
+                <div>{props.count} шт.</div>
                 : null
             }
         </ButtonInfoStyle>
