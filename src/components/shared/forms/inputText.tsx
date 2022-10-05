@@ -152,6 +152,17 @@ export class InputUR_INN extends InputText {
     }
 }
 
+export class InputFIZ_OR_UR_INN extends InputText {
+    check = (value: string) => {
+        if (/^[0-9]{10}$/.test(value) || /^[0-9]{12}$/.test(value)) {
+            return false
+        }
+        else {
+            return true
+        }
+    }
+}
+
 export class InputAddress extends InputText {
     check = (value: string) => {
         if (/^.+$/.test(value)) {
