@@ -53,9 +53,9 @@ const ImageContainer = styled.div`
   position: relative;
 `;
 
-const Image = styled.div`
+const Image = styled.div<{src: string}>`
   width: 500px;
-  background: rgba(196, 196, 196, 0.23);
+  background-color: rgba(196, 196, 196, 0.23);
   align-self: end;
   flex-shrink: 0;
   height: 360px;
@@ -65,11 +65,10 @@ const Image = styled.div`
   position: absolute;
   right: 0;
   bottom: 0;
-  
-  & img {
-    max-width: 100%;
-    max-height: 100%;
-  }
+  background-image: url(${props => props.src});
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 `;
 
 const Banner = (props: {header: string; text: string}) => {
@@ -96,9 +95,7 @@ const Banner = (props: {header: string; text: string}) => {
                     <ButtonBlue styled={ButtonStyle} func={() => open(products[0].id)}>Подробнее</ButtonBlue>
                 </Info>
                 <ImageContainer>
-                    <Image>
-                        <img src={products[0].image && products[0].image.length ? BASE_URL + products[0].image[0] : ''}></img>
-                    </Image>
+                    <Image src={products[0].image && products[0].image.length ? BASE_URL + products[0].image[0] : ''} />
                 </ImageContainer>
             </BannerStyle>
         );
