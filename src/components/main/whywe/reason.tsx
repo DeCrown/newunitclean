@@ -14,8 +14,8 @@ const ReasonStyle = styled.div`
   border-radius: 10px;
   //filter: drop-shadow(1px 3px 3px rgba(0, 0, 0, 0.5));
   padding: 20px;
-  display: grid;
-  grid-template-rows: 60% 40%;
+  /*display: grid;
+  grid-template-rows: 60% 40%;*/
   justify-items: center;
   cursor: pointer;
   overflow: hidden;
@@ -51,9 +51,19 @@ const Text = styled.div`
   }
 `;
 
-const Image = styled.img`
+/*const Image = styled.img`
   max-width: 100%;
   max-height: 100%;
+`;*/
+
+const Image = styled.div<{src: string|undefined}>`
+  background-image: url(${props => props.src});
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  //height: 100%;
+  aspect-ratio: 1;
 `;
 
 export interface reason {
