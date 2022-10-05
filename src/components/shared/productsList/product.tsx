@@ -197,8 +197,10 @@ const ButtonInfoStyle = styled(Button)`
   }
 `;
 
-const Delimiter = styled.div`
-  
+const Size = styled.div`
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 const ButtonsAddDelete = styled.div`
@@ -211,14 +213,14 @@ const ButtonInfo = (props: {size?: string; count?: number}) => {
     if (props.size || props.count) {
         return <ButtonInfoStyle>
             {props.size ?
-                <div>
+                <Size>
                     {props.size}
-                </div>
+                </Size>
                 : null
             }
             {
                 props.size && props.count ?
-                    <Delimiter>•</Delimiter>
+                    <div>•</div>
                     : null
             }
             {props.count ?
