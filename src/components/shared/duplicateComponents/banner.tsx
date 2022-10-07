@@ -55,7 +55,7 @@ const ImageContainer = styled.div`
 
 const Image = styled.div<{src: string}>`
   width: 500px;
-  background-color: rgba(196, 196, 196, 0.23);
+  //background-color: rgba(196, 196, 196, 0.23);
   align-self: end;
   flex-shrink: 0;
   height: 360px;

@@ -44,7 +44,7 @@ const ExpositionEllipse2 = styled.svg<{background?: string}>`
 const Image = styled.img`
   position: absolute;
   mix-blend-mode: normal;
-  backdrop-filter: blur(4px);
+  //backdrop-filter: blur(4px);
   max-width: 100%;
   max-height: 100%;
   bottom: -32px;
