@@ -35,8 +35,6 @@ const funcs = {
         axios.put(BASE_URL + url, data,auth ? config(access_token) : configDefault),
 }
 
-//yxyvX3H7jUfsBEj
-
 const ApiMethodRequest = (data: ApiMethodType) =>
     new Promise((resolve, reject) => {
         const access_token = getAuth().access_token;

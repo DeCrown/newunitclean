@@ -30,14 +30,14 @@ const ImagesContainer = styled.div`
   width: 100%;
   position: relative;
   overflow: hidden;
-  background-color: rgba(196, 196, 196, 0.23);
+  //background-color: rgba(196, 196, 196, 0.23);
 `;
 
 const Image = styled.div<{src: string; left: number}>`
   position: relative;
   left: ${props => props.left}%;
   background-image: url(${props => BASE_URL + props.src});
-  background-color: rgba(196, 196, 196, 0.23);
+  //background-color: rgba(196, 196, 196, 0.23);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;

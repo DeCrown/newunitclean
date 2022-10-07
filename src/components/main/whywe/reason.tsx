@@ -24,7 +24,7 @@ const ReasonStyle = styled.div`
   
   .mobile & {
     width: 270px;
-    height: 280px;
+    //height: 280px;
   }
 `;
 
