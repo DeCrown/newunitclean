@@ -72,7 +72,7 @@ const Order = (props: {order: OrderType}) => {
                 <OrderInfoRow title={'Дата доставки'} value={props.order.date_to_receive ? props.order.date_to_receive : 'нет данных'} />
                 <OrderInfoRow title={'Сумма заказа'} value={showMoneySum(props.order.full_price)} />
             </OrderInfo>
-            <ProductsList products={props.order.product} buttons={true}></ProductsList>
+            <ProductsList products={props.order.product} buttons={true} current_size={true}></ProductsList>
             {/*
                 <ButtonContainerLeft>
                     <ButtonBlue styled={Button}>Скачать счет</ButtonBlue>

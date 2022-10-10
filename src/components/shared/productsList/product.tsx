@@ -256,7 +256,7 @@ const Star = (props: {children: string}) => {
     </StarStyle>
 }
 
-export const Product = (props: {data: ProductType; noStar?: boolean}) => {
+export const Product = (props: {data: ProductType; noStar?: boolean, current_size?: boolean}) => {
 
     return (
         <ProductStyle href={URLs.PRODUCT.replace(':id', '' + props.data.id)}>
@@ -271,7 +271,7 @@ export const Product = (props: {data: ProductType; noStar?: boolean}) => {
                 <Title>{props.data.title}</Title>
                 <Description>{props.data.description}</Description>
                 {
-                    props.data.order_size_price ?
+                    (props.data.order_size_price && props.current_size) ?
                         <Price>{showMoneySum(props.data.order_size_price *
                             (props.data.amount_of_product ? props.data.amount_of_product : 1))} РУБ</Price>
                         : props.data.price ?
@@ -284,7 +284,7 @@ export const Product = (props: {data: ProductType; noStar?: boolean}) => {
     );
 }
 
-export const ProductWithButtons = (props: {data: ProductType; onlyFavourite?: boolean}) => {
+export const ProductWithButtons = (props: {data: ProductType; onlyFavourite?: boolean, current_size?: boolean}) => {
 
     const Favourites = useTypedSelector((store) => store.Favourites);
     const {products} = Favourites as IStateFavourites;
@@ -345,7 +345,7 @@ export const ProductWithButtons = (props: {data: ProductType; onlyFavourite?: bo
 
     return (
         <ButtonsContainer>
-            <Product data={props.data}></Product>
+            <Product data={props.data} current_size={props.current_size}></Product>
             <Buttons>
                 <ButtonFavourite onClick={MarkAsFavourite}>
                     <img src={IsFavourite() ? icons.favourite : icons.not_favourite}/>

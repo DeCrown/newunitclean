@@ -28,16 +28,16 @@ const ProductsStyle = styled.div`
   }
 `
 
-const ProductsList = (props: {products: ProductType[], buttons?: boolean}) => {
+const ProductsList = (props: {products: ProductType[], buttons?: boolean, current_size?: boolean}) => {
 
     return (
         props.buttons ?
             <ProductsStyle className={'withButtons'}>
-                { props.products.map((product, i) => <ProductWithButtons key={i} data={product}></ProductWithButtons>) }
+                { props.products.map((product, i) => <ProductWithButtons key={i} data={product} current_size={props.current_size}></ProductWithButtons>) }
             </ProductsStyle>
         :
             <ProductsStyle>
-                { props.products.map((product, i) => <Product key={i} data={product}></Product>) }
+                { props.products.map((product, i) => <Product key={i} data={product} current_size={props.current_size}></Product>) }
             </ProductsStyle>
     );
 };

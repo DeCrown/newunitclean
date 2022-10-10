@@ -37,7 +37,7 @@ const All = () => {
         cart.product.length
             ?
             <TabContent>
-                <ProductsList products={cart.product} buttons={true}></ProductsList>
+                <ProductsList products={cart.product} buttons={true} current_size={true}></ProductsList>
                 { isMobile() ? null : <Line></Line> }
                 <ButtonContainerCenter>
                     <ButtonBlue styled={Button} func={toPayment} setObj={setPrice}>Купить за {showMoneySum(cart.full_price)} ₽</ButtonBlue>
