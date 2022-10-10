@@ -19,7 +19,7 @@ const Title = styled.h1`
 `;
 
 const Header = styled.div`
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(199, 216, 234, 0.7);
   border-radius: 10px 0px 0px 10px;
   font-size: ${({ theme }) => theme.font.size[18]};
   font-weight: ${({ theme }) => theme.font.weight[400]};
@@ -28,11 +28,13 @@ const Header = styled.div`
   padding: 28px;
   margin-right: -${({ theme }) => theme.values.contentMobileMargin}px;
   position: absolute;
-  bottom: 50px;
+  bottom: 24%;
   right: 0px;
+  width: calc(100% - 40px);
 `;
 
 const HeaderNoImage = styled(Header)`
+  background: rgba(199, 216, 234);
   bottom: -60px;
 `;
 
