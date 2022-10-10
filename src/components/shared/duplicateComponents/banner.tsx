@@ -58,7 +58,7 @@ const Image = styled.div<{src: string}>`
   //background-color: rgba(196, 196, 196, 0.23);
   align-self: end;
   flex-shrink: 0;
-  height: 360px;
+  height: 500px;
   display: grid;
   align-content: center;
   justify-items: center;
