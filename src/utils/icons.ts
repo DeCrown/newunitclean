@@ -38,6 +38,7 @@ import close from "../icons/close.svg";
 
 import whatsapp from "../icons/links/whatsapp.svg";
 import wildberries from "../icons/links/wildberries.png";
+import ya_market from "../icons/links/ya_market.png";
 import youtube from "../icons/links/youtube.svg";
 import telegram from "../icons/links/telegram.svg";
 import instagram from "../icons/links/instagram.svg";
@@ -92,7 +93,8 @@ export const icons = {
         wildberries: wildberries,
         telegram: telegram,
         instagram: instagram,
-        ozon: ozon
+        ozon: ozon,
+        ya_market: ya_market
     },
     close: close,
     reasons: {

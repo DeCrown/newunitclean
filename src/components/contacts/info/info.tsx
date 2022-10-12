@@ -22,6 +22,9 @@ const links = [
         icon: icons.links.instagram,
         url: LINKS.instagram
     },
+];
+
+const partners = [
     {
         icon: icons.links.ozon,
         url: LINKS.ozon,
@@ -31,7 +34,12 @@ const links = [
         icon: icons.links.wildberries,
         url: LINKS.wildberries,
         height: '36px'
-    }
+    },
+    {
+        icon: icons.links.ya_market,
+        url: LINKS.ya_market,
+        height: '30px'
+    },
 ];
 
 const Rows = styled.div`
@@ -40,7 +48,7 @@ const Rows = styled.div`
 `;
 
 const Links = styled.div`
-  display: flex;
+  display: grid;
   justify-items: start;
   //grid-auto-flow: column;
   justify-content: start;
@@ -55,9 +63,9 @@ const Info = () => {
             <InfoRow title={'Адрес'} value={INFO.ADDRESS}></InfoRow>
             <InfoRow title={'Телефон'} value={INFO.PHONE_NUMBER}></InfoRow>
             <InfoRow title={'E-mail'} value={INFO.EMAIL}></InfoRow>
-            <InfoRow title={'Мы в соц. сетях'} value={''}></InfoRow>
+            <InfoRow title={'Наши партнеры'} value={''}></InfoRow>
             <Links>
-                { links.map((link, i) => <Link height={link.height ? link.height : 'auto'} key={i} image={link.icon} url={link.url}></Link>) }
+                { partners.map((partner, i) => <Link height={partner.height ? partner.height : 'auto'} key={i} image={partner.icon} url={partner.url}></Link>) }
             </Links>
         </Rows>
     );
