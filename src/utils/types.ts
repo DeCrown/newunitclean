@@ -86,7 +86,8 @@ export interface EmployeeType {
     phone_number: string;
     address: string;
     avatar: string;
-    email: string
+    email: string;
+    is_staff: boolean;
 }
 
 export interface CompanyType {

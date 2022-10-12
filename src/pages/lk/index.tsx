@@ -16,6 +16,8 @@ import {GetCompany} from "src/actions/CompanyAction/CompanyAction";
 import {useTypedSelector} from "src/store/configureStore";
 import {IStateCompany} from "src/reducers/CompanyReducer/CompanyReducer.types";
 import {GetTable, Table} from "components/excel/table";
+import {IStateEmployee} from "src/reducers/EmployeeReducer/EmployeeReducer.types";
+import {GetEmployee} from "src/actions/EmployeeAction/EmployeeAction";
 
 const HeaderWithButton = styled.div`
   display: grid;
@@ -57,18 +59,20 @@ const ToCompanyButton = styled(DIV_BUTTON_WHITE_STYLE)`
 `;
 
 const Lk = () => {
+    const Employee = useTypedSelector((store) => store.Employee);
+    const {employee} = Employee as IStateEmployee;
     const Company = useTypedSelector((store) => store.Company);
     const {error} = Company as IStateCompany;
 
     const dispatch = useDispatch();
-    const stableDispatch = useCallback(dispatch, []);
 
     useEffect(() => {
-        stableDispatch(GetCompany());
+        GetEmployee()(dispatch);
+        GetCompany()(dispatch);
     }, []);
 
     const logout = () => {
-        LogoutUser(stableDispatch);
+        LogoutUser(dispatch);
         //window.open(URLs.ROOT, '_self');
     }
 
@@ -87,17 +91,24 @@ const Lk = () => {
                 <ButtonExit src={icons.exit} onClick={logout} />
             </HeaderWithButton>
 
-            <EmployeeInfo></EmployeeInfo>
+            <EmployeeInfo employee={employee}></EmployeeInfo>
 
             <Table></Table>
 
-            <LkButtons>
-                <ButtonBlue styled={ToCompanyButton} func={downloadPriceList}>Скачать прайс-лист</ButtonBlue>
-                {
-                    error ? null
-                        : <ButtonBlue styled={ToCompanyButton} func={toCompany}>Личный кабинет компании</ButtonBlue>
-                }
-            </LkButtons>
+            {
+                !employee.is_staff && error ? null :
+                    <LkButtons>
+                        {
+                            employee.is_staff ?
+                                <ButtonBlue styled={ToCompanyButton} func={downloadPriceList}>Скачать прайс-лист</ButtonBlue>
+                                : null
+                        }
+                        {
+                            error ? null
+                                : <ButtonBlue styled={ToCompanyButton} func={toCompany}>Личный кабинет компании</ButtonBlue>
+                        }
+                    </LkButtons>
+            }
 
             {
                 error

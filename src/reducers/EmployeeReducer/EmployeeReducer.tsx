@@ -14,7 +14,8 @@ const initialStateEmployee = {
     phone_number: '',
     address: '',
     avatar: '',
-    email: ''
+    email: '',
+    is_staff: false
   }
 };
 

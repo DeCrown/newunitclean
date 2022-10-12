@@ -1,31 +1,22 @@
-import {useTypedSelector} from "src/store/configureStore";
-import {IStateEmployee} from "src/reducers/EmployeeReducer/EmployeeReducer.types";
 import {useDispatch} from "react-redux";
-import React, {useCallback, useEffect} from "react";
-import {GetEmployee, PatchEmployee} from "src/actions/EmployeeAction/EmployeeAction";
+import React from "react";
+import {PatchEmployee} from "src/actions/EmployeeAction/EmployeeAction";
 import {icons} from "src/utils/icons";
 import {EditRow, EditRows} from "components/shared/info/editRow";
 import {InfoPhoto, InfoPhotoContainer, InfoStyle} from "components/lk/info";
+import {EmployeeType} from "src/utils/types";
 
-export const EmployeeInfo = () => {
-    const Employee = useTypedSelector((store) => store.Employee);
-    const {employee} = Employee as IStateEmployee;
-
+export const EmployeeInfo = (props: {employee: EmployeeType}) => {
     const dispatch = useDispatch();
-    const stableDispatch = useCallback(dispatch, []);
-
-    useEffect(() => {
-        stableDispatch(GetEmployee());
-    }, []);
 
     return (
         <InfoStyle>
-            <InfoPhotoContainer><InfoPhoto src={employee.avatar ? employee.avatar : icons.avatar} /></InfoPhotoContainer>
+            <InfoPhotoContainer><InfoPhoto src={props.employee.avatar ? props.employee.avatar : icons.avatar} /></InfoPhotoContainer>
             <EditRows>
-                <EditRow save={(val) => stableDispatch(PatchEmployee({full_name: val}))} value={employee.full_name}></EditRow>
-                <EditRow title={'E-mail'} value={employee.email} nonEditable={true}></EditRow>
-                <EditRow save={(val) => stableDispatch(PatchEmployee({phone_number: val}))} title={'Телефон'} value={employee.phone_number}></EditRow>
-                <EditRow save={(val) => stableDispatch(PatchEmployee({address: val}))} title={'Адрес'} value={employee.address}></EditRow>
+                <EditRow save={(val) => PatchEmployee({full_name: val})(dispatch)} value={props.employee.full_name}></EditRow>
+                <EditRow title={'E-mail'} value={props.employee.email} nonEditable={true}></EditRow>
+                <EditRow save={(val) => PatchEmployee({phone_number: val})(dispatch)} title={'Телефон'} value={props.employee.phone_number}></EditRow>
+                <EditRow save={(val) => PatchEmployee({address: val})(dispatch)} title={'Адрес'} value={props.employee.address}></EditRow>
             </EditRows>
         </InfoStyle>
     );
