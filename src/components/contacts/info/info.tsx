@@ -54,7 +54,7 @@ const Info = () => {
         <Rows>
             <InfoRow title={'Адрес'} value={INFO.ADDRESS}></InfoRow>
             <InfoRow title={'Телефон'} value={INFO.PHONE_NUMBER}></InfoRow>
-            <InfoRow title={'E-mail'} value={INFO.ADDRESS}></InfoRow>
+            <InfoRow title={'E-mail'} value={INFO.EMAIL}></InfoRow>
             <InfoRow title={'Мы в соц. сетях'} value={''}></InfoRow>
             <Links>
                 { links.map((link, i) => <Link height={link.height ? link.height : 'auto'} key={i} image={link.icon} url={link.url}></Link>) }

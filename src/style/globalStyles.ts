@@ -34,10 +34,11 @@ export default createGlobalStyle`
   }
 
   p {
-    padding-top: 48px;
+    text-indent: 2em;
+    /*padding-top: 48px;
     
     .mobile & {
       padding: 0;
-    }
+    }*/
   }
 `
