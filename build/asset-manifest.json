@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.js": "/static/js/main.2abf065f.js",
+    "main.js": "/static/js/main.43092998.js",
     "static/media/basket.png": "/static/media/basket.4d6fd1f778b56ff66c13.png",
     "static/media/star.svg": "/static/media/star.191833d0b8cf155062a665815b45f4c1.svg",
     "static/media/croppedlogo.png": "/static/media/croppedlogo.06528b05de7c8ab0ee79.png",
+    "static/media/main_image.jpg": "/static/media/main_image.8e755f1fe28264a0c0c2.jpg",
     "static/media/security.png": "/static/media/security.d63c720d73fe2ab69026.png",
     "static/media/wallet.png": "/static/media/wallet.0049900589e8cb8f47b9.png",
     "static/media/wallet_clicked.png": "/static/media/wallet_clicked.1624747b41d5001c7bcc.png",
     "static/media/chat.png": "/static/media/chat.8adfd7a1225f6f6145db.png",
     "static/media/settings.png": "/static/media/settings.987edfc55b4dea95db0a.png",
-    "static/media/wildberries.png": "/static/media/wildberries.b702e0ae5013f8e1afd7.png",
+    "static/media/ya_market.png": "/static/media/ya_market.690e0faf0263ac545364.png",
     "static/media/logo.png": "/static/media/logo.8c495939e696af1b8230.png",
     "static/media/instagram.svg": "/static/media/instagram.ff074f1f7a9f3e22d9d2f6e3f8123006.svg",
     "static/media/youtube.svg": "/static/media/youtube.60d4b9d87dde3aab23f5024b900b6166.svg",
@@ -46,9 +47,9 @@
     "static/media/left_arrow_black.svg": "/static/media/left_arrow_black.2d95f7617b22258bf3af23aa213c4fad.svg",
     "static/media/price.svg": "/static/media/price.ecbdd8e79f8ab7710788f83d54c3e028.svg",
     "static/media/button_right_arrow.svg": "/static/media/button_right_arrow.0bd48208c844eaf4af52d8f68ac39c84.svg",
-    "main.2abf065f.js.map": "/static/js/main.2abf065f.js.map"
+    "main.43092998.js.map": "/static/js/main.43092998.js.map"
   },
   "entrypoints": [
-    "static/js/main.2abf065f.js"
+    "static/js/main.43092998.js"
   ]
 }
