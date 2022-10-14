@@ -1,9 +1,12 @@
 {
   "files": {
-    "main.js": "/static/js/main.43092998.js",
+    "main.js": "/static/js/main.11462ccc.js",
     "static/media/basket.png": "/static/media/basket.4d6fd1f778b56ff66c13.png",
     "static/media/star.svg": "/static/media/star.191833d0b8cf155062a665815b45f4c1.svg",
     "static/media/croppedlogo.png": "/static/media/croppedlogo.06528b05de7c8ab0ee79.png",
+    "static/media/BEJjc6MiR14.jpg": "/static/media/BEJjc6MiR14.dd8a4eae61b7ff728aff.jpg",
+    "static/media/ToixYvmt8xE.jpg": "/static/media/ToixYvmt8xE.1da0aaee2c5901997a39.jpg",
+    "static/media/ppJ6wOIa_Wc.jpg": "/static/media/ppJ6wOIa_Wc.b35461834bd12272c4a9.jpg",
     "static/media/main_image.jpg": "/static/media/main_image.8e755f1fe28264a0c0c2.jpg",
     "static/media/security.png": "/static/media/security.d63c720d73fe2ab69026.png",
     "static/media/wallet.png": "/static/media/wallet.0049900589e8cb8f47b9.png",
@@ -47,9 +50,9 @@
     "static/media/left_arrow_black.svg": "/static/media/left_arrow_black.2d95f7617b22258bf3af23aa213c4fad.svg",
     "static/media/price.svg": "/static/media/price.ecbdd8e79f8ab7710788f83d54c3e028.svg",
     "static/media/button_right_arrow.svg": "/static/media/button_right_arrow.0bd48208c844eaf4af52d8f68ac39c84.svg",
-    "main.43092998.js.map": "/static/js/main.43092998.js.map"
+    "main.11462ccc.js.map": "/static/js/main.11462ccc.js.map"
   },
   "entrypoints": [
-    "static/js/main.43092998.js"
+    "static/js/main.11462ccc.js"
   ]
 }
