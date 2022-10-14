@@ -6,10 +6,17 @@ const ReviewStyle = styled.div`
   grid-gap: 15px; gap: 15px;
   position: relative;
   transition: left 0.3s;
+  justify-items: center;
 `;
 
-const ReviewPhoto = styled.div`
+const ReviewPhoto = styled.div<{src: string}>`
   position: relative;
+  background-image: url(${props => props.src});
+  height: 106px;
+  width: 106px;
+  background-size: cover;
+  border-radius: 50%;
+  background-repeat: no-repeat;
 `;
 
 const ReviewText = styled.div`
@@ -31,7 +38,7 @@ const ReviewSign = styled.div`
 const Review = (props: {pos: number, photo: string; text: string; name: string; role: string}) => {
     return (
         <ReviewStyle style={{left: -100 * props.pos + '%'}}>
-            <ReviewPhoto><img src={props.photo} /></ReviewPhoto>
+            <ReviewPhoto src={props.photo} />
             <ReviewText>{props.text}</ReviewText>
             <ReviewSign>{props.name}, {props.role}</ReviewSign>
         </ReviewStyle>

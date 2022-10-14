@@ -57,6 +57,10 @@ import dropInput from "../icons/dropInput.svg";
 import star from "../icons/star.svg";
 import promotionEmpty from "../icons/promotionEmpty.png";
 
+import avatar1 from "../icons/reviews_avatars/ppJ6wOIa_Wc.jpg";
+import avatar2 from "../icons/reviews_avatars/BEJjc6MiR14.jpg";
+import avatar3 from "../icons/reviews_avatars/ToixYvmt8xE.jpg";
+
 export const icons = {
     lk: lk,
     cart: cart,
@@ -108,5 +112,10 @@ export const icons = {
     search_gray: search_gray,
     dropInput: dropInput,
     star: star,
-    promotionEmpty: promotionEmpty
+    promotionEmpty: promotionEmpty,
+    reviewsAvatars: [
+        avatar1,
+        avatar2,
+        avatar3
+    ]
 }

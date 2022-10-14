@@ -12,7 +12,7 @@ const ReviewsStyle = styled.div`
   background: #FFFFFF;
   border-radius: 10px;
   display: grid;
-  grid-template-rows: 70% 5% 25%;
+  grid-template-rows: 70% 30%;
   grid-gap: 10px; gap: 10px;
   /* overflow: hidden; */
   position: relative;
@@ -136,7 +136,9 @@ const Reviews: React.FC = () => {
             <ReviewsContainer>
                 { reviewsList.map((review) => <Review pos={pos} key={review.id} name={review.name} photo={review.photo} role={review.role} text={review.text} />) }
             </ReviewsContainer>
-            <ButtonBlue styled={ReviewsMoreButton}>Читать все отзывы</ButtonBlue>
+            {
+                /*<ButtonBlue styled={ReviewsMoreButton}>Читать все отзывы</ButtonBlue>*/
+            }
             <ReviewsCounter>
                 <ReviewsArrowLeft onClick={leftArrow}>
                     <img src={icons.larrowblack} />
@@ -155,7 +157,9 @@ const Reviews: React.FC = () => {
             <ReviewsCounter>
                 { reviewsList.map((review, i) => pos == i ? <ReviewPointSelected key={review.id}></ReviewPointSelected> : <ReviewPoint key={review.id}></ReviewPoint>)}
             </ReviewsCounter>
-            <ButtonBlue styled={ReviewsMoreButton}>Читать все отзывы</ButtonBlue>
+            {
+                /*<ButtonBlue styled={ReviewsMoreButton}>Читать все отзывы</ButtonBlue>*/
+            }
             <ReviewsArrowLeft onClick={leftArrow}>
                 <img src={icons.larrow} />
             </ReviewsArrowLeft>
