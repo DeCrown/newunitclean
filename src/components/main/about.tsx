@@ -21,6 +21,7 @@ const Text = styled.div`
   font-weight: ${({ theme }) => theme.font.weight[400]};
   color: ${({ theme }) => theme.font.color.black};
   text-align: left;
+  user-select: text;
 `;
 
 const Image = styled.img`

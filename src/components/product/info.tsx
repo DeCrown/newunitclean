@@ -31,6 +31,7 @@ const Header = styled(H1)`
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
+  user-select: text;
 `;
 
 const Price = styled.div`
@@ -38,11 +39,13 @@ const Price = styled.div`
   font-weight: ${({ theme }) => theme.font.weight[600]};
   color: ${({ theme }) => theme.font.color.blue};
   padding: 12px 0;
+  user-select: text;
 `;
 
 const Description = styled.div`
   width: 100%;
   position: relative;
+  user-select: text;
 `;
 
 const ButtonStyle = styled(DIV_BUTTON_BLUE_STYLE)`
