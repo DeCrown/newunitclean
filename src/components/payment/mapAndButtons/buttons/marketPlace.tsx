@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
 import {DIV_BUTTON_WHITE_STYLE} from "components/shared/forms/primitives/DIV_BUTTON";
+import ButtonBlue from "components/shared/forms/buttonBlue";
+import {LINKS} from "src/utils/constants";
 
 const MarketPlaceStyle = styled.div`
   .mobile & {
@@ -25,7 +27,7 @@ const ButtonStyle = styled(DIV_BUTTON_WHITE_STYLE)`
 const MarketPlace = () => {
     return (
         <MarketPlaceStyle>
-            <ButtonStyle>Купить на маркетплейсе</ButtonStyle>
+            <ButtonBlue styled={ButtonStyle} func={() => { window.open(LINKS.wildberries) }}>Купить на маркетплейсе</ButtonBlue>
         </MarketPlaceStyle>
     );
 };

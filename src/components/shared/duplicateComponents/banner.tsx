@@ -14,7 +14,7 @@ const BannerStyle = styled.div`
   background: #A5AFBA;
   display: flex;
   padding: 30px 75px 30px 150px;
-  margin-top: 146px;
+  margin-top: 280px;
   flex-wrap: wrap-reverse;
   grid-gap: 20px; gap: 20px;
 `;
