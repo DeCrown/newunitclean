@@ -46,10 +46,12 @@ const Payment = () => {
                 <MapAndButtons></MapAndButtons>
             </Container>
 
-            { isMobile() ? null :
+            { /*
+            isMobile() ? null :
                 <MonthTrendContainer>
                     <Banner header={'Тренд месяца'} text={'В честь начала летнего сезона скидки на товары месяца 15%. Успей заказать и в поход!'}></Banner>
                 </MonthTrendContainer>
+                */
             }
         </Content>
     );

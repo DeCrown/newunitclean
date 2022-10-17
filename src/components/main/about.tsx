@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {H2Main} from "components/shared/fonts/specialFonts";
 import styled from "styled-components";
 import main_image from "src/images/main_image.jpg";
-import text from "src/images/about.txt";
 
 const Header = styled(H2Main)`
   text-align: left;
@@ -69,9 +68,6 @@ const About = () => {
                 <Point>
                     - поддерживать неизменно высокое качество продукции.
                 </Point>
-                <p>
-                    Компания сотрудничает как с дилерами, так и с конечными покупателями напрямую.
-                </p>
             </Text>
         </div>
     );
