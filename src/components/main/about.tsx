@@ -1,7 +1,7 @@
 import React from 'react';
 import {H2Main} from "components/shared/fonts/specialFonts";
 import styled from "styled-components";
-import main_image from "src/images/main_image.jpg";
+import main_image from "src/images/main_image_new.jpg";
 
 const Header = styled(H2Main)`
   text-align: left;
