@@ -34,7 +34,7 @@ export const LINKS = {
 }
 
 //export const BASE_URL = 'http://84.23.55.240:5050';
-export const BASE_URL = 'http://141.8.193.185';
+export const BASE_URL = 'http://141.8.193.185:5050';
 
 export const CONTACT_MAP = (props: {height?: string; width?: string}) => {
     return(
