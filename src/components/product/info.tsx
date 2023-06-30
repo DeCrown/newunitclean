@@ -126,6 +126,14 @@ const Info = (props: {data: ProductType}) => {
                         : null
                 }
                 {
+                    true
+                        ?
+                        <InfoRow title={'Видео'}>
+
+                        </InfoRow>
+                        : null
+                }
+                {
                     props.data.sizes?.length
                         ?
                         <InfoRow title={'Размеры'}>

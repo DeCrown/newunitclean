@@ -33,7 +33,8 @@ export const LINKS = {
     ya_market: 'https://market.yandex.ru/catalog--avto/54418/list?srnum=20&was_redir=1&rt=9&rs=eJwzEg1grGLh2HeIdRYjV2heZolCck5qYh4ASxcHDA,,&text=Unit clean&hid=90402&local-offers-first=0'
 }
 
-export const BASE_URL = 'http://84.23.55.240:5050';
+//export const BASE_URL = 'http://84.23.55.240:5050';
+export const BASE_URL = 'http://141.8.193.185';
 
 export const CONTACT_MAP = (props: {height?: string; width?: string}) => {
     return(
